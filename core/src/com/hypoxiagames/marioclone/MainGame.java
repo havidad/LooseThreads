@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.hypoxiagames.marioclone.screens.*;
 
 public class MainGame extends Game {
-	MainMenuScreen mainMenuScreen;
+	TitleScreen mainMenuScreen;
 	SettingsScreen settingsScreen;
 	SaveSelectionScreen saveScreen;
 	
@@ -19,7 +19,7 @@ public class MainGame extends Game {
 	public void switchScreens(String ScreenName){
 		switch(ScreenName){
 		case "Main Menu":
-			mainMenuScreen = new MainMenuScreen(this);
+			mainMenuScreen = new TitleScreen(this);
 			setScreen(mainMenuScreen);
 			break;
 		
@@ -33,6 +33,8 @@ public class MainGame extends Game {
 			
 		}
 	}
+	
+	
 	
 	public void create() {
 		screenX = Gdx.graphics.getWidth();

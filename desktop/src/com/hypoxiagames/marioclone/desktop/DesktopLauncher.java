@@ -12,7 +12,7 @@ public class DesktopLauncher {
 	}
 	public static void main (String[] arg) {
 		cfg = new LwjglApplicationConfiguration();
-		cfg.title = "Hypoxia";
+		cfg.title = "Project: Mafia";
 		cfg.useGL30 = true;
 		cfg.width = 1024;
 		cfg.height = 720;

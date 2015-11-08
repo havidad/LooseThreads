@@ -5,10 +5,18 @@ import com.hypoxiagames.marioclone.input.SaveSelectionInput;
 import com.hypoxiagames.marioclone.screens.SaveSelectionScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SaveSelectionScreen implements com.badlogic.gdx.Screen {
 	final MainGame game;
 	final SaveSelectionInput inputProcessor;
+	Assets assets;
+	SpriteBatch batch;
+	OrthographicCamera camera;
+	BitmapFont mainFont;
+	GlyphLayout glyphLayout;
 	public SaveSelectionScreen(final MainGame gam) {
 		game = gam;
 		inputProcessor = new SaveSelectionInput(game);
@@ -29,6 +37,9 @@ public class SaveSelectionScreen implements com.badlogic.gdx.Screen {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(inputProcessor);
+		game.screenX = Gdx.graphics.getWidth();
+		game.screenY = Gdx.graphics.getHeight();
+		
 		
 		
 	}
