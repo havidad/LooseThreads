@@ -4,13 +4,13 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.hypoxiagames.marioclone.marioclonegame;
+import com.hypoxiagames.marioclone.MainGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new marioclonegame(), config);
+		initialize(new MainGame(), config);
 	}
 }

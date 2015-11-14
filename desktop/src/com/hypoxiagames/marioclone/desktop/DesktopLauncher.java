@@ -15,8 +15,8 @@ public class DesktopLauncher {
 		cfg.title = "Project: Mafia";
 		cfg.useGL30 = true;
 		cfg.width = 1024;
-		cfg.height = 720;
-		cfg.resizable = false;
+		cfg.height = 768;
+		cfg.resizable = true;
 		new LwjglApplication(new MainGame(), cfg);
 	}
 }
