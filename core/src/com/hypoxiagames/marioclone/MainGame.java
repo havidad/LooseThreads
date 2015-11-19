@@ -9,6 +9,7 @@ public class MainGame extends Game {
 	TitleScreen mainMenuScreenOld;
 	SettingsScreen settingsScreen;
 	SaveSelectionScreen saveScreen;
+	GameScreen gameScreen;
 	
 	public int screenX, screenY;
 
@@ -31,6 +32,11 @@ public class MainGame extends Game {
 		case "Save Selection":
 			saveScreen = new SaveSelectionScreen(this);
 			setScreen(saveScreen);
+			break;
+		case "Game Screen":
+			gameScreen = new GameScreen(this);
+			setScreen(gameScreen);
+			break;
 			
 		}
 	}

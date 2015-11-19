@@ -25,7 +25,7 @@ public class TitleInput implements com.badlogic.gdx.InputProcessor{
 		case Keys.ENTER:
 			switch (TitleScreenNew.getItemSelected()) {
 			case 0:
-				game.switchScreens("Save Selection");
+				game.switchScreens("Game Screen");
 				break;
 			case 1:
 				System.out.println("Settings Pressed");

@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.hypoxiagames.marioclone.Assets;
 import com.hypoxiagames.marioclone.MainGame;
 import com.hypoxiagames.marioclone.input.TitleInput;
+import com.hypoxiagames.marioclone.Util.*;
 
 public class TitleScreenNew implements com.badlogic.gdx.Screen {
 	final MainGame game;
@@ -68,8 +69,8 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 		
 		// To fill the whole screen with an image, multiply by aspect ratio(for a static unmoving background,
 				//To have a scrollale level, make it as big as the game world.
-		backgroundSprite.setSize(GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT);
-		finn.setSize(48, 48);
+		backgroundSprite.setSize(GAME_WORLD_WIDTH * ASPECT_RATIO, GAME_WORLD_HEIGHT);
+		finn.setSize(30, 48);
 		finn.setPosition(200,25);
 		
 		glyphLayout = new GlyphLayout();
@@ -93,6 +94,7 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 		if(frame % 5 == 0){
 			if (TitleInput.upButtonPressed == true){
 				setItemSelected(getItemSelected() - 1);
+				System.out.println("Up is pressed down");
 				if(getItemSelected() < 0)
 					setItemSelected(3);
 			}
@@ -103,15 +105,15 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 			}
 			if(TitleInput.rightButtonPressed == true){
 				float finnXBefore = finn.getX();
-				if(finn.getX() >= GAME_WORLD_WIDTH - finn.getWidth()/2)
-					finn.setX(GAME_WORLD_WIDTH + finn.getWidth()/2);
-				else
-					finn.setX(finnXBefore+= 700 * delta);
-				
-				if(finn.getX() > camera.viewportWidth * ASPECT_RATIO - 50)
-					camera.position.x += 665 * delta;
-				if(camera.position.x >= camera.viewportWidth * ASPECT_RATIO)
-					camera.position.x = camera.viewportWidth * ASPECT_RATIO;
+				finn.setX(finnXBefore += 700 * delta);
+				System.out.println(String.valueOf(finnXBefore));
+				if(finn.getX() >= GAME_WORLD_WIDTH * ASPECT_RATIO - finn.getWidth()){
+					finn.setX(GAME_WORLD_WIDTH * ASPECT_RATIO - finn.getWidth());
+				}
+				//if(finn.getX()  camera.viewportWidth)
+					//camera.position.x += 665 * delta;
+				if(camera.position.x >= camera.viewportWidth)
+					camera.position.x = camera.viewportWidth;
 			}
 			if(TitleInput.leftButtonPressed == true){
 				float finnXBefore = finn.getX();
@@ -125,11 +127,7 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 				if(camera.position.x <= camera.viewportWidth/2)
 					camera.position.x = camera.viewportWidth/2;
 			}
-		
-			
 		}
-		
-		
 	}
 
 	@Override
@@ -144,10 +142,10 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 		finn.draw(batch);
 		glyphLayout.setText(titleFont, TITLE);
 		titleFont.draw(batch, TITLE, 0, 0);
+		ShowFPSCounter.isShown = true;
 		drawMenuItems();
+		ShowFPSCounter.ShowCounter(menuItemFont, batch, glyphLayout);
 		batch.end();
-		
-		
 		
 		processControl(delta);
 		
@@ -220,13 +218,6 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 					- glyphLayout.width / 2, yDraw);
 			yDraw -= 30;
 		}
-		menuItemFont.setColor(Color.BLUE);
-		menuItemFont.getData().setScale(0.5f);
-		// FPS Counter TODO Implement FPS counter to be togglable from any screen any time.
-		//For now it is just resting here.
-		int fps = Gdx.graphics.getFramesPerSecond();
-		glyphLayout.setText(menuItemFont , String.valueOf(fps));
-		menuItemFont.draw(batch, glyphLayout, 5, 15);
 	}
 	
 	// Loads Assets based on what assets are needed for the scene.
