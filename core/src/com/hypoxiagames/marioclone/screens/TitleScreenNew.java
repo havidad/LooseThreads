@@ -70,7 +70,6 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 		// To fill the whole screen with an image, multiply by aspect ratio(for a static unmoving background,
 				//To have a scrollale level, make it as big as the game world.
 		backgroundSprite.setSize(GAME_WORLD_WIDTH * ASPECT_RATIO, GAME_WORLD_HEIGHT);
-		finn.setSize(30, 48);
 		finn.setPosition(200,25);
 		
 		glyphLayout = new GlyphLayout();
@@ -172,7 +171,6 @@ public class TitleScreenNew implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void hide() {
-		Gdx.input.setInputProcessor(null);
 		dispose();
 		
 	}
