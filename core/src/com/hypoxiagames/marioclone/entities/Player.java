@@ -18,10 +18,8 @@ public class Player extends Sprite implements InputProcessor {
 	// movement in the world
 	private float speed = 45 * 2, gravity = 85 * 1.0f;
 
-	// Used to see if a player can land on this a secific tile
+	// Used to see if a player can land on this a specific tile
 	private TiledMapTileLayer collisionLayer;
-
-	//PlayerInput input;
 
 	public boolean collidedGround, collidedWall;
 
@@ -127,11 +125,15 @@ public class Player extends Sprite implements InputProcessor {
 		case Keys.W:
 			if (!collidedGround)
 				velocity.y += speed;
+			if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isButtonPressed(Keys.DOWN))
+				velocity.y = -velocity.y;
 			break;
 		case Keys.DOWN:
 		case Keys.S:
 			if (!collidedGround)
 				velocity.y -= speed;
+			if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isButtonPressed(Keys.UP))
+				velocity.y = -velocity.y;
 			break;
 		case Keys.LEFT:
 		case Keys.A:
