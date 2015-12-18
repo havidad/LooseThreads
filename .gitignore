@@ -40,6 +40,7 @@ tmp/
 *.swp
 *~.nib
 local.properties
+local.properties~
 .settings/
 .loadpath
 .externalToolBuilders/
@@ -62,3 +63,4 @@ build/
 
 ## OS Specific
 .DS_Store
+/desktop/assets

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="98">
+ <tileset firstgid="1" name="Grass" tilewidth="32" tileheight="32" tilecount="15">
+  <tile id="0">
+   <image width="32" height="32" source="lightestcrag.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="lightcrag.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="crag.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="crag_ground_base.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="crag_ground_end_me_up.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="crag_ground_end_me_right.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="crag_ground_end_me_left.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="crag_ground_end_me_down.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="crag_ground_2.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="crag_ground_3.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="crag_ground_end_me_left_down_diag.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="crag_ground_end_me_top_right_diag.png"/>
+  </tile>
+  <tile id="12">
+   <image width="32" height="32" source="crag_ground_end_me_bottom_right_diag.png"/>
+  </tile>
+  <tile id="13">
+   <image width="32" height="32" source="crag_ground_end_me_top_right_diag.png"/>
+  </tile>
+  <tile id="14">
+   <image width="32" height="32" source="crag_ground_end_me_top_right_diag.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="16" name="interactme's" tilewidth="32" tileheight="32" tilecount="1">
+  <tile id="0">
+   <image width="32" height="32" source="door.png"/>
+  </tile>
+ </tileset>
+ <layer name="Walls" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2W2YrkMAxFA/1Ub/P/X9s0NHTGeNFmKcs5YCqVOJJ8r5ccBwAAAAAAAAAAAAAAAAAAAAAAADyJz2+DfXwMDeLwaos3fqL1O8fCGzm7dPo0v7vzPYGdunwG1xm570bWHMWTNZka9PaqVZ+3kT3+1RqZ3dfkqP4et36HZhO5RiK03aWBpa4qPyR1jr7DIua0JHf0Glv1r1wb7Z41WiPR2u/cu7TvZu2bqxpG157aNBpHjn0Wy7t2dvsjqVnr10qLUS4v1nNKW/9Oj2axrfm1e5B3L9LoYekbrY80hyXnah55a5jV4cETx6PV7L2j82uN2xtfb7ySNaHN48UaU6vZqF8bz6t/RZvVreVq9d+hRWh4dw2upLkUTY7q8V65RemzonqcV9B4hx6zWDOqNXlbO5rrKHbX/bW5ZWke/U6W/m2Ofzf3ZKZxhp4SL9v/s9oy/MjwJNLDnn5ZrWp9eMbcQ9P3EDyrak/Yr7RrwOL3mZ01X3WvitJiFGPGTq93eFI136Xzt4fn/erxnn2qrsHqRYSH51i9mE9su8YZgTZutZYWXSo8vAK9Wqq9kWpVPc+j8cyhn+urnuUePSr88ORsPbHkG+0nq/538jaTVs/R85HO7XureIfgGYz3u1n/3vpq40hywh/Wtd326fkhzf9GNLpb53bvPJHWdgcqz7ZZ39m5YfFD2zebjG8Ha/yRB+29tq+0JliTsR7PuUBGT1vJOdLey1j/b+C8D632JI+Oo/0P/qd3Xs/0ijjXQMbu7z688BM5t/Ejjghf8GMfWm/wIg++bQEAAAAAAAAAAAAAAAAAAAAAAAB8fAOOE+bDQJwAAA==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="96" x="1216" y="1512">
+   <polyline points="0,0 0,24 32,24 32,152 0,152 0,184 32,184 32,216 224,216 224,248 256,248 256,224 256,216 416,216 416,184 800,184 800,80 800,88 832,88 832,56 800,56 800,24 768,24 768,-8 -8,-8 0,-8 0,8"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Object Layer 2">
+  <object id="97" x="1216" y="1544">
+   <polyline points="0,0 0,120 32,120 32,0 32,-8 -40,-8 -40,120 16,120 8,120"/>
+  </object>
+ </objectgroup>
+</map>

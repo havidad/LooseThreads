@@ -5,9 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.hypoxiagames.marioclone.screens.*;
 
 public class MainGame extends Game {
-	MainMenuScreen mainMenuScreen;
+	//Declarations for all screen states.
+	// Each screen handles a certain task.
+	
+	TitleScreen mainMenuScreen;
 	SettingsScreen settingsScreen;
 	SaveSelectionScreen saveScreen;
+	GameScreen gameScreen;
 	
 	public int screenX, screenY;
 
@@ -19,7 +23,7 @@ public class MainGame extends Game {
 	public void switchScreens(String ScreenName){
 		switch(ScreenName){
 		case "Main Menu":
-			mainMenuScreen = new MainMenuScreen(this);
+			mainMenuScreen = new TitleScreen(this);
 			setScreen(mainMenuScreen);
 			break;
 		
@@ -30,9 +34,16 @@ public class MainGame extends Game {
 		case "Save Selection":
 			saveScreen = new SaveSelectionScreen(this);
 			setScreen(saveScreen);
+			break;
+		case "Game Screen":
+			gameScreen = new GameScreen(this);
+			setScreen(gameScreen);
+			break;
 			
 		}
 	}
+	
+	
 	
 	public void create() {
 		screenX = Gdx.graphics.getWidth();

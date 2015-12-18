@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" nextobjectid="8">
+ <tileset firstgid="1" name="Poop" tilewidth="32" tileheight="32">
+  <tile id="0">
+   <image width="32" height="32" source="actually_grass_for_real_live_2015.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="amazinggrass.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="crag_ground_2.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="crag_ground_3.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="crag_ground_base.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="crag_ground_end_me_bottom_right_diag.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="crag_ground_end_me_down.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="crag_ground_end_me_left_down_diag.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="crag_ground_end_me_left.png"/>
+  </tile>
+  <tile id="9">
+   <image width="32" height="32" source="crag_ground_end_me_right.png"/>
+  </tile>
+  <tile id="10">
+   <image width="32" height="32" source="crag_ground_end_me_top_right_diag.png"/>
+  </tile>
+  <tile id="11">
+   <image width="32" height="32" source="crag_ground_end_me_top_right.png"/>
+  </tile>
+  <tile id="12">
+   <image width="32" height="32" source="crag_ground_end_me_up.png"/>
+  </tile>
+  <tile id="13">
+   <image width="32" height="32" source="crag.png"/>
+  </tile>
+  <tile id="14">
+   <image width="32" height="32" source="door.png"/>
+  </tile>
+  <tile id="15">
+   <image width="32" height="32" source="Grass2ass_dark.png"/>
+  </tile>
+  <tile id="16">
+   <image width="32" height="32" source="Grass2ass.png"/>
+  </tile>
+  <tile id="17">
+   <image width="32" height="32" source="lightcrag.png"/>
+  </tile>
+  <tile id="18">
+   <image width="32" height="32" source="lightestcrag.png"/>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="25" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3UzQqAMAwD4B6c/+79H1c9DGSsa1LYRRrITfJRhIlEIv9NJurdP55eRk+nU/YTWI/zfrsRxtcZaSTyFs2YwFsQp2egDmKsyobl7ISROzuaMQv/T7RbWvew+7WzGPXuF2P0exKJsLkBxbVitsQJAAA=
+  </data>
+ </layer>
+ <objectgroup name="blocked">
+  <object id="1" x="289.333" y="256.667">
+   <polyline points="0,0 320,0 320,30 350,31.3333 349.333,60 380.667,63.3333 382.667,126.667 414.667,127.333 414.667,158.667 444,158 446.667,220.667 416.667,220.667 416,252 386.667,254 380,253.333 383.333,286 350.667,287.333 352,319.333 352,350 383.333,350.667 382.667,319.333 415.333,320 416,287.333 444.667,286 449.333,254.667 478,252.667 476.667,128.667 444.667,128.667 445.333,93.3333 414.667,93.3333 414,34 385.333,32.6667 381.333,-2.66667 349.333,-1.33333 350.667,-33.3333 0,-34 0,-1.33333"/>
+  </object>
+  <object id="2" x="256.5" y="254.5" width="31.5" height="33.5"/>
+  <object id="3" x="224" y="289.5" width="31" height="223"/>
+  <object id="5" x="256" y="480.5" width="30" height="63"/>
+  <object id="6" x="288.5" y="544" width="30.5" height="64.5"/>
+  <object id="7" x="321.5" y="578" width="319.5" height="29"/>
+ </objectgroup>
+</map>
