@@ -2,7 +2,6 @@ package com.hypoxiagames.marioclone.input;
 
 import com.hypoxiagames.marioclone.MainGame;
 import com.hypoxiagames.marioclone.screens.*;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
 public class TitleInput implements com.badlogic.gdx.InputProcessor{
@@ -23,7 +22,7 @@ public class TitleInput implements com.badlogic.gdx.InputProcessor{
 		
 		switch (keycode) {
 		case Keys.ENTER:
-			switch (TitleScreenNew.getItemSelected()) {
+			switch (TitleScreen.getItemSelected()) {
 			case 0:
 				game.switchScreens("Game Screen");
 				break;

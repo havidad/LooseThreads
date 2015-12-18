@@ -3,7 +3,9 @@ package com.hypoxiagames.marioclone;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+
+// This file is used to load files at runtime. This exists to load, and divide up regions on a spritesheet
+//but hasn't been implemented yet.
 
 public class Assets {
 	private final static AssetManager manager = new AssetManager();

@@ -2,11 +2,7 @@ package com.hypoxiagames.marioclone.screens;
 
 import com.hypoxiagames.marioclone.*;
 import com.hypoxiagames.marioclone.entities.Player;
-import com.hypoxiagames.marioclone.input.PlayerInput;
-import com.hypoxiagames.marioclone.input.TitleInput;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.MapObjects;
@@ -15,25 +11,23 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 
 public class GameScreen implements com.badlogic.gdx.Screen {
-	final MainGame game;
+	private final MainGame game;
 	Assets assetManager;
-	SpriteBatch batch;
 	GlyphLayout glyphLayout;
 	
 	private Player player;
 	
 	private TiledMap testMap;
 	private OrthogonalTiledMapRenderer renderer;
-	private StaticTiledMapTile staticTile;
-	private MapObjects groundObjects, wallObjects;
+	private MapObjects groundObjects;
 	private OrthographicCamera camera;
 	
-	final float GAME_WORLD_WIDTH = 480, GAME_WORLD_HEIGHT = 360;
+	final float GAME_WORLD_WIDTH = 100, GAME_WORLD_HEIGHT = 100;
 	final float ASPECT_RATIO;
 	
 	public GameScreen(final MainGame gam){
@@ -42,14 +36,19 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		
 		ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
 	
-		testMap = new TmxMapLoader().load("Maps/TestMap.tmx");
+		testMap = new TmxMapLoader().load("Maps/testRoom.tmx");
 		renderer =  new OrthogonalTiledMapRenderer(testMap);
 		camera = new OrthographicCamera();
+		
+		// Sets the camera to show the maximum game world size, times an aspect ratio so it looks similar at most
+		//resolutions.
 		camera.setToOrtho(false, GAME_WORLD_WIDTH * ASPECT_RATIO, GAME_WORLD_HEIGHT);
 		
-		player = new Player(new Sprite(new Texture("Sprites/Finn.png")), 
+		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), 
 				(TiledMapTileLayer)testMap.getLayers().get("Player"));
-		player.setPosition(2, 71);
+		
+		// Spawns him somewhere in the room.
+		player.setPosition(512,354);
 		
 		//Set collision points for player
 		setCollisionMap();
@@ -60,8 +59,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	public void setCollisionMap(){
 		try{
-			groundObjects = testMap.getLayers().get(2).getObjects();
-			wallObjects = testMap.getLayers().get(3).getObjects();
+			groundObjects = testMap.getLayers().get(1).getObjects();
+			//wallObjects = testMap.getLayers().get(3).getObjects();
 		}catch (ExceptionInInitializerError e){
 			System.out.println("We can't load the collision Layer");
 			game.exit();
@@ -71,6 +70,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	public boolean checkCollision(MapObjects objects){
 		boolean collided = false;
 		for(RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)){
+			// Checks to see if the previous check had a collision
 			if(collided)
 				return true;
 			Rectangle rect = rectangleObject.getRectangle();
@@ -85,7 +85,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void show() {
-		
+		testMap.getLayers().get(0).setVisible(true);
+		testMap.getLayers().get(1).setVisible(true);
 	}
 
 	@Override
@@ -97,10 +98,6 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 			player.collidedGround = true;
 		else
 			player.collidedGround = false;
-		if(checkCollision(wallObjects))
-			player.collidedWall = true;
-		else 
-			player.collidedWall = false;
 		renderer.setView(camera);
 		renderer.render();
 		renderer.getBatch().begin();
@@ -135,6 +132,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		
 	}
 
+	// When writing code, make sure to check the Declarations of every thing you are working with. If they 
+	//extend or 
 	@Override
 	public void dispose() {
 		testMap.dispose();
@@ -142,6 +141,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		
 	}
 
+	// Get/Setters
 	public TiledMap getTestMap() {
 		return testMap;
 	}
@@ -152,6 +152,10 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	public MapObjects getObjects(MapObjects objects) {
 		return objects;
+	}
+	
+	public MainGame getMainGame(){
+		return game;
 	}
 
 }

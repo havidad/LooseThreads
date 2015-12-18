@@ -1,9 +1,7 @@
 package com.hypoxiagames.marioclone.input;
 
 import com.hypoxiagames.marioclone.MainGame;
-import com.hypoxiagames.marioclone.screens.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 
 

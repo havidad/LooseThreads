@@ -1,105 +1,155 @@
 package com.hypoxiagames.marioclone.screens;
 
-import com.hypoxiagames.marioclone.*;
-import com.hypoxiagames.marioclone.input.TitleInput;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.hypoxiagames.marioclone.Assets;
+import com.hypoxiagames.marioclone.MainGame;
+import com.hypoxiagames.marioclone.input.TitleInput;
+import com.hypoxiagames.marioclone.Util.*;
 
 public class TitleScreen implements com.badlogic.gdx.Screen {
 	final MainGame game;
-	final TitleInput inputProcessor;
-	Assets assets;
+	final TitleInput input;
+	Sprite backgroundSprite;
 	SpriteBatch batch;
 	Viewport viewport;
 	OrthographicCamera camera;
 	BitmapFont titleFont, menuItemFont;
 	GlyphLayout glyphLayout;
 	Stage stage;
-
-	// Starting at 0 for the top item selected, used to locate which item is
-	// selected on the main menu
+	final float GAME_WORLD_WIDTH = 480, GAME_WORLD_HEIGHT = 360;
+	final float ASPECT_RATIO;
+	
+	// Keeps track of how many frames have passed.
+	long frame;
+	
+	
+	// Used for logic dealing with selecting an item from the menu. Will be unimplemented when someone
+	//gets around to implementing buttons as menu items.
 	private static int itemSelected;
-
-	public Texture background;
-
+	private static boolean isKeyPressed;
+	
 	// Strings to be displayed on the screen
-	public static final String TITLE = "Project: Mafia";
-	public static final String menuItem[] = { "Play Now", "Settings",
-			"Credits", "Exit" };
+		public static final String TITLE = "Project: Mafia";
+		public static final String menuItem[] = { "Play Now", "Settings",
+				"Credits", "Exit" };
 	
-	// Constructor used as the create method.
-	public TitleScreen(final MainGame gam) {
+	public TitleScreen(final MainGame gam){
 		game = gam;
-		inputProcessor = new TitleInput(game);
-		glyphLayout = new GlyphLayout();
-		stage = new Stage();
-	}
+		
+		
+		ASPECT_RATIO = (float)Gdx.graphics.getHeight()/(float)Gdx.graphics.getWidth();
+		
+		input = new TitleInput(game);
+		batch = new SpriteBatch();
+		camera = new OrthographicCamera();
+		viewport = new StretchViewport(GAME_WORLD_WIDTH * ASPECT_RATIO, GAME_WORLD_HEIGHT, camera);
+		viewport.apply();
+		camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
+		
+		loadAssets();
+		
+		// To fill the whole screen with an image, multiply by aspect ratio(for a static unmoving background,
+				//To have a scrollale level, make it as big as the game world.
+		backgroundSprite.setSize(GAME_WORLD_WIDTH * ASPECT_RATIO, GAME_WORLD_HEIGHT);
 	
+		
+		glyphLayout = new GlyphLayout();
+		
+		Gdx.input.setInputProcessor(input);
+		
+		frame = 0;
+		
+	}
 	@Override
 	public void show() {
-		game.screenX = Gdx.graphics.getWidth();
-		game.screenY = Gdx.graphics.getHeight();
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 256, 176);
-		viewport = new FitViewport(256,176, camera);
-		Gdx.input.setInputProcessor(inputProcessor);
-		batch = new SpriteBatch();
-		loadAssets();
+		
+		
 	}
 	
+	private void processControl(float delta){
+		
+		// Checks 20 times in a second and goes through an array that mirrors the options on the screen.
+		//this is how we are doing Menu's until some UI controls get implemented into the game
+		if(frame % 5 == 0){
+			if (TitleInput.upButtonPressed == true){
+				setItemSelected(getItemSelected() - 1);
+				System.out.println("Up is pressed down");
+				if(getItemSelected() < 0)
+					setItemSelected(3);
+			}
+			if(TitleInput.downButtonPressed == true){	
+				setItemSelected(getItemSelected() + 1);
+				if(getItemSelected() > 3)
+					setItemSelected(0);
+			}
+		}
+	}
+
 	@Override
 	public void render(float delta) {
+		// Updates how many frames has passed. This is to limit controls on the menu, to make them actually usable
+		frame++;
+		
+		// Needs to be called every render loop. Clears screen from last frame. 
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
+		
+		// Updates camera information
 		camera.update();
-		batch.setProjectionMatrix(viewport.getCamera().combined);
-
+		
+		// Begin drawing items to the screen.
 		batch.begin();
-		batch.draw(background, 0, 0, game.screenX, game.screenY);
-		// Draws the Title Centered halfway in the screen, and offset from the
-		// top.
+		batch.setProjectionMatrix(camera.combined);
+		backgroundSprite.draw(batch);
 		glyphLayout.setText(titleFont, TITLE);
-		titleFont.draw(batch, TITLE,
-				((game.screenX / 2) - glyphLayout.width / 2),
-				game.screenY - 40);
+		titleFont.draw(batch, TITLE, 0, 0);
+		ShowFPSCounter.isShown = true;
 		drawMenuItems();
-		menuItemFont.setColor(Color.YELLOW);
+		ShowFPSCounter.ShowCounter(menuItemFont, batch, glyphLayout);
 		batch.end();
+		
+		// Calls method that processes the control of the main screen
+		processControl(delta);
+		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		int newW = width, newH = height;
-		if(camera.viewportWidth > width){
-			float scale = (float) camera.viewportWidth / (float) width;
-			newW *= scale;
-			newH *= scale;
-		}
-		camera.setToOrtho(false, newW, newH);
-	}
-	
-	public void hide() {
-		Gdx.input.setInputProcessor(null);
-		dispose();
+		viewport.update(width, height);
+		camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
+		
 	}
 
 	@Override
 	public void pause() {
+
+		
 	}
 
 	@Override
 	public void resume() {
+		
+	}
 
+	@Override
+	public void hide() {
+		dispose();
+		
 	}
 
 	@Override
 	public void dispose() {
-		Assets.dispose();
 		batch.dispose();
 	}
 	
@@ -110,49 +160,55 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 	public static void setItemSelected(int number) {
 		itemSelected = number;
 	}
-
+	
+	public static boolean getKeyPressed(){
+		return isKeyPressed;
+	}
+	
+	public static void setIsKeyPressed(boolean isPressed)
+	{
+		isKeyPressed = isPressed;
+	}
+	
+	
 	public void drawMenuItems() {
-		int yDraw = 500;
+		float yDraw = (int) (GAME_WORLD_HEIGHT) * ASPECT_RATIO ;
 
+		// This is a parrallel array of menu items, to draw those items on the screen.
 		for(int i = 0; i < 4; i++)
 		{ 
 			if(i == itemSelected){
 				menuItemFont.setColor(Color.RED);
-				menuItemFont.getData().setScale(1.3f);
+				menuItemFont.getData().setScale(0.7f);
 			}
 			else{
 				menuItemFont.setColor(Color.WHITE);
-				menuItemFont.getData().setScale(1);
+				menuItemFont.getData().setScale(0.5f);
 			}
 			glyphLayout.setText(menuItemFont, menuItem[i]);
-			menuItemFont.draw(batch, glyphLayout, (game.screenX / 2)
+			menuItemFont.draw(batch, glyphLayout, (GAME_WORLD_WIDTH * ASPECT_RATIO / 2)
 					- glyphLayout.width / 2, yDraw);
-			yDraw -= 40;
+			yDraw -= 30;
 		}
-		menuItemFont.setColor(Color.WHITE);
-		menuItemFont.getData().setScale(0.85f);
-		// FPS Counter TODO Implement FPS counter to be togglable from any screen any time.
-		//For now it is just resting here.
-		int fps = Gdx.graphics.getFramesPerSecond();
-		glyphLayout.setText(menuItemFont , String.valueOf(fps));
-		menuItemFont.draw(batch, glyphLayout, 10, 30);
 	}
-
+	
 	// Loads Assets based on what assets are needed for the scene.
-	public void loadAssets() {
-		Assets.load();
-		while (!Assets.getManager().update()) {
-			System.out.println(Assets.getManager().getProgress() * 100 + "%");
-		}
-		if (Assets.getManager().isLoaded("Screens/mainMenuBackground.png")) {
-			background = Assets.getManager().get(
-					"Screens/Background.png");
-			titleFont = Assets.getManager().get("Fonts/AVidaNova.fnt");
-			menuItemFont = Assets.getManager().get("Fonts/DroidSans.fnt");
+		public void loadAssets() {
+			Assets.load();
+			// Prints out loading info into the console. While this is happening in the future, it will slow down.
+			//eventually we will need to implement an actual loading screen with a loading bar and stuff on it.
+			while (!Assets.getManager().update()) {
+					System.out.println(Assets.getManager().getProgress() * 100 + "%");
+			}
+			System.out.println(Assets.getManager().getProgress() * 100 + "% All Files Loaded");
+			if (Assets.getManager().isLoaded("Screens/Background.png")) {
+				backgroundSprite = new Sprite(new Texture(Gdx.files.internal("Screens/Background.png")));
+				titleFont = Assets.getManager().get("Fonts/AVidaNova.fnt");
+				menuItemFont = Assets.getManager().get("Fonts/DroidSans.fnt");
 
-		} else {
-			loadAssets();
+			} else {
+				loadAssets();
+			}
 		}
-	}
 
 }
