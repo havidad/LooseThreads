@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" nextobjectid="58">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" nextobjectid="62">
  <tileset firstgid="1" name="Poop" tilewidth="32" tileheight="32">
   <tile id="0">
    <image width="32" height="32" source="actually_grass_for_real_live_2015.png"/>
@@ -77,40 +77,10 @@
   <object id="16" x="705" y="353" width="30" height="61"/>
   <object id="17" x="735.667" y="384.333" width="32.3333" height="127.667"/>
   <object id="19" x="704.333" y="480" width="32.3333" height="64.6667"/>
-  <object id="20" x="674" y="511" width="30" height="64.3333"/>
-  <object id="24" x="640.5" y="544" width="32" height="64"/>
-  <object id="25" x="648" y="575.5"/>
-  <object id="26" x="644.5" y="548.5"/>
-  <object id="27" x="651" y="555"/>
-  <object id="28" x="654.5" y="559" width="0.5"/>
-  <object id="29" x="659.5" y="571.5"/>
-  <object id="30" x="659" y="560"/>
-  <object id="31" x="659.5" y="551.5"/>
-  <object id="32" x="662.5" y="558" width="1" height="1"/>
-  <object id="33" x="665.5" y="547.5"/>
-  <object id="34" x="662.5" y="567.5" height="6"/>
-  <object id="35" x="665.5" y="591.5" height="1"/>
-  <object id="36" x="664.5" y="595"/>
-  <object id="37" x="653.5" y="596"/>
-  <object id="38" x="653" y="587"/>
-  <object id="39" x="670" y="588" width="1"/>
-  <object id="40" x="640.5" y="600.5"/>
-  <object id="41" x="648.5" y="596.5"/>
-  <object id="42" x="650.5" y="580"/>
-  <object id="43" x="656" y="594" width="3" height="4"/>
-  <object id="44" x="663.5" y="604" width="1"/>
-  <object id="45" x="660.5" y="577"/>
-  <object id="46" x="662.5" y="580.5" width="0.5"/>
-  <object id="47" x="667.5" y="598" width="1.5" height="2.5"/>
-  <object id="48" x="669" y="601" height="0.5"/>
-  <object id="49" x="668.5" y="597"/>
-  <object id="50" x="663" y="580.5"/>
-  <object id="51" x="658" y="570"/>
-  <object id="52" x="650.5" y="546"/>
-  <object id="53" x="649.5" y="543.5" height="0.5"/>
-  <object id="54" x="653.5" y="557" height="0.5"/>
-  <object id="55" x="653.5" y="561.5" height="0.5"/>
-  <object id="56" x="653.5" y="567" height="5.5"/>
-  <object id="57" x="656" y="583.5"/>
+  <object id="20" x="671.75" y="511" width="32.25" height="64.3333"/>
+  <object id="58" x="640.5" y="544.5" width="32.25" height="64.3333"/>
+  <object id="59" x="641.5" y="544.5" width="29.75" height="63.75"/>
+  <object id="60" x="642.75" y="545.75" width="26.75" height="62"/>
+  <object id="61" x="644.25" y="547" width="26.25" height="59.25"/>
  </objectgroup>
 </map>

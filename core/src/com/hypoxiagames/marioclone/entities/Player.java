@@ -16,7 +16,12 @@ public class Player extends Sprite implements InputProcessor {
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
-	private float speed = 45 * 2, gravity = 85 * 1.0f;
+	private float speed = 45 * 2;
+
+	public xDir xDirection;
+	public yDir yDirection;
+
+	private Vector2 location;
 
 	// Used to see if a player can land on this a specific tile
 	private TiledMapTileLayer collisionLayer;
@@ -27,6 +32,17 @@ public class Player extends Sprite implements InputProcessor {
 		super(sprite);
 		this.collisionLayer = collisionLayer;
 		this.setSize(24, 48);
+		location = new Vector2(getX(), getY());
+		xDirection = xDir.none;
+		yDirection = yDir.none;
+	}
+
+	private enum xDir {
+		left, right, none
+	}
+
+	private enum yDir {
+		up, down, none
 	}
 
 	@Override
@@ -49,9 +65,34 @@ public class Player extends Sprite implements InputProcessor {
 			velocity.x = -speed;
 
 		// Save old position
-		float oldX = getX(), oldY = getY();
-		// float tileWidth = collisionLayer.getTileWidth(), tileHeight =
-		// collisionLayer.getTileHeight();
+		location.x = getX();
+		location.y = getY();
+
+		// Logic to decide which directions the player should move
+		if (!collidedGround) {
+			switch (xDirection) {
+			case none:
+				velocity.x = 0;
+				break;
+			case left:
+				velocity.x = -speed;
+				break;
+			case right:
+				velocity.x = speed;
+				break;
+			}
+			switch (yDirection) {
+			case none:
+				velocity.y = 0;
+				break;
+			case up:
+				velocity.y = speed;
+				break;
+			case down:
+				velocity.y = -speed;
+				break;
+			}
+		}
 
 		// Move on X Axis
 		setX(getX() + velocity.x * delta);
@@ -59,23 +100,31 @@ public class Player extends Sprite implements InputProcessor {
 		// Move on Y Axis
 		setY(getY() + velocity.y * delta);
 
-		// Offsets player by 3 pixels to the direction opposite of which they are moving, and stops them from moving
-		//any farther to any direction, until the player chooses a new direction to go to.
+		// Offsets player by 3 pixels to the direction opposite of which they
+		// are moving, and stops them from moving
+		// any farther to any direction, until the player chooses a new
+		// direction to go to.
 		if (collidedGround) {
-			if (velocity.x < 0)
-				setX(oldX + 3);
-			else if (velocity.x > 0)
-				setX(oldX - 3);
-			if(velocity.y < 0)
-				setY(oldY + 3);
-			else if(velocity.y > 0)
-				setY(oldY - 3);
 			velocity.x = 0;
 			velocity.y = 0;
+			if (xDirection == xDir.left) {
+				setX(location.x + 3);
+				xDirection = xDir.none;
+			} else if (xDirection == xDir.right) {
+				setX(location.x - 3);
+				xDirection = xDir.none;
+			}
+			if (yDirection == yDir.down) {
+				setY(location.y + 3);
+				yDirection = yDir.none;
+			} else if (yDirection == yDir.up) {
+				setY(location.y - 3);
+				yDirection = yDir.none;
+			}
 		}
 	}
 
-	// Bunch of different get/setters 
+	// Bunch of different get/setters
 	public Vector2 getVelocity() {
 		return velocity;
 	}
@@ -92,14 +141,6 @@ public class Player extends Sprite implements InputProcessor {
 		this.speed = speed;
 	}
 
-	public float getGravity() {
-		return gravity;
-	}
-
-	public void setGravity(float gravity) {
-		this.gravity = gravity;
-	}
-
 	public TiledMapTileLayer getCollisionLayer() {
 		return collisionLayer;
 	}
@@ -107,43 +148,36 @@ public class Player extends Sprite implements InputProcessor {
 	public void setCollisionLayer(TiledMapTileLayer collisionLayer) {
 		this.collisionLayer = collisionLayer;
 	}
-	
-	
-	// Begins code for the player controlled inputs. Such as moving and attack. So far only movement code 
-	//has been done
 
-	/* 		TODO Basic combat code should be done at some point. For now, we will use some sort of shooting 
-	 * projectile, which should shoot off in the direction that the player is facing.
-	 * 
-	 * 
-	 * 
-	*/
+	public Vector2 getLocation() {
+		return location;
+	}
+
+	public void setLocation(Vector2 location) {
+		this.location = location;
+	}
+
+	// Begins code for the player controlled inputs. Such as moving and attack.
+	// So far only movement code
+	// has been done
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
 		case Keys.UP:
 		case Keys.W:
-			if (!collidedGround)
-				velocity.y += speed;
-			if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isButtonPressed(Keys.DOWN))
-				velocity.y = -velocity.y;
+			yDirection = yDir.up;
 			break;
 		case Keys.DOWN:
 		case Keys.S:
-			if (!collidedGround)
-				velocity.y -= speed;
-			if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isButtonPressed(Keys.UP))
-				velocity.y = -velocity.y;
+			yDirection = yDir.down;
 			break;
 		case Keys.LEFT:
 		case Keys.A:
-			if (!collidedGround)
-				velocity.x -= speed;
+			xDirection = xDir.left;
 			break;
 		case Keys.RIGHT:
 		case Keys.D:
-			if (!collidedGround)
-				velocity.x += speed;
+			xDirection = xDir.right;
 			break;
 		}
 		return true;
@@ -156,13 +190,23 @@ public class Player extends Sprite implements InputProcessor {
 		case Keys.DOWN:
 		case Keys.W:
 		case Keys.S:
-			velocity.y = 0;
+			if (Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W))
+				yDirection = yDir.up;
+			else if (Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S))
+				yDirection = yDir.down;
+			else
+				yDirection = yDir.none;
 			break;
 		case Keys.LEFT:
 		case Keys.RIGHT:
 		case Keys.A:
 		case Keys.D:
-			velocity.x = 0;
+			if (Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A))
+				xDirection = xDir.left;
+			else if (Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D))
+				xDirection = xDir.right;
+			else
+				xDirection = xDir.none;
 			break;
 		case Keys.ESCAPE:
 			Gdx.app.exit();

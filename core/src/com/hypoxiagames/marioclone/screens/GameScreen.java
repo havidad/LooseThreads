@@ -1,6 +1,7 @@
 package com.hypoxiagames.marioclone.screens;
 
 import com.hypoxiagames.marioclone.*;
+import com.hypoxiagames.marioclone.Util.ShowFPSCounter;
 import com.hypoxiagames.marioclone.entities.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
@@ -18,15 +19,19 @@ import com.badlogic.gdx.math.Rectangle;
 public class GameScreen implements com.badlogic.gdx.Screen {
 	private final MainGame game;
 	Assets assetManager;
-	GlyphLayout glyphLayout;
 	
 	private Player player;
+	
+	// Variables for Text to be drawn;
+	private BitmapFont fpsFont;
+	GlyphLayout glyphLayout;
 	
 	private TiledMap testMap;
 	private OrthogonalTiledMapRenderer renderer;
 	private MapObjects groundObjects;
 	private OrthographicCamera camera;
 	
+	// Used to keep things drawn at the same size regardless of the screen size.
 	final float GAME_WORLD_WIDTH = 100, GAME_WORLD_HEIGHT = 100;
 	final float ASPECT_RATIO;
 	
@@ -55,6 +60,9 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		
 		Gdx.input.setInputProcessor(player);
 		
+		glyphLayout = new GlyphLayout();
+		fpsFont = Assets.getManager().get("Fonts/DroidSans.fnt");
+		
 	}
 
 	public void setCollisionMap(){
@@ -67,7 +75,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		}
 	}
 	
-	public boolean checkCollision(MapObjects objects){
+	public boolean checkPlayerCollision(MapObjects objects){
 		boolean collided = false;
 		for(RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)){
 			// Checks to see if the previous check had a collision
@@ -93,8 +101,9 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		ShowFPSCounter.isShown = true;
 		player.update(delta);
-		if(checkCollision(groundObjects))
+		if(checkPlayerCollision(groundObjects))
 			player.collidedGround = true;
 		else
 			player.collidedGround = false;
@@ -102,6 +111,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		renderer.render();
 		renderer.getBatch().begin();
 		player.draw(renderer.getBatch());
+		ShowFPSCounter.ShowCounter(fpsFont, renderer.getBatch(), glyphLayout);
 		renderer.getBatch().end();
 
 	}
