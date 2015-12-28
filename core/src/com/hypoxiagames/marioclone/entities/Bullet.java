@@ -5,12 +5,27 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Bullet extends Sprite{
 
-	private int travelDirection; // 0 = South, 1 = North, 2 = West, 3 = East
-	private Vector2 location;
+	public enum Direction{
+		up,
+		down,
+		left,
+		right,
+		ul,
+		ur,
+		dl,
+		dr,
+		none
+	}
 	
-	public Bullet(Vector2 Location, int direction){
-		location = Location;
-		travelDirection = direction;
+	private Vector2 location;
+	private Direction direction;
+	
+	public Bullet(){} // Placeholder until I get a bullet sprite.
+	
+	public Bullet(Sprite sprite,Vector2 Location, Direction dir){
+		super(sprite);
+		direction = dir;
+		
 	}
 	
 	public void destroy(){

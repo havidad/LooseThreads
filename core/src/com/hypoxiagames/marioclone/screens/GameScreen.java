@@ -1,6 +1,7 @@
 package com.hypoxiagames.marioclone.screens;
 
 import com.hypoxiagames.marioclone.*;
+import com.hypoxiagames.marioclone.Util.ProjectileManager;
 import com.hypoxiagames.marioclone.Util.ShowFPSCounter;
 import com.hypoxiagames.marioclone.entities.Player;
 import com.badlogic.gdx.Gdx;
@@ -30,6 +31,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	private OrthogonalTiledMapRenderer renderer;
 	private MapObjects groundObjects;
 	private OrthographicCamera camera;
+	private ProjectileManager projManager;
 	
 	// Used to keep things drawn at the same size regardless of the screen size.
 	final float GAME_WORLD_WIDTH = 100, GAME_WORLD_HEIGHT = 100;
@@ -62,6 +64,12 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		
 		glyphLayout = new GlyphLayout();
 		fpsFont = Assets.getManager().get("Fonts/DroidSans.fnt");
+		
+		/*
+		 * 	Handle Projectiles being shot from the player. This
+		 * is just an initialization of this system.
+		*/
+		projManager = new ProjectileManager(player.getLocation(), this);
 		
 	}
 
@@ -101,12 +109,13 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		projManager.findBulletSpawn();
 		ShowFPSCounter.isShown = true;
+		// Player Collision is checked here, and player gets updated.
+		player.collidedGround = checkPlayerCollision(groundObjects);
 		player.update(delta);
-		if(checkPlayerCollision(groundObjects))
-			player.collidedGround = true;
-		else
-			player.collidedGround = false;
+		
+
 		renderer.setView(camera);
 		renderer.render();
 		renderer.getBatch().begin();

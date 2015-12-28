@@ -18,8 +18,8 @@ public class Player extends Sprite implements InputProcessor {
 	// movement in the world
 	private float speed = 45 * 2;
 
-	public xDir xDirection;
-	public yDir yDirection;
+	public static xDir xDirection;
+	public static yDir yDirection;
 
 	private Vector2 location;
 
@@ -37,11 +37,11 @@ public class Player extends Sprite implements InputProcessor {
 		yDirection = yDir.none;
 	}
 
-	private enum xDir {
+	public enum xDir {
 		left, right, none
 	}
 
-	private enum yDir {
+	public enum yDir {
 		up, down, none
 	}
 
