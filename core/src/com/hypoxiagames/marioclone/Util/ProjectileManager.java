@@ -35,7 +35,7 @@ public class ProjectileManager {
 	// Logic to figure out where the bullet should spawn from, and which
 	// direction to move in.
 	public void findBulletSpawn() {
-		switch (Player.xDirection) {
+		switch (Player.getxDirection()) {
 		case left:
 			bulletLocation = new Vector2(initLocation.x - 5, initLocation.y);
 			break;

@@ -4,6 +4,7 @@ import com.hypoxiagames.marioclone.*;
 import com.hypoxiagames.marioclone.Util.ProjectileManager;
 import com.hypoxiagames.marioclone.Util.ShowFPSCounter;
 import com.hypoxiagames.marioclone.entities.Player;
+import com.hypoxiagames.marioclone.entities.Player.xDir;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -85,11 +86,24 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	
 	public boolean checkPlayerCollision(MapObjects objects){
 		boolean collided = false;
+		//boolean almostCollidingL = false, almostCollidingU = false, almostCollidingR = false,
+			//	almostCollidingD = false;
 		for(RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)){
-			// Checks to see if the previous check had a collision
-			if(collided)
-				return true;
+			/* Code to check if you are about to collide with a wall, if you aren't,
+			*then that direction of movement will be disabled in the update method, until 
+			*there isn't a wall that the player couldn't have hit before. This will limit 
+			*the character from getting within a certain space to the wall, however will 
+			*allow him to move just fine in other directions.This is to create a gap after
+			* the player had ran into the wall, only disabling movement in that direction 
+			* after hitting the wall once. Once these bounding boxes aren't hit anymore by 
+			* second, larger bounding box, then the player will be able to move in that direction again.
+			*/
 			Rectangle rect = rectangleObject.getRectangle();
+			// Checks to see if the previous check had a collision
+			if(collided){
+				return true;
+			}
+				
 			if(Intersector.overlaps(rect, new Rectangle(player.getX(),player.getY()
 					,player.getWidth(), player.getHeight())))
 					collided = true;
@@ -101,8 +115,6 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void show() {
-		testMap.getLayers().get(0).setVisible(true);
-		testMap.getLayers().get(1).setVisible(true);
 	}
 
 	@Override
@@ -112,7 +124,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		projManager.findBulletSpawn();
 		ShowFPSCounter.isShown = true;
 		// Player Collision is checked here, and player gets updated.
-		player.collidedGround = checkPlayerCollision(groundObjects);
+		player.collidedWall = checkPlayerCollision(groundObjects);
 		player.update(delta);
 		
 

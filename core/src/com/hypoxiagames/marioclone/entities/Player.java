@@ -16,12 +16,14 @@ public class Player extends Sprite implements InputProcessor {
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
-	private float speed = 45 * 2;
+	private float speed = 35 * 2;
 
-	public static xDir xDirection;
+	private static xDir xDirection;
 	public static yDir yDirection;
 
 	private Vector2 location;
+
+	public boolean canMoveLeft = true, canMoveRight = true, canMoveUp = true, canMoveDown = true;
 
 	// Used to see if a player can land on this a specific tile
 	private TiledMapTileLayer collisionLayer;
@@ -31,9 +33,9 @@ public class Player extends Sprite implements InputProcessor {
 	public Player(Sprite sprite, TiledMapTileLayer collisionLayer) {
 		super(sprite);
 		this.collisionLayer = collisionLayer;
-		this.setSize(24, 48);
+		this.setSize(32, 64);
 		location = new Vector2(getX(), getY());
-		xDirection = xDir.none;
+		setxDirection(xDir.none);
 		yDirection = yDir.none;
 	}
 
@@ -52,7 +54,7 @@ public class Player extends Sprite implements InputProcessor {
 	}
 
 	public void update(float delta) {
-
+		updateMovement();
 		// Limits the player to only going too fast.
 		if (velocity.y > speed)
 			velocity.y = speed;
@@ -68,9 +70,65 @@ public class Player extends Sprite implements InputProcessor {
 		location.x = getX();
 		location.y = getY();
 
+		// updateMovement();
+
+		// Move on X Axis
+		setX(getX() + velocity.x * delta);
+
+		// Move on Y Axis
+		setY(getY() + velocity.y * delta);
+
+		// Offsets player by 3 pixels to the direction opposite of which they
+		// are moving, and stops them from moving
+		// any farther to any direction, until the player chooses a new
+		// direction to go to.
+		if (collidedWall) {
+			speed *= 0.20f;
+			if (getxDirection() == xDir.left) {
+				if (yDirection == yDir.down) {
+					setX(location.x + 6f);
+					setY(location.y + 6f);
+				} else if (yDirection == yDir.up) {
+					setX(location.x + 6f);
+					setY(location.y - 6f);
+				} else
+					setX(location.x + 6f);
+			} else if (getxDirection() == xDir.right) {
+				if (yDirection == yDir.down) {
+					setX(location.x - 6f);
+					setY(location.y + 6f);
+				} else if (yDirection == yDir.up) {
+					setX(location.x - 6f);
+					setY(location.y - 6f);
+				} else
+					setX(location.x - 6f);
+			}
+			setxDirection(xDir.none);
+
+			if (yDirection == yDir.down) {
+				setY(location.y + 6f);
+				yDirection = yDir.none;
+			} else if (yDirection == yDir.up) {
+				setY(location.y - 6f);
+				yDirection = yDir.none;
+			}
+
+			if ((Gdx.input.isKeyPressed(Keys.A)))
+				setxDirection(xDir.left);
+			if ((Gdx.input.isKeyPressed(Keys.D)))
+				setxDirection(xDir.right);
+			if ((Gdx.input.isKeyPressed(Keys.W)))
+				yDirection = yDir.up;
+			if ((Gdx.input.isKeyPressed(Keys.S)))
+				yDirection = yDir.down;
+		}
+		speed = 35 * 2;
+	}
+
+	public void updateMovement() {
 		// Logic to decide which directions the player should move
-		if (!collidedGround) {
-			switch (xDirection) {
+		if (!collidedWall) {
+			switch (getxDirection()) {
 			case none:
 				velocity.x = 0;
 				break;
@@ -91,35 +149,6 @@ public class Player extends Sprite implements InputProcessor {
 			case down:
 				velocity.y = -speed;
 				break;
-			}
-		}
-
-		// Move on X Axis
-		setX(getX() + velocity.x * delta);
-
-		// Move on Y Axis
-		setY(getY() + velocity.y * delta);
-
-		// Offsets player by 3 pixels to the direction opposite of which they
-		// are moving, and stops them from moving
-		// any farther to any direction, until the player chooses a new
-		// direction to go to.
-		if (collidedGround) {
-			velocity.x = 0;
-			velocity.y = 0;
-			if (xDirection == xDir.left) {
-				setX(location.x + 3);
-				xDirection = xDir.none;
-			} else if (xDirection == xDir.right) {
-				setX(location.x - 3);
-				xDirection = xDir.none;
-			}
-			if (yDirection == yDir.down) {
-				setY(location.y + 3);
-				yDirection = yDir.none;
-			} else if (yDirection == yDir.up) {
-				setY(location.y - 3);
-				yDirection = yDir.none;
 			}
 		}
 	}
@@ -162,23 +191,21 @@ public class Player extends Sprite implements InputProcessor {
 	// has been done
 	@Override
 	public boolean keyDown(int keycode) {
-		switch (keycode) {
-		case Keys.UP:
-		case Keys.W:
-			yDirection = yDir.up;
-			break;
-		case Keys.DOWN:
-		case Keys.S:
-			yDirection = yDir.down;
-			break;
-		case Keys.LEFT:
-		case Keys.A:
-			xDirection = xDir.left;
-			break;
-		case Keys.RIGHT:
-		case Keys.D:
-			xDirection = xDir.right;
-			break;
+		if (!collidedWall) {
+			switch (keycode) {
+			case Keys.W:
+				yDirection = yDir.up;
+				break;
+			case Keys.S:
+				yDirection = yDir.down;
+				break;
+			case Keys.A:
+				setxDirection(xDir.left);
+				break;
+			case Keys.D:
+				setxDirection(xDir.right);
+				break;
+			}
 		}
 		return true;
 	}
@@ -186,27 +213,38 @@ public class Player extends Sprite implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		switch (keycode) {
-		case Keys.UP:
-		case Keys.DOWN:
 		case Keys.W:
-		case Keys.S:
-			if (Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W))
-				yDirection = yDir.up;
-			else if (Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S))
+			if (collidedWall)
+				setY(location.y - 10);
+			if (Gdx.input.isKeyPressed(Keys.S))
 				yDirection = yDir.down;
 			else
 				yDirection = yDir.none;
 			break;
-		case Keys.LEFT:
-		case Keys.RIGHT:
-		case Keys.A:
-		case Keys.D:
-			if (Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A))
-				xDirection = xDir.left;
-			else if (Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D))
-				xDirection = xDir.right;
+		case Keys.S:
+			if (collidedWall)
+				setY(location.y + 10);
+			if (Gdx.input.isKeyPressed(Keys.W))
+				yDirection = yDir.up;
 			else
-				xDirection = xDir.none;
+				yDirection = yDir.none;
+			break;
+		case Keys.A:
+			if (collidedWall)
+				setX(location.y + 10);
+			if (Gdx.input.isKeyPressed(Keys.D))
+				setxDirection(xDir.right);
+			else
+				setxDirection(xDir.none);
+			break;
+		case Keys.D:
+			if (collidedWall)
+				setX(location.y - 10);
+
+			if (Gdx.input.isKeyPressed(Keys.D))
+				setxDirection(xDir.left);
+			else
+				setxDirection(xDir.none);
 			break;
 		case Keys.ESCAPE:
 			Gdx.app.exit();
@@ -242,6 +280,14 @@ public class Player extends Sprite implements InputProcessor {
 	@Override
 	public boolean scrolled(int amount) {
 		return false;
+	}
+
+	public static xDir getxDirection() {
+		return xDirection;
+	}
+
+	public static void setxDirection(xDir xDirection) {
+		Player.xDirection = xDirection;
 	}
 
 }
