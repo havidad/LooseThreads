@@ -35,8 +35,9 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	private ProjectileManager projManager;
 	
 	// Used to keep things drawn at the same size regardless of the screen size.
-	final float GAME_WORLD_WIDTH = 100, GAME_WORLD_HEIGHT = 100;
-	final float ASPECT_RATIO;
+	public final static float GAME_WORLD_WIDTH = 100;
+	public final static float GAME_WORLD_HEIGHT = 100;
+	public final float ASPECT_RATIO;
 	
 	public GameScreen(final MainGame gam){
 		game = gam;
