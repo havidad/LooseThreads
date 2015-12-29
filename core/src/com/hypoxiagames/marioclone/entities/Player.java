@@ -241,7 +241,7 @@ public class Player extends Sprite implements InputProcessor {
 			if (collidedWall)
 				setX(location.y - 10);
 
-			if (Gdx.input.isKeyPressed(Keys.D))
+			if (Gdx.input.isKeyPressed(Keys.A))
 				setxDirection(xDir.left);
 			else
 				setxDirection(xDir.none);
