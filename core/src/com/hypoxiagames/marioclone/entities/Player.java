@@ -35,7 +35,7 @@ public class Player extends Sprite implements InputProcessor {
 	public Player(Sprite sprite, TiledMapTileLayer collisionLayer) {
 		super(sprite);
 		this.collisionLayer = collisionLayer;
-		this.setSize(24, 48);
+		this.setSize(30, 56);
 		location = new Vector2(getX(), getY());
 		setxDirection(xDir.none);
 		setyDirection(yDir.none);
