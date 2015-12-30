@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.hypoxiagames.marioclone.screens.GameScreen;
 
 public class Player extends Sprite implements InputProcessor {
@@ -32,8 +31,6 @@ public class Player extends Sprite implements InputProcessor {
 	public boolean collidedGround, collidedWall;
 	
 	boolean isFlipped;
-	
-	Body playerBody;
 
 	public Player(Sprite sprite, TiledMapTileLayer collisionLayer) {
 		super(sprite);
@@ -131,7 +128,7 @@ public class Player extends Sprite implements InputProcessor {
 		speed = 35 * 2;
 	}
 
-	private void updateMovement() {
+	public void updateMovement() {
 		// Logic to decide which directions the player should move
 		if (!collidedWall) {
 			switch (getxDirection()) {
@@ -237,6 +234,15 @@ public class Player extends Sprite implements InputProcessor {
 			break;
 		}
 		return true;
+	}
+
+	private boolean checkTextureFlip() {
+		if(xDirection == xDir.left)
+			return true;
+		//else if(xDirection == xDir.right || xDirection == xDir.none)
+			//return false;
+		return false;
+		
 	}
 
 	@Override

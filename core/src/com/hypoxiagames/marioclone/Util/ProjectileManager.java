@@ -5,6 +5,7 @@ import java.awt.List;
 import com.badlogic.gdx.math.Vector2;
 import com.hypoxiagames.marioclone.entities.Bullet;
 import com.hypoxiagames.marioclone.entities.Player;
+import com.hypoxiagames.marioclone.entities.Player.xDir;
 import com.hypoxiagames.marioclone.screens.GameScreen;
 
 public class ProjectileManager {

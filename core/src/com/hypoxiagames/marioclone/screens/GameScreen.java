@@ -4,6 +4,7 @@ import com.hypoxiagames.marioclone.*;
 import com.hypoxiagames.marioclone.Util.ProjectileManager;
 import com.hypoxiagames.marioclone.Util.ShowFPSCounter;
 import com.hypoxiagames.marioclone.entities.Player;
+import com.hypoxiagames.marioclone.entities.Player.xDir;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
