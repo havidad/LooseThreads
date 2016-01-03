@@ -20,7 +20,7 @@ public class Player extends Sprite implements InputProcessor {
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
-	private float speed = 45 * 2;
+	private float speed = 100 * unitScale;
 
 	private static xDir xDirection;
 	private static yDir yDirection;
@@ -124,7 +124,7 @@ public class Player extends Sprite implements InputProcessor {
 			if ((Gdx.input.isKeyPressed(Keys.S)))
 				setyDirection(yDir.down);
 		}
-		speed = 35 * 2;
+		speed = 100 * unitScale;
 	}
 
 	public void updateMovement() {
