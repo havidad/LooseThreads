@@ -14,8 +14,8 @@ public class DesktopLauncher {
 		cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Loose Threads";
 		cfg.useGL30 = false;
-		cfg.width = 1024;
-		cfg.height = 768;
+		cfg.width = 800;
+		cfg.height = 640;
 		cfg.resizable = true;
 		new LwjglApplication(new MainGame(), cfg);
 	}

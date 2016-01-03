@@ -6,13 +6,17 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.hypoxiagames.marioclone.CollisionManager;
 import com.hypoxiagames.marioclone.screens.GameScreen;
 
 public class Player extends Sprite implements InputProcessor {
 	GameScreen screen;
 	// Player movement velocity
 	public Vector2 velocity = new Vector2(0, 0);
+	
+	private static float unitScale = GameScreen.UNITSCALE;
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
@@ -25,17 +29,13 @@ public class Player extends Sprite implements InputProcessor {
 
 	public boolean canMoveLeft = true, canMoveRight = true, canMoveUp = true, canMoveDown = true;
 
-	// Used to see if a player can land on this a specific tile
-	private TiledMapTileLayer collisionLayer;
-
 	public boolean collidedGround, collidedWall;
 	
 	boolean isFlipped;
 
-	public Player(Sprite sprite, TiledMapTileLayer collisionLayer) {
+	public Player(Sprite sprite, TiledMapTileLayer collisionLayer, OrthogonalTiledMapRenderer renderer) {
 		super(sprite);
-		this.collisionLayer = collisionLayer;
-		this.setSize(30, 56);
+		this.setSize(30*unitScale, 56*unitScale);
 		location = new Vector2(getX(), getY());
 		setxDirection(xDir.none);
 		setyDirection(yDir.none);
@@ -72,7 +72,6 @@ public class Player extends Sprite implements InputProcessor {
 		location.x = getX();
 		location.y = getY();
 
-		// updateMovement();
 
 		// Move on X Axis
 		setX(getX() + velocity.x * delta);
@@ -154,8 +153,6 @@ public class Player extends Sprite implements InputProcessor {
 				break;
 			}
 		}
-		if(isFlipped)
-			this.flip(true, false);
 	}
 
 	// Bunch of different get/setters
@@ -173,14 +170,6 @@ public class Player extends Sprite implements InputProcessor {
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
-	}
-
-	public TiledMapTileLayer getCollisionLayer() {
-		return collisionLayer;
-	}
-
-	public void setCollisionLayer(TiledMapTileLayer collisionLayer) {
-		this.collisionLayer = collisionLayer;
 	}
 
 	public Vector2 getLocation() {
@@ -234,15 +223,6 @@ public class Player extends Sprite implements InputProcessor {
 			break;
 		}
 		return true;
-	}
-
-	private boolean checkTextureFlip() {
-		if(xDirection == xDir.left)
-			return true;
-		//else if(xDirection == xDir.right || xDirection == xDir.none)
-			//return false;
-		return false;
-		
 	}
 
 	@Override

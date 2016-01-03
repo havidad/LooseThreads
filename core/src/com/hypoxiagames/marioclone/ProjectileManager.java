@@ -1,4 +1,4 @@
-package com.hypoxiagames.marioclone.Util;
+package com.hypoxiagames.marioclone;
 
 import java.awt.List;
 

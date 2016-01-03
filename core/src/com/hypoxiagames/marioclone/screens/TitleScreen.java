@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.hypoxiagames.marioclone.Assets;
 import com.hypoxiagames.marioclone.MainGame;
 import com.hypoxiagames.marioclone.input.TitleInput;
-import com.hypoxiagames.marioclone.Util.*;
+import com.hypoxiagames.marioclone.util.*;
 
 public class TitleScreen implements com.badlogic.gdx.Screen {
 	final MainGame game;
@@ -114,9 +114,9 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		backgroundSprite.draw(batch);
 		glyphLayout.setText(titleFont, TITLE);
 		titleFont.draw(batch, TITLE, 0, 0);
-		ShowFPSCounter.isShown = true;
+		FPSCounter.isShown = true;
 		drawMenuItems();
-		ShowFPSCounter.ShowCounter(menuItemFont, batch, glyphLayout);
+		FPSCounter.ShowCounter(menuItemFont, batch, glyphLayout);
 		batch.end();
 		
 		// Calls method that processes the control of the main screen

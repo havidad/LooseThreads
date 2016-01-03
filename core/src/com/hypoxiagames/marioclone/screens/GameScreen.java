@@ -1,38 +1,39 @@
 package com.hypoxiagames.marioclone.screens;
 
 import com.hypoxiagames.marioclone.*;
-import com.hypoxiagames.marioclone.Util.ProjectileManager;
-import com.hypoxiagames.marioclone.Util.ShowFPSCounter;
 import com.hypoxiagames.marioclone.entities.Player;
 import com.hypoxiagames.marioclone.entities.Player.xDir;
+import com.hypoxiagames.marioclone.util.FPSCounter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 
 public class GameScreen implements com.badlogic.gdx.Screen {
 	private final MainGame game;
 	Assets assetManager;
 	
 	private Player player;
-	
+	public static final float UNITSCALE  = 1/32f;
 	// Variables for Text to be drawn;
 	private BitmapFont fpsFont;
 	GlyphLayout glyphLayout;
 	
 	private TiledMap testMap;
+	private TiledMapTileLayer layer;
 	private OrthogonalTiledMapRenderer renderer;
 	private MapObjects groundObjects;
 	private OrthographicCamera camera;
+
 	private ProjectileManager projManager;
+	private CollisionManager colManager;
+	
+	private int tileHeight = 32;
+	private int tileWidth = 32;
 	
 	// Used to keep things drawn at the same size regardless of the screen size.
 	public final static float GAME_WORLD_WIDTH = 100;
@@ -46,22 +47,18 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
 	
 		testMap = new TmxMapLoader().load("Maps/testRoom.tmx");
-		renderer =  new OrthogonalTiledMapRenderer(testMap);
+		layer = (TiledMapTileLayer)testMap.getLayers().get(0);
+		renderer =  new OrthogonalTiledMapRenderer(testMap, UNITSCALE);
 		camera = new OrthographicCamera();
 		
 		// Sets the camera to show the maximum game world size, times an aspect ratio so it looks similar at most
 		//resolutions.
-		camera.setToOrtho(false, GAME_WORLD_WIDTH * ASPECT_RATIO, GAME_WORLD_HEIGHT);
+		camera.setToOrtho(false, 30, 20);
 		
-		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), 
-				(TiledMapTileLayer)testMap.getLayers().get("Player"));
+		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), layer, renderer);
 		
 		// Spawns him somewhere in the room.
-		player.setPosition(512,354);
-		
-		//Set collision points for player
-		setCollisionMap();
-		
+		player.setPosition(1 ,1);
 		Gdx.input.setInputProcessor(player);
 		
 		glyphLayout = new GlyphLayout();
@@ -73,45 +70,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		*/
 		projManager = new ProjectileManager(player.getLocation(), this);
 		
-	}
-
-	public void setCollisionMap(){
-		try{
-			groundObjects = testMap.getLayers().get(1).getObjects();
-			//wallObjects = testMap.getLayers().get(3).getObjects();
-		}catch (ExceptionInInitializerError e){
-			System.out.println("We can't load the collision Layer");
-			game.exit();
-		}
-	}
-	
-	public boolean checkPlayerCollision(MapObjects objects){
-		boolean collided = false;
-		//boolean almostCollidingL = false, almostCollidingU = false, almostCollidingR = false,
-			//	almostCollidingD = false;
-		for(RectangleMapObject rectangleObject : objects.getByType(RectangleMapObject.class)){
-			/* Code to check if you are about to collide with a wall, if you aren't,
-			*then that direction of movement will be disabled in the update method, until 
-			*there isn't a wall that the player couldn't have hit before. This will limit 
-			*the character from getting within a certain space to the wall, however will 
-			*allow him to move just fine in other directions.This is to create a gap after
-			* the player had ran into the wall, only disabling movement in that direction 
-			* after hitting the wall once. Once these bounding boxes aren't hit anymore by 
-			* second, larger bounding box, then the player will be able to move in that direction again.
-			*/
-			Rectangle rect = rectangleObject.getRectangle();
-			// Checks to see if the previous check had a collision
-			if(collided){
-				return true;
-			}
-				
-			if(Intersector.overlaps(rect, new Rectangle(player.getX(),player.getY()
-					,player.getWidth(), player.getHeight())))
-					collided = true;
-			else
-				collided = false;
-		}
-		return false;
+		colManager = new CollisionManager(this);
+		
 	}
 
 	@Override
@@ -123,9 +83,9 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		Gdx.gl.glClearColor(0, 0, 0,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		projManager.findBulletSpawn();
-		ShowFPSCounter.isShown = true;
+		FPSCounter.isShown = true;
 		// Player Collision is checked here, and player gets updated.
-		player.collidedWall = checkPlayerCollision(groundObjects);
+		//player.collidedWall = ;
 		player.update(delta);
 		
 
@@ -133,15 +93,15 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		renderer.render();
 		renderer.getBatch().begin();
 		player.draw(renderer.getBatch());
-		ShowFPSCounter.ShowCounter(fpsFont, renderer.getBatch(), glyphLayout);
+		FPSCounter.ShowCounter(fpsFont, renderer.getBatch(), glyphLayout);
 		renderer.getBatch().end();
 
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		camera.viewportWidth = width;
-		camera.viewportHeight = height;
+		camera.viewportWidth = width * UNITSCALE;
+		camera.viewportHeight = height * UNITSCALE;
 		camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
 		camera.update();
 		
@@ -188,6 +148,25 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	
 	public MainGame getMainGame(){
 		return game;
+	}
+
+
+	public TiledMapTileLayer getLayer() {
+		return layer;
+	}
+
+
+	public void setLayer(TiledMapTileLayer layer) {
+		this.layer = layer;
+	}
+	
+	public OrthographicCamera getCamera() {
+		return camera;
+	}
+
+
+	public void setCamera(OrthographicCamera camera) {
+		this.camera = camera;
 	}
 
 }
