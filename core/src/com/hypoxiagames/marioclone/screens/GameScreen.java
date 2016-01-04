@@ -2,7 +2,6 @@ package com.hypoxiagames.marioclone.screens;
 
 import com.hypoxiagames.marioclone.*;
 import com.hypoxiagames.marioclone.entities.Player;
-import com.hypoxiagames.marioclone.entities.Player.xDir;
 import com.hypoxiagames.marioclone.util.FPSCounter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader.Parameters;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class GameScreen implements com.badlogic.gdx.Screen {
@@ -45,17 +45,19 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		glyphLayout = new GlyphLayout();
 		
 		ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
-	
-		testMap = new TmxMapLoader().load("Maps/testRoom.tmx");
-		layer = (TiledMapTileLayer)testMap.getLayers().get(0);
+		
+		Parameters params = new Parameters();
+		params.flipY = true;
+		testMap = new TmxMapLoader().load("Maps/testRoom.tmx", params);
+		layer = (TiledMapTileLayer)testMap.getLayers().get(1);
 		renderer =  new OrthogonalTiledMapRenderer(testMap, UNITSCALE);
 		camera = new OrthographicCamera();
 		
 		// Sets the camera to show the maximum game world size, times an aspect ratio so it looks similar at most
 		//resolutions.
-		camera.setToOrtho(false, 30, 20);
+		camera.setToOrtho(false, 24, 24);
 		
-		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), layer, renderer);
+		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), testMap, this);
 		
 		// Spawns him somewhere in the room.
 		player.setPosition(1 ,1);
@@ -70,7 +72,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		*/
 		projManager = new ProjectileManager(player.getLocation(), this);
 		
-		colManager = new CollisionManager(this);
+		colManager = new CollisionManager(this, testMap);
+		
 		
 	}
 
@@ -84,11 +87,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		projManager.findBulletSpawn();
 		FPSCounter.isShown = true;
-		// Player Collision is checked here, and player gets updated.
-		//player.collidedWall = ;
 		player.update(delta);
-		
-
 		renderer.setView(camera);
 		renderer.render();
 		renderer.getBatch().begin();

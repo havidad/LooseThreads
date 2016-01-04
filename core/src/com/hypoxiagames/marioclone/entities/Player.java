@@ -5,8 +5,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.hypoxiagames.marioclone.CollisionManager;
 import com.hypoxiagames.marioclone.screens.GameScreen;
@@ -15,6 +15,9 @@ public class Player extends Sprite implements InputProcessor {
 	GameScreen screen;
 	// Player movement velocity
 	public Vector2 velocity = new Vector2(0, 0);
+	
+	TiledMap map;
+	CollisionManager colManager;
 	
 	private static float unitScale = GameScreen.UNITSCALE;
 
@@ -32,13 +35,22 @@ public class Player extends Sprite implements InputProcessor {
 	public boolean collidedGround, collidedWall;
 	
 	boolean isFlipped;
+	
+	public int posX, posY;
+	public float oldX;
+	public float oldY;
 
-	public Player(Sprite sprite, TiledMapTileLayer collisionLayer, OrthogonalTiledMapRenderer renderer) {
+	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
 		super(sprite);
+		this.screen = screen;
 		this.setSize(30*unitScale, 56*unitScale);
+		this.map = map;
 		location = new Vector2(getX(), getY());
+		posX = (int) location.x;
+		posY = (int) location.y;
 		setxDirection(xDir.none);
 		setyDirection(yDir.none);
+		colManager = new CollisionManager(screen, map);
 	}
 
 	public enum xDir {
@@ -56,7 +68,15 @@ public class Player extends Sprite implements InputProcessor {
 	}
 
 	public void update(float delta) {
+		// Save old position
+		oldX = (this.location.x);
+		oldY = (this.location.y);
+		
+		colManager.checkPlayerCollision(oldX, oldY);
+		
 		updateMovement();
+		
+		
 		// Limits the player to only going too fast.
 		if (velocity.y > speed)
 			velocity.y = speed;
@@ -68,16 +88,17 @@ public class Player extends Sprite implements InputProcessor {
 		else if (velocity.x < -speed)
 			velocity.x = -speed;
 
-		// Save old position
-		location.x = getX();
-		location.y = getY();
-
-
 		// Move on X Axis
 		setX(getX() + velocity.x * delta);
 
 		// Move on Y Axis
 		setY(getY() + velocity.y * delta);
+		setLocation(new Vector2(getX(), getY()));
+		
+		posX = (int)location.x;
+		posY = (int)location.y;
+		
+		System.out.println(posX +","+ posY);
 
 		// Offsets player by 3 pixels to the direction opposite of which they
 		// are moving, and stops them from moving
@@ -201,27 +222,6 @@ public class Player extends Sprite implements InputProcessor {
 				break;
 			}
 		}
-		if (collidedWall)
-			switch (xDirection) {
-			case left:
-				location.x += 10;
-				break;
-			case right:
-				location.x -= 10;
-				break;
-			case none:
-				break;
-			}
-		switch (yDirection) {
-		case up:
-			location.y -= 10;
-			break;
-		case down:
-			location.y += 10;
-			break;
-		case none:
-			break;
-		}
 		return true;
 	}
 
@@ -229,33 +229,24 @@ public class Player extends Sprite implements InputProcessor {
 	public boolean keyUp(int keycode) {
 		switch (keycode) {
 		case Keys.W:
-			if (collidedWall)
-				setY(location.y - 15);
 			if (Gdx.input.isKeyPressed(Keys.S))
 				setyDirection(yDir.down);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.S:
-			if (collidedWall)
-				setY(location.y + 15);
 			if (Gdx.input.isKeyPressed(Keys.W))
 				setyDirection(yDir.up);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.A:
-			if (collidedWall)
-				setX(location.x + 15);
 			if (Gdx.input.isKeyPressed(Keys.D))
 				setxDirection(xDir.right);
 			else
 				setxDirection(xDir.none);
 			break;
 		case Keys.D:
-			if (collidedWall)
-				setX(location.x - 15);
-
 			if (Gdx.input.isKeyPressed(Keys.A))
 				setxDirection(xDir.left);
 			else

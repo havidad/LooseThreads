@@ -5,7 +5,6 @@ import java.awt.List;
 import com.badlogic.gdx.math.Vector2;
 import com.hypoxiagames.marioclone.entities.Bullet;
 import com.hypoxiagames.marioclone.entities.Player;
-import com.hypoxiagames.marioclone.entities.Player.xDir;
 import com.hypoxiagames.marioclone.screens.GameScreen;
 
 public class ProjectileManager {
@@ -35,17 +34,6 @@ public class ProjectileManager {
 	// Logic to figure out where the bullet should spawn from, and which
 	// direction to move in.
 	public void findBulletSpawn() {
-		switch (Player.getxDirection()) {
-		case left:
-			bulletLocation = new Vector2(initLocation.x - 5, initLocation.y);
-			break;
-		case none:
-			break;
-		case right:
-			break;
-		default:
-			break;
-		}
 
 	}
 
