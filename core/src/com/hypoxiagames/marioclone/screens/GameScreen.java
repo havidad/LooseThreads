@@ -2,7 +2,6 @@ package com.hypoxiagames.marioclone.screens;
 
 import com.hypoxiagames.marioclone.*;
 import com.hypoxiagames.marioclone.entities.Player;
-import com.hypoxiagames.marioclone.util.FPSCounter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -72,8 +71,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		*/
 		projManager = new ProjectileManager(player.getLocation(), this);
 		
-		colManager = new CollisionManager(this, testMap);
-		
+		colManager = new CollisionManager(this, testMap);	
 		
 	}
 
@@ -86,13 +84,11 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		Gdx.gl.glClearColor(0, 0, 0,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		projManager.findBulletSpawn();
-		FPSCounter.isShown = true;
 		player.update(delta);
 		renderer.setView(camera);
 		renderer.render();
 		renderer.getBatch().begin();
 		player.draw(renderer.getBatch());
-		FPSCounter.ShowCounter(fpsFont, renderer.getBatch(), glyphLayout);
 		renderer.getBatch().end();
 
 	}

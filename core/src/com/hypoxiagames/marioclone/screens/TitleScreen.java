@@ -114,9 +114,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		backgroundSprite.draw(batch);
 		glyphLayout.setText(titleFont, TITLE);
 		titleFont.draw(batch, TITLE, 0, 0);
-		FPSCounter.isShown = true;
 		drawMenuItems();
-		FPSCounter.ShowCounter(menuItemFont, batch, glyphLayout);
 		batch.end();
 		
 		// Calls method that processes the control of the main screen
