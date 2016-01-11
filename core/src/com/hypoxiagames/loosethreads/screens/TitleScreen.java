@@ -1,4 +1,4 @@
-package com.hypoxiagames.marioclone.screens;
+package com.hypoxiagames.loosethreads.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -12,10 +12,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.hypoxiagames.marioclone.Assets;
-import com.hypoxiagames.marioclone.MainGame;
-import com.hypoxiagames.marioclone.input.TitleInput;
-import com.hypoxiagames.marioclone.util.*;
+import com.hypoxiagames.loosethreads.Assets;
+import com.hypoxiagames.loosethreads.MainGame;
+import com.hypoxiagames.loosethreads.input.TitleInput;
+import com.hypoxiagames.loosethreads.util.*;
 
 public class TitleScreen implements com.badlogic.gdx.Screen {
 	final MainGame game;

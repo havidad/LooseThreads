@@ -1,8 +1,8 @@
-package com.hypoxiagames.marioclone.input;
+package com.hypoxiagames.loosethreads.input;
 
-import com.hypoxiagames.marioclone.MainGame;
-import com.hypoxiagames.marioclone.screens.*;
 import com.badlogic.gdx.Input.Keys;
+import com.hypoxiagames.loosethreads.MainGame;
+import com.hypoxiagames.loosethreads.screens.*;
 
 public class TitleInput implements com.badlogic.gdx.InputProcessor{
 	final MainGame game;

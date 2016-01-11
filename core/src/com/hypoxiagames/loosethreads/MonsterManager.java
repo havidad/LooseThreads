@@ -1,4 +1,4 @@
-package com.hypoxiagames.marioclone;
+package com.hypoxiagames.loosethreads;
 
 /* 		This class will read in data from maps, and find where monsters are located, based off of where
  * they are on the map. We will do this by adding a layer in the map on tiled. Objects drawn on that 

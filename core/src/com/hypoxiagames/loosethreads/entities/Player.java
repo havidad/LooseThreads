@@ -1,4 +1,4 @@
-package com.hypoxiagames.marioclone.entities;
+package com.hypoxiagames.loosethreads.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -6,10 +6,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.hypoxiagames.marioclone.CollisionManager;
-import com.hypoxiagames.marioclone.screens.GameScreen;
+import com.badlogic.gdx.utils.Array;
+import com.hypoxiagames.loosethreads.CollisionManager;
+import com.hypoxiagames.loosethreads.screens.GameScreen;
 
 public class Player extends Sprite implements InputProcessor {
 	GameScreen screen;
@@ -18,6 +18,7 @@ public class Player extends Sprite implements InputProcessor {
 	
 	TiledMap map;
 	CollisionManager colManager;
+	Array<Vector2> collisionPoints = new Array<Vector2>();
 	
 	private static float unitScale = GameScreen.UNITSCALE;
 
@@ -50,7 +51,16 @@ public class Player extends Sprite implements InputProcessor {
 		posY = (int) location.y;
 		setxDirection(xDir.none);
 		setyDirection(yDir.none);
-		colManager = new CollisionManager(screen, map);
+		colManager = new CollisionManager(map, this);
+		// Bottom Collision Point
+		collisionPoints.add(new Vector2(location.x + (getWidth() / 2),location.y)); 
+		// Top Left Collision Point
+		collisionPoints.add(new Vector2(location.x + (getWidth() / 2),location.y + getHeight())); 
+		// Left Collision Point
+		collisionPoints.add(new Vector2(location.x,location.y + (getHeight() / 2)));
+		// Right Collision Point
+		collisionPoints.add(new Vector2(location.x + getWidth(),location.y +(getHeight() / 2))); 
+		
 	}
 
 	public enum xDir {
@@ -71,8 +81,12 @@ public class Player extends Sprite implements InputProcessor {
 		// Save old position
 		oldX = (this.location.x);
 		oldY = (this.location.y);
+		collisionPoints.set(0, new Vector2(location.x + (getWidth() / 2),location.y));
+		collisionPoints.set(1, new Vector2(location.x + (getWidth() / 2),location.y + getHeight()));
+		collisionPoints.set(2, new Vector2(location.x,location.y + (getHeight() / 2))); 
+		collisionPoints.set(3, new Vector2(location.x + getWidth(),location.y +(getHeight() / 2)));
 		
-		colManager.checkPlayerCollision(oldX, oldY);
+		colManager.checkWallCollision(collisionPoints);
 		
 		updateMovement();
 		
@@ -99,53 +113,6 @@ public class Player extends Sprite implements InputProcessor {
 		posY = (int)location.y;
 		
 		System.out.println(posX +","+ posY);
-
-		// Offsets player by 3 pixels to the direction opposite of which they
-		// are moving, and stops them from moving
-		// any farther to any direction, until the player chooses a new
-		// direction to go to.
-		if (collidedWall) {
-			speed *= 0.20f;
-			if (getxDirection() == xDir.left) {
-				if (getyDirection() == yDir.down) {
-					setX(location.x + 6f);
-					setY(location.y + 6f);
-				} else if (yDirection == yDir.up) {
-					setX(location.x + 6f);
-					setY(location.y - 6f);
-				} else
-					setX(location.x + 6f);
-			} else if (getxDirection() == xDir.right) {
-				if (getyDirection() == yDir.down) {
-					setX(location.x - 6f);
-					setY(location.y + 6f);
-				} else if (getyDirection() == yDir.up) {
-					setX(location.x - 6f);
-					setY(location.y - 6f);
-				} else
-					setX(location.x - 6f);
-			} else if (getyDirection() == yDir.none && getxDirection() == xDir.none) {
-			}
-			setxDirection(xDir.none);
-
-			if (getyDirection() == yDir.down) {
-				setY(location.y + 6f);
-				setyDirection(yDir.none);
-			} else if (yDirection == yDir.up) {
-				setY(location.y - 6f);
-				setyDirection(yDir.none);
-			}
-
-			if ((Gdx.input.isKeyPressed(Keys.A)))
-				setxDirection(xDir.left);
-			if ((Gdx.input.isKeyPressed(Keys.D)))
-				setxDirection(xDir.right);
-			if ((Gdx.input.isKeyPressed(Keys.W)))
-				setyDirection(yDir.up);
-			if ((Gdx.input.isKeyPressed(Keys.S)))
-				setyDirection(yDir.down);
-		}
-		speed = 100 * unitScale;
 	}
 
 	public void updateMovement() {
@@ -174,31 +141,6 @@ public class Player extends Sprite implements InputProcessor {
 				break;
 			}
 		}
-	}
-
-	// Bunch of different get/setters
-	public Vector2 getVelocity() {
-		return velocity;
-	}
-
-	public void setVelocity(Vector2 velocity) {
-		this.velocity = velocity;
-	}
-
-	public float getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(float speed) {
-		this.speed = speed;
-	}
-
-	public Vector2 getLocation() {
-		return location;
-	}
-
-	public void setLocation(Vector2 location) {
-		this.location = location;
 	}
 
 	// Begins code for the player controlled inputs. Such as moving and attack.
@@ -286,6 +228,30 @@ public class Player extends Sprite implements InputProcessor {
 	@Override
 	public boolean scrolled(int amount) {
 		return false;
+	}
+	// Bunch of different get/setters
+	public Vector2 getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector2 velocity) {
+		this.velocity = velocity;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public Vector2 getLocation() {
+		return location;
+	}
+
+	public void setLocation(Vector2 location) {
+		this.location = location;
 	}
 
 	public static xDir getxDirection() {

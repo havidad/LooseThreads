@@ -2,7 +2,7 @@ package com.hypoxiagames.marioclone.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.hypoxiagames.marioclone.MainGame;
+import com.hypoxiagames.loosethreads.MainGame;
 
 public class DesktopLauncher {
 	static LwjglApplicationConfiguration cfg;

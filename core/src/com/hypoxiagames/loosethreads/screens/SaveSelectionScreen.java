@@ -1,13 +1,13 @@
-package com.hypoxiagames.marioclone.screens;
+package com.hypoxiagames.loosethreads.screens;
 
-import com.hypoxiagames.marioclone.*;
-import com.hypoxiagames.marioclone.input.SaveSelectionInput;
-import com.hypoxiagames.marioclone.screens.SaveSelectionScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hypoxiagames.loosethreads.*;
+import com.hypoxiagames.loosethreads.input.SaveSelectionInput;
+import com.hypoxiagames.loosethreads.screens.SaveSelectionScreen;
 
 public class SaveSelectionScreen implements com.badlogic.gdx.Screen {
 	final MainGame game;

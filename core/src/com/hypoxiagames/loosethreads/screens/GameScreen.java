@@ -1,7 +1,5 @@
-package com.hypoxiagames.marioclone.screens;
+package com.hypoxiagames.loosethreads.screens;
 
-import com.hypoxiagames.marioclone.*;
-import com.hypoxiagames.marioclone.entities.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -11,6 +9,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader.Parameters;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.hypoxiagames.loosethreads.*;
+import com.hypoxiagames.loosethreads.entities.Player;
 
 public class GameScreen implements com.badlogic.gdx.Screen {
 	private final MainGame game;
@@ -70,8 +70,6 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		 * is just an initialization of this system.
 		*/
 		projManager = new ProjectileManager(player.getLocation(), this);
-		
-		colManager = new CollisionManager(this, testMap);	
 		
 	}
 

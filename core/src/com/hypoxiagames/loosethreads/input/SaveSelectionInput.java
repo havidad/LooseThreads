@@ -1,28 +1,25 @@
-package com.hypoxiagames.marioclone.input;
+package com.hypoxiagames.loosethreads.input;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.hypoxiagames.marioclone.MainGame;
+import com.badlogic.gdx.Input.Keys;
+import com.hypoxiagames.loosethreads.MainGame;
 
-public class SettingInput implements InputProcessor {
+
+public class SaveSelectionInput implements com.badlogic.gdx.InputProcessor{
 	final MainGame game;
-	boolean hovered;
-	public boolean isLeftPressed;
-	
-	public SettingInput(final MainGame gam) {
+	public SaveSelectionInput(final MainGame gam){
 		game = gam;
-		
 	}
 	@Override
 	public boolean keyDown(int keycode) {
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) isLeftPressed = true;
 		return false;
+		
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if(!Gdx.input.isKeyPressed(Keys.LEFT)) isLeftPressed = false;
+		if(Gdx.input.isKeyPressed(Keys.ENTER))
+			game.switchScreens("Main Menu");
 		return false;
 	}
 
@@ -34,9 +31,7 @@ public class SettingInput implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		System.out.println(screenX + " " + screenY);
-		if(hovered)
-			game.switchScreens("Main Menu");
+		
 		return false;
 	}
 
@@ -54,14 +49,7 @@ public class SettingInput implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		hovered = false;
-		if(screenX >= 503 || screenX <= 903)
-		{
-			if(screenY >= 222 && screenY <= 249)
-			{
-				hovered = true;
-			}
-		}
+		
 		return false;
 	}
 

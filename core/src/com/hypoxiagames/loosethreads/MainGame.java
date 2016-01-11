@@ -1,8 +1,8 @@
-package com.hypoxiagames.marioclone;
+package com.hypoxiagames.loosethreads;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.hypoxiagames.marioclone.screens.*;
+import com.hypoxiagames.loosethreads.screens.*;
 
 public class MainGame extends Game {
 	//Declarations for all screen states.

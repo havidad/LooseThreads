@@ -1,4 +1,4 @@
-package com.hypoxiagames.marioclone.entities;
+package com.hypoxiagames.loosethreads.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
