@@ -59,7 +59,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), testMap, this);
 		
 		// Spawns him somewhere in the room.
-		player.setPosition(1 ,1);
+		player.setPosition(19 ,4);
 		Gdx.input.setInputProcessor(player);
 		
 		glyphLayout = new GlyphLayout();
