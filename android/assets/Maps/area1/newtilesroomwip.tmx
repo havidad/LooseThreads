@@ -58,9 +58,6 @@
   <tile id="18">
    <image width="64" height="64" source="myhomewall.png"/>
   </tile>
-  <tile id="19">
-   <image width="64" height="64" source="woody.png"/>
-  </tile>
   <tile id="20">
    <image width="64" height="64" source="fwfwffe.png"/>
   </tile>
@@ -163,15 +160,18 @@
   <tile id="40">
    <image width="248" height="132" source="beddy.png"/>
   </tile>
+  <tile id="42">
+   <image width="64" height="64" source="linoleum.png"/>
+  </tile>
  </tileset>
  <layer name="Background" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3WSwoCMRAE0FxC/CuIv/uf0AwIMwqBdHTRi/egYDa1mVp0SgEAAAAAAAAAAAAAAPjdrmYdyGmwu+zRtqnZBnIc7C57tE3/dBXI9x4jPdrskYs9crFHLvbIJbrHpcxv2GegZ48+0T2ujW97/Ed0j1vN4Z1HoGePPu5HLvbIxR657Mt8D3pybnSnW3Ivn/el1QMAAAAAAAAAAAAAAAAAAAAAAAAAAICIF0pBb5lAnAAA
+   H4sIAAAAAAAAC+3YWQrCMBRA0WxCnBXECbr//dmgohYKCVTyxHPggT+B4g2kTUoAAAAAAAAAAAAAAABtrfqZF86u0TP+k0U/y8LZNnrGX1Ozx4f7PPeYFY4eZWr2+HCf6zE9PWKp+U+H/6se09Mjltoeh/Q6268V6/QoU9vjOPJbj2nU9jj1s3nMpWKdHmWcH7HoEYsesazT6zwomf3I2nyWnNPn+TK2ju/Kd2D53bdL9/dhd7ltPe9cuuQuN4Lco3sbPdrSIxY9YtEjFj1iGX7D+NYAAAAAAAAAAAAAAAAAAAAAAAD4DzfmUJqWQJwAAA==
   </data>
  </layer>
  <layer name="Foreground" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OMQEAAAwCIOusf8G9NvCBBCQAAAAAAAAAAAAAAAAAsHXrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEB5eoNe/kCcAAA=
+   H4sIAAAAAAAAC+3OoQEAAAjDsN2C4/8HeWEGl+iKJgAAAAAAAAAAAAAAAAAAQGPLbl4vAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAbweVQB5jQJwAAA==
   </data>
  </layer>
 </map>
