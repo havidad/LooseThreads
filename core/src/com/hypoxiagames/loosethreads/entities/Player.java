@@ -42,7 +42,7 @@ public class Player extends Sprite implements InputProcessor {
 	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
 		super(sprite);
 		this.screen = screen;
-		this.setSize(30 * unitScale, 56 * unitScale);
+		this.setSize(44 * unitScale, 70 * unitScale);
 		this.map = map;
 		location = new Vector2(getX(), getY());
 		posX = (int) location.x;
