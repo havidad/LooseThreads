@@ -31,6 +31,7 @@ public class Player extends Sprite implements InputProcessor {
 	private Vector2 location;
 
 	public boolean canMoveLeft = true, canMoveRight = true, canMoveUp = true, canMoveDown = true;
+	private boolean wHeld, aHeld, sHeld, dHeld;
 
 	boolean isFlipped;
 
@@ -104,8 +105,14 @@ public class Player extends Sprite implements InputProcessor {
 		else if (velocity.x < -speed)
 			velocity.x = -speed;
 
+		
 		// Move on X Axis
-		setX(getX() + velocity.x * delta);
+		if(canMoveLeft)
+			setX(getX() + velocity.x * delta);
+		else if(canMoveRight)
+			setX(getX() + velocity.x * delta);
+		else
+			setX(getX());
 
 		// Move on Y Axis
 		if(canMoveDown)
@@ -123,6 +130,18 @@ public class Player extends Sprite implements InputProcessor {
 	}
 
 	public void updateMovement() {
+		// Logic to decide if button's been held down, if it has then keep trying to move in those directions.
+		if(wHeld)
+			setyDirection(yDir.up);
+		if(sHeld)
+			setyDirection(yDir.down);
+		if(aHeld)
+			setxDirection(xDir.left);
+		if(dHeld)
+			setxDirection(xDir.right);
+		
+		
+		
 		// Logic to decide which directions the player should move
 		if(!canMoveDown)
 			if(velocity.y < 0)
@@ -161,22 +180,32 @@ public class Player extends Sprite implements InputProcessor {
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
 		case Keys.W:
+			wHeld = true;
 			if (canMoveUp)
 				setyDirection(yDir.up);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.S:
+			sHeld = true;
 			if (canMoveDown)
 				setyDirection(yDir.down);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.A:
-			setxDirection(xDir.left);
+			aHeld = true;
+			if(canMoveLeft)
+				setxDirection(xDir.left);
+			else
+				setxDirection(xDir.none);
 			break;
 		case Keys.D:
-			setxDirection(xDir.right);
+			dHeld = true;
+			if(canMoveRight)
+				setxDirection(xDir.right);
+			else
+				setxDirection(xDir.none);
 			break;
 		}
 		return true;
@@ -186,24 +215,28 @@ public class Player extends Sprite implements InputProcessor {
 	public boolean keyUp(int keycode) {
 		switch (keycode) {
 		case Keys.W:
+			wHeld = false;
 			if (Gdx.input.isKeyPressed(Keys.S))
 				setyDirection(yDir.down);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.S:
+			sHeld = false;
 			if (Gdx.input.isKeyPressed(Keys.W))
 				setyDirection(yDir.up);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.A:
+			aHeld = false;
 			if (Gdx.input.isKeyPressed(Keys.D))
 				setxDirection(xDir.right);
 			else
 				setxDirection(xDir.none);
 			break;
 		case Keys.D:
+			dHeld = false;
 			if (Gdx.input.isKeyPressed(Keys.A))
 				setxDirection(xDir.left);
 			else
