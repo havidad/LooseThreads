@@ -18,21 +18,15 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	
 	private Player player;
 	public static final float UNITSCALE  = 1/32f;
-	// Variables for Text to be drawn;
-	private BitmapFont fpsFont;
+
 	GlyphLayout glyphLayout;
 	
 	private TiledMap testMap;
 	private TiledMapTileLayer layer;
 	private OrthogonalTiledMapRenderer renderer;
-	private MapObjects groundObjects;
 	private OrthographicCamera camera;
 
 	private ProjectileManager projManager;
-	private CollisionManager colManager;
-	
-	private int tileHeight = 32;
-	private int tileWidth = 32;
 	
 	// Used to keep things drawn at the same size regardless of the screen size.
 	public final static float GAME_WORLD_WIDTH = 100;
@@ -63,8 +57,6 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		Gdx.input.setInputProcessor(player);
 		
 		glyphLayout = new GlyphLayout();
-		fpsFont = Assets.getManager().get("Fonts/DroidSans.fnt");
-		
 		/*
 		 * 	Handle Projectiles being shot from the player. This
 		 * is just an initialization of this system.

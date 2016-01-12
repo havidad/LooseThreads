@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.hypoxiagames.loosethreads.Assets;
 import com.hypoxiagames.loosethreads.MainGame;
 import com.hypoxiagames.loosethreads.input.TitleInput;
-import com.hypoxiagames.loosethreads.util.*;
 
 public class TitleScreen implements com.badlogic.gdx.Screen {
 	final MainGame game;
