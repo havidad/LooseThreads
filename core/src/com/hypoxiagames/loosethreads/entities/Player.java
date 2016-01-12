@@ -15,7 +15,6 @@ public class Player extends Sprite implements InputProcessor {
 	GameScreen screen;
 	// Player movement velocity
 	public Vector2 velocity = new Vector2(0, 0);
-	
 	TiledMap map;
 	CollisionManager colManager;
 	Array<Vector2> collisionPoints = new Array<Vector2>();

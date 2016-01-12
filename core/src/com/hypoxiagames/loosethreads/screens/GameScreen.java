@@ -123,7 +123,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	}
 
 	public void moveCamera(float x, float y) {
-		camera.position.set(camera.viewportWidth / 2 + 13, camera.viewportHeight / 2, 0);
+		camera.position.set(camera.viewportWidth / 2 + x, camera.viewportHeight / 2, 0);
 		camera.update();
 	}
 
