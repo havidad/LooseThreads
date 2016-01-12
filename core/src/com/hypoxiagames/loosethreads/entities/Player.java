@@ -24,7 +24,7 @@ public class Player extends Sprite implements InputProcessor {
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
-	private float speed = 100 * unitScale;
+	private float speed = 145 * unitScale;
 
 	private static xDir xDirection;
 	private static yDir yDirection;
@@ -51,7 +51,7 @@ public class Player extends Sprite implements InputProcessor {
 		posY = (int) location.y;
 		setxDirection(xDir.none);
 		setyDirection(yDir.none);
-		colManager = new CollisionManager(map, this);
+		colManager = new CollisionManager(map, this, this.screen);
 		// Bottom Collision Point
 		collisionPoints.add(new Vector2(location.x + (getWidth() / 2),location.y)); 
 		// Top Left Collision Point
@@ -86,7 +86,8 @@ public class Player extends Sprite implements InputProcessor {
 		collisionPoints.set(2, new Vector2(location.x,location.y + (getHeight() / 2))); 
 		collisionPoints.set(3, new Vector2(location.x + getWidth(),location.y +(getHeight() / 2)));
 		
-		colManager.checkWallCollision(collisionPoints);
+		if(velocity.x > 0 || velocity.x < 0 || velocity.y > 0 || velocity.y < 0)
+			colManager.checkWallCollision(collisionPoints);
 		
 		updateMovement();
 		

@@ -9,15 +9,17 @@ import com.hypoxiagames.loosethreads.screens.GameScreen;
 
 public class CollisionManager {
 	Player player;
+	GameScreen screen;
 
 	// Handle the width and height of the tile.
 	float tileHeight, tileWidth;
 	static float unitScale = GameScreen.UNITSCALE;
 	TiledMap map;
 
-	public CollisionManager(TiledMap map, Player player) {
+	public CollisionManager(TiledMap map, Player player, GameScreen screen) {
 		this.map = map;
 		this.player = player;
+		this.screen = screen;
 
 	}
 
@@ -32,25 +34,28 @@ public class CollisionManager {
 					switch (i) {
 					case 0:
 						System.out.println("Feet hit wall");
-						player.setY(player.getLocation().y + 0.3f);
+						player.setY(player.getLocation().y + 0.1f);
 						
 						break;
 					case 1:
 						System.out.println("Head hit wall");
-						player.setY(player.getLocation().y - 0.3f);
+						player.setY(player.getLocation().y - 0.1f);
 						break;
 					case 2:
 						System.out.println("Left Side Hit wall");
-						player.setX(player.getLocation().x + 0.3f);
+						player.setX(player.getLocation().x + 0.1f);
 						break;
 					case 3:
 						System.out.println("Right Side Hit Wall");
-						player.setX(player.getLocation().x - 0.3f);
+						player.setX(player.getLocation().x - 0.1f);
 						break;
 					}
 			} catch (Exception e) {
 				// System.out.println("Not A Wall");
 			}
+			if(player.getLocation().x > 12)
+				screen.moveCamera(5, 0);
+				
 			i++;
 		}
 
