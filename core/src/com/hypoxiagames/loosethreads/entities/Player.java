@@ -42,7 +42,7 @@ public class Player extends Sprite implements InputProcessor {
 	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
 		super(sprite);
 		this.screen = screen;
-		this.setSize(36 * unitScale, 64 * unitScale);
+		this.setSize(30 * unitScale, 56 * unitScale);
 		this.map = map;
 		location = new Vector2(getX(), getY());
 		posX = (int) location.x;
@@ -128,20 +128,9 @@ public class Player extends Sprite implements InputProcessor {
 
 		System.out.println(posX + "," + posY);
 	}
+	
 
 	public void updateMovement() {
-		// Logic to decide if button's been held down, if it has then keep trying to move in those directions.
-		if(wHeld)
-			setyDirection(yDir.up);
-		if(sHeld)
-			setyDirection(yDir.down);
-		if(aHeld)
-			setxDirection(xDir.left);
-		if(dHeld)
-			setxDirection(xDir.right);
-		
-		
-		
 		// Logic to decide which directions the player should move
 		if(!canMoveDown)
 			if(velocity.y < 0)
@@ -220,28 +209,28 @@ public class Player extends Sprite implements InputProcessor {
 		switch (keycode) {
 		case Keys.W:
 			wHeld = false;
-			if (Gdx.input.isKeyPressed(Keys.S))
+			if (sHeld)
 				setyDirection(yDir.down);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.S:
 			sHeld = false;
-			if (Gdx.input.isKeyPressed(Keys.W))
+			if (wHeld)
 				setyDirection(yDir.up);
 			else
 				setyDirection(yDir.none);
 			break;
 		case Keys.A:
 			aHeld = false;
-			if (Gdx.input.isKeyPressed(Keys.D))
+			if (dHeld)
 				setxDirection(xDir.right);
 			else
 				setxDirection(xDir.none);
 			break;
 		case Keys.D:
 			dHeld = false;
-			if (Gdx.input.isKeyPressed(Keys.A))
+			if (aHeld)
 				setxDirection(xDir.left);
 			else
 				setxDirection(xDir.none);

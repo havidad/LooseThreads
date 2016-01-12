@@ -73,20 +73,32 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		// Clear the screen from the last frame
+		Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		projManager.findBulletSpawn();
+		
+		// Update the player movement and collision
 		player.update(delta);
+		
+		// Determine where the  bullet should spawn this frame step, if it were to fire this frame.
+		projManager.findBulletSpawn();
+		
+		// Have the camera follow the player around, based on the player's new location.
 		camera.position.set(player.getX(), player.getY(), 0);
 		camera.update();
+		
+		// Render the map using the camera
 		renderer.setView(camera);
 		renderer.render();
+		
+		// Render the player, bullets, and anything else that moves/lives in this part.
 		renderer.getBatch().begin();
 		player.draw(renderer.getBatch());
 		renderer.getBatch().end();
 
 	}
 
+	// When the screen resizes
 	@Override
 	public void resize(int width, int height) {
 		camera.viewportWidth = width * UNITSCALE;
