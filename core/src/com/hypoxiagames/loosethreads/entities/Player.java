@@ -178,6 +178,8 @@ public class Player extends Sprite implements InputProcessor {
 	// has been done
 	@Override
 	public boolean keyDown(int keycode) {
+		// Switch Statements for the initial deciscion of movement direction. Sets values so we can keep track of keys kept
+		//pressed down.
 		switch (keycode) {
 		case Keys.W:
 			wHeld = true;
@@ -213,6 +215,8 @@ public class Player extends Sprite implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
+		// Sets the direction moving to none, unless they are trying to move in the opposite direction.
+		//also lets us know when a button is no longer held.
 		switch (keycode) {
 		case Keys.W:
 			wHeld = false;

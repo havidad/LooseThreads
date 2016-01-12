@@ -33,7 +33,7 @@ public class CollisionManager {
 	public boolean wallBelow(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x), (int) (points.y - 0.12f)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x), (int) (points.y - 0.05f)).getTile().getProperties()
 					.containsKey("isWall"))
 				return false;
 			else
@@ -47,7 +47,7 @@ public class CollisionManager {
 	public boolean wallAbove(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x), (int) (points.y + 0.12f)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x), (int) (points.y + 0.05f)).getTile().getProperties()
 					.containsKey("isWall"))
 				return false;
 			else
@@ -61,7 +61,7 @@ public class CollisionManager {
 	public boolean wallLeft(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x - 0.12f), (int) (points.y)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x - 0.05f), (int) (points.y)).getTile().getProperties()
 					.containsKey("isWall"))
 				return false;
 			else
@@ -75,7 +75,7 @@ public class CollisionManager {
 	public boolean wallRight(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x + 0.12f), (int) (points.y)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x + 0.05f), (int) (points.y)).getTile().getProperties()
 					.containsKey("isWall"))
 				return false;
 			else
