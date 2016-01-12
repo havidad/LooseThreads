@@ -4,11 +4,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.hypoxiagames.loosethreads.entities.Monster;
 import com.hypoxiagames.loosethreads.entities.Player;
 import com.hypoxiagames.loosethreads.screens.GameScreen;
 
 public class CollisionManager {
 	Player player;
+	Array<Monster> monsters;
 	GameScreen screen;
 
 	// Handle the width and height of the tile.
@@ -20,7 +22,12 @@ public class CollisionManager {
 		this.map = map;
 		this.player = player;
 		this.screen = screen;
-
+	}
+	
+	public CollisionManager(TiledMap map, Array<Monster> monsters, GameScreen screen){
+		this.map = map;
+		this.monsters = monsters;
+		this.screen = screen;
 	}
 
 	public void checkWallCollision(Array<Vector2> collisionPoints) {
@@ -30,7 +37,7 @@ public class CollisionManager {
 			int pointX = (int) points.x;
 			int pointY = (int) points.y;
 			try {
-				if (collisionLayer.getCell(pointX, pointY).getTile().getProperties().containsKey("isWall"))
+				if (collisionLayer.getCell(pointX , pointY).getTile().getProperties().containsKey("isWall"))
 					switch (i) {
 					case 0:
 						System.out.println("Feet hit wall");
@@ -54,7 +61,7 @@ public class CollisionManager {
 				// System.out.println("Not A Wall");
 			}
 			if(player.getLocation().x > 12)
-				screen.moveCamera(5, 0);
+				screen.moveCamera(13, 0);
 				
 			i++;
 		}
