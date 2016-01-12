@@ -18,7 +18,7 @@ public class Player extends Sprite implements InputProcessor {
 	TiledMap map;
 	CollisionManager colManager;
 	Array<Vector2> collisionPoints = new Array<Vector2>();
-	
+
 	private static float unitScale = GameScreen.UNITSCALE;
 
 	// Change these values to change different parameters for the characters
@@ -32,10 +32,8 @@ public class Player extends Sprite implements InputProcessor {
 
 	public boolean canMoveLeft = true, canMoveRight = true, canMoveUp = true, canMoveDown = true;
 
-	public boolean collidedGround, collidedWall;
-	
 	boolean isFlipped;
-	
+
 	public int posX, posY;
 	public float oldX;
 	public float oldY;
@@ -43,7 +41,7 @@ public class Player extends Sprite implements InputProcessor {
 	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
 		super(sprite);
 		this.screen = screen;
-		this.setSize(30*unitScale, 56*unitScale);
+		this.setSize(30 * unitScale, 56 * unitScale);
 		this.map = map;
 		location = new Vector2(getX(), getY());
 		posX = (int) location.x;
@@ -52,14 +50,14 @@ public class Player extends Sprite implements InputProcessor {
 		setyDirection(yDir.none);
 		colManager = new CollisionManager(map, this, this.screen);
 		// Bottom Collision Point
-		collisionPoints.add(new Vector2(location.x + (getWidth() / 2),location.y)); 
-		// Top Left Collision Point
-		collisionPoints.add(new Vector2(location.x + (getWidth() / 2),location.y + getHeight())); 
+		collisionPoints.add(new Vector2(location.x + (getWidth() / 2), location.y));
+		// Top Collision Point
+		collisionPoints.add(new Vector2(location.x + (getWidth() / 2), location.y + getHeight()));
 		// Left Collision Point
-		collisionPoints.add(new Vector2(location.x,location.y + (getHeight() / 2)));
+		collisionPoints.add(new Vector2(location.x, location.y + (getHeight() / 2)));
 		// Right Collision Point
-		collisionPoints.add(new Vector2(location.x + getWidth(),location.y +(getHeight() / 2))); 
-		
+		collisionPoints.add(new Vector2(location.x + getWidth(), location.y + (getHeight() / 2)));
+
 	}
 
 	public enum xDir {
@@ -80,23 +78,27 @@ public class Player extends Sprite implements InputProcessor {
 		// Save old position
 		oldX = (this.location.x);
 		oldY = (this.location.y);
-		collisionPoints.set(0, new Vector2(location.x + (getWidth() / 2),location.y));
-		collisionPoints.set(1, new Vector2(location.x + (getWidth() / 2),location.y + getHeight()));
-		collisionPoints.set(2, new Vector2(location.x,location.y + (getHeight() / 2))); 
-		collisionPoints.set(3, new Vector2(location.x + getWidth(),location.y +(getHeight() / 2)));
-		
-		if(velocity.x > 0 || velocity.x < 0 || velocity.y > 0 || velocity.y < 0)
+		collisionPoints.set(0, new Vector2(location.x + (getWidth() / 2), location.y));
+		collisionPoints.set(1, new Vector2(location.x + (getWidth() / 2), location.y + getHeight()));
+		collisionPoints.set(2, new Vector2(location.x, location.y + (getHeight() / 2)));
+		collisionPoints.set(3, new Vector2(location.x + getWidth(), location.y + (getHeight() / 2)));
+
+		if (velocity.x > 0 || velocity.x < 0 || velocity.y > 0 || velocity.y < 0)
 			colManager.checkWallCollision(collisionPoints);
-		
+
+		// Check to see which directions we can't move.
+		canMoveDown = colManager.wallBelow(collisionPoints.get(0));
+		canMoveUp = colManager.wallAbove(collisionPoints.get(1));
+		canMoveLeft = colManager.wallLeft(collisionPoints.get(2));
+		canMoveRight = colManager.wallRight(collisionPoints.get(3));
 		updateMovement();
-		
-		
+
+
 		// Limits the player to only going too fast.
 		if (velocity.y > speed)
 			velocity.y = speed;
 		else if (velocity.y < -speed)
 			velocity.y = -speed;
-
 		if (velocity.x > speed)
 			velocity.x = speed;
 		else if (velocity.x < -speed)
@@ -106,41 +108,50 @@ public class Player extends Sprite implements InputProcessor {
 		setX(getX() + velocity.x * delta);
 
 		// Move on Y Axis
-		setY(getY() + velocity.y * delta);
+		if(canMoveDown)
+			setY(getY() + velocity.y * delta);
+		else if (canMoveUp)
+			setY(getY() + velocity.y * delta);
+		else
+			setY(getY());
 		setLocation(new Vector2(getX(), getY()));
-		
-		posX = (int)location.x;
-		posY = (int)location.y;
-		
-		System.out.println(posX +","+ posY);
+
+		posX = (int) location.x;
+		posY = (int) location.y;
+
+		System.out.println(posX + "," + posY);
 	}
 
 	public void updateMovement() {
 		// Logic to decide which directions the player should move
-		if (!collidedWall) {
-			switch (getxDirection()) {
-			case none:
-				velocity.x = 0;
-				break;
-			case left:
-				velocity.x = -speed;
-				break;
-			case right:
-				velocity.x = speed;
-				break;
-			}
-			switch (yDirection) {
-			case none:
+		if(!canMoveDown)
+			if(velocity.y < 0)
 				velocity.y = 0;
-				break;
-			case up:
-				velocity.y = speed;
-				break;
-			case down:
+		if(canMoveDown)
+			if(getyDirection() == yDir.down)
 				velocity.y = -speed;
-				break;
-			}
-		}
+		if(!canMoveUp)
+			if(velocity.y > 0)
+				velocity.y = 0;
+		if(canMoveUp)
+			if(getyDirection() == yDir.up)
+				velocity.y = speed;
+		if(getyDirection() == yDir.none)
+			velocity.y = 0;
+		if(!canMoveLeft)
+			if(velocity.x < 0)
+				velocity.x = 0;
+		if(canMoveLeft)
+			if(getxDirection() == xDir.left)
+				velocity.x = -speed;
+		if(!canMoveRight)
+			if(velocity.x > 0)
+				velocity.x = 0;
+		if(canMoveRight)
+			if(getxDirection() == xDir.right)
+				velocity.x = speed;
+		if(getxDirection() == xDir.none)
+			velocity.x = 0;
 	}
 
 	// Begins code for the player controlled inputs. Such as moving and attack.
@@ -148,21 +159,25 @@ public class Player extends Sprite implements InputProcessor {
 	// has been done
 	@Override
 	public boolean keyDown(int keycode) {
-		if (!collidedWall) {
-			switch (keycode) {
-			case Keys.W:
+		switch (keycode) {
+		case Keys.W:
+			if (canMoveUp)
 				setyDirection(yDir.up);
-				break;
-			case Keys.S:
+			else
+				setyDirection(yDir.none);
+			break;
+		case Keys.S:
+			if (canMoveDown)
 				setyDirection(yDir.down);
-				break;
-			case Keys.A:
-				setxDirection(xDir.left);
-				break;
-			case Keys.D:
-				setxDirection(xDir.right);
-				break;
-			}
+			else
+				setyDirection(yDir.none);
+			break;
+		case Keys.A:
+			setxDirection(xDir.left);
+			break;
+		case Keys.D:
+			setxDirection(xDir.right);
+			break;
 		}
 		return true;
 	}
@@ -229,6 +244,7 @@ public class Player extends Sprite implements InputProcessor {
 	public boolean scrolled(int amount) {
 		return false;
 	}
+
 	// Bunch of different get/setters
 	public Vector2 getVelocity() {
 		return velocity;
