@@ -23,7 +23,7 @@ public class Player extends Sprite implements InputProcessor {
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
-	private float speed = 145 * unitScale;
+	private float speed = 120 * unitScale;
 
 	private static xDir xDirection;
 	private static yDir yDirection;
@@ -42,7 +42,7 @@ public class Player extends Sprite implements InputProcessor {
 	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
 		super(sprite);
 		this.screen = screen;
-		this.setSize(40 * unitScale, 62 * unitScale);
+		this.setSize(40 * unitScale, 58 * unitScale);
 		this.map = map;
 		location = new Vector2(getX(), getY());
 		posX = (int) location.x;
@@ -69,6 +69,15 @@ public class Player extends Sprite implements InputProcessor {
 		up, down, none
 	}
 
+	public void checkWallsAround() {
+		colManager.checkWallCollision(collisionPoints);
+		// Check to see which directions we can't move.
+		canMoveDown = colManager.wallBelow(collisionPoints.get(0));
+		canMoveUp = colManager.wallAbove(collisionPoints.get(1));
+		canMoveLeft = colManager.wallLeft(collisionPoints.get(2));
+		canMoveRight = colManager.wallRight(collisionPoints.get(3));
+	}
+
 	@Override
 	public void draw(Batch spriteBatch) {
 		update(Gdx.graphics.getDeltaTime());
@@ -84,17 +93,8 @@ public class Player extends Sprite implements InputProcessor {
 		collisionPoints.set(2, new Vector2(location.x, location.y + (getHeight() / 2)));
 		collisionPoints.set(3, new Vector2(location.x + getWidth(), location.y + (getHeight() / 2)));
 
-		// Check to see which directions we can't move.
-		canMoveDown = colManager.wallBelow(collisionPoints.get(0));
-		canMoveUp = colManager.wallAbove(collisionPoints.get(1));
-		canMoveLeft = colManager.wallLeft(collisionPoints.get(2));
-		canMoveRight = colManager.wallRight(collisionPoints.get(3));
-		
-		if (velocity.x > 0 || velocity.x < 0 || velocity.y > 0 || velocity.y < 0)
-			colManager.checkWallCollision(collisionPoints);
-		
-		updateMovement();
 
+		checkWallsAround();
 
 		// Limits the player to only going too fast.
 		if (velocity.y > speed)
@@ -106,19 +106,21 @@ public class Player extends Sprite implements InputProcessor {
 		else if (velocity.x < -speed)
 			velocity.x = -speed;
 
-		
+		updateMovement();
+		checkWallsAround();
+
 		// Move on X Axis
-		if(canMoveLeft || canMoveRight)
+		if (canMoveLeft || canMoveRight)
 			setX(getX() + velocity.x * delta);
 		else
 			setX(getX());
 
 		// Move on Y Axis
-		if(canMoveDown || canMoveUp)
+		if (canMoveDown || canMoveUp)
 			setY(getY() + velocity.y * delta);
 		else
 			setY(getY());
-		
+
 		setLocation(new Vector2(getX(), getY()));
 
 		posX = (int) location.x;
@@ -126,37 +128,36 @@ public class Player extends Sprite implements InputProcessor {
 
 		System.out.println(posX + "," + posY);
 	}
-	
 
 	public void updateMovement() {
 		// Logic to decide which directions the player should move
-		if(!canMoveDown)
-			if(velocity.y < 0)
+		if (!canMoveDown)
+			if (velocity.y < 0)
 				velocity.y = 0;
-		if(canMoveDown)
-			if(getyDirection() == yDir.down)
+		if (canMoveDown)
+			if (getyDirection() == yDir.down)
 				velocity.y = -speed;
-		if(!canMoveUp)
-			if(velocity.y > 0)
+		if (!canMoveUp)
+			if (velocity.y > 0)
 				velocity.y = 0;
-		if(canMoveUp)
-			if(getyDirection() == yDir.up)
+		if (canMoveUp)
+			if (getyDirection() == yDir.up)
 				velocity.y = speed;
-		if(getyDirection() == yDir.none)
+		if (getyDirection() == yDir.none)
 			velocity.y = 0;
-		if(!canMoveLeft)
-			if(velocity.x < 0)
+		if (!canMoveLeft)
+			if (velocity.x < 0)
 				velocity.x = 0;
-		if(canMoveLeft)
-			if(getxDirection() == xDir.left)
+		if (canMoveLeft)
+			if (getxDirection() == xDir.left)
 				velocity.x = -speed;
-		if(!canMoveRight)
-			if(velocity.x > 0)
+		if (!canMoveRight)
+			if (velocity.x > 0)
 				velocity.x = 0;
-		if(canMoveRight)
-			if(getxDirection() == xDir.right)
+		if (canMoveRight)
+			if (getxDirection() == xDir.right)
 				velocity.x = speed;
-		if(getxDirection() == xDir.none)
+		if (getxDirection() == xDir.none)
 			velocity.x = 0;
 	}
 
@@ -165,8 +166,9 @@ public class Player extends Sprite implements InputProcessor {
 	// has been done
 	@Override
 	public boolean keyDown(int keycode) {
-		// Switch Statements for the initial deciscion of movement direction. Sets values so we can keep track of keys kept
-		//pressed down.
+		// Switch Statements for the initial deciscion of movement direction.
+		// Sets values so we can keep track of keys kept
+		// pressed down.
 		switch (keycode) {
 		case Keys.W:
 			wHeld = true;
@@ -184,14 +186,14 @@ public class Player extends Sprite implements InputProcessor {
 			break;
 		case Keys.A:
 			aHeld = true;
-			if(canMoveLeft)
+			if (canMoveLeft)
 				setxDirection(xDir.left);
 			else
 				setxDirection(xDir.none);
 			break;
 		case Keys.D:
 			dHeld = true;
-			if(canMoveRight)
+			if (canMoveRight)
 				setxDirection(xDir.right);
 			else
 				setxDirection(xDir.none);
@@ -202,8 +204,9 @@ public class Player extends Sprite implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// Sets the direction moving to none, unless they are trying to move in the opposite direction.
-		//also lets us know when a button is no longer held.
+		// Sets the direction moving to none, unless they are trying to move in
+		// the opposite direction.
+		// also lets us know when a button is no longer held.
 		switch (keycode) {
 		case Keys.W:
 			wHeld = false;
