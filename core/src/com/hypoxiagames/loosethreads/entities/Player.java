@@ -42,7 +42,7 @@ public class Player extends Sprite implements InputProcessor {
 	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
 		super(sprite);
 		this.screen = screen;
-		this.setSize(40 * unitScale, 64 * unitScale);
+		this.setSize(40 * unitScale, 62 * unitScale);
 		this.map = map;
 		location = new Vector2(getX(), getY());
 		posX = (int) location.x;
@@ -84,14 +84,15 @@ public class Player extends Sprite implements InputProcessor {
 		collisionPoints.set(2, new Vector2(location.x, location.y + (getHeight() / 2)));
 		collisionPoints.set(3, new Vector2(location.x + getWidth(), location.y + (getHeight() / 2)));
 
-		if (velocity.x > 0 || velocity.x < 0 || velocity.y > 0 || velocity.y < 0)
-			colManager.checkWallCollision(collisionPoints);
-
 		// Check to see which directions we can't move.
 		canMoveDown = colManager.wallBelow(collisionPoints.get(0));
 		canMoveUp = colManager.wallAbove(collisionPoints.get(1));
 		canMoveLeft = colManager.wallLeft(collisionPoints.get(2));
 		canMoveRight = colManager.wallRight(collisionPoints.get(3));
+		
+		if (velocity.x > 0 || velocity.x < 0 || velocity.y > 0 || velocity.y < 0)
+			colManager.checkWallCollision(collisionPoints);
+		
 		updateMovement();
 
 
@@ -107,20 +108,17 @@ public class Player extends Sprite implements InputProcessor {
 
 		
 		// Move on X Axis
-		if(canMoveLeft)
-			setX(getX() + velocity.x * delta);
-		else if(canMoveRight)
+		if(canMoveLeft || canMoveRight)
 			setX(getX() + velocity.x * delta);
 		else
 			setX(getX());
 
 		// Move on Y Axis
-		if(canMoveDown)
-			setY(getY() + velocity.y * delta);
-		else if (canMoveUp)
+		if(canMoveDown || canMoveUp)
 			setY(getY() + velocity.y * delta);
 		else
 			setY(getY());
+		
 		setLocation(new Vector2(getX(), getY()));
 
 		posX = (int) location.x;
