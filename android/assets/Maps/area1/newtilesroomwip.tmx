@@ -1,160 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="64" nextobjectid="37">
- <tileset firstgid="1" name="NewTiles" tilewidth="64" tileheight="64" tilecount="40">
+ <tileset firstgid="1" name="NewTiles" tilewidth="248" tileheight="132" tilecount="41" columns="0">
   <tile id="0">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/CenterPeice.png"/>
+   <image width="64" height="64" source="CenterPeice.png"/>
   </tile>
   <tile id="1">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/LightSide bottom right.png"/>
+   <image width="64" height="64" source="LightSide bottom right.png"/>
   </tile>
   <tile id="2">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside Bottom.png"/>
+   <image width="64" height="64" source="Lightside Bottom.png"/>
   </tile>
   <tile id="3">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside Cover Piece Bottom Left.png"/>
+   <image width="64" height="64" source="Lightside Cover Piece Bottom Left.png"/>
   </tile>
   <tile id="4">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside Cover Piece left.png"/>
+   <image width="64" height="64" source="Lightside Cover Piece left.png"/>
   </tile>
   <tile id="5">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside Cover Piece Top Left.png"/>
+   <image width="64" height="64" source="Lightside Cover Piece Top Left.png"/>
   </tile>
   <tile id="6">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside Right.png"/>
+   <image width="64" height="64" source="Lightside Right.png"/>
   </tile>
   <tile id="7">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside Top-Right.png"/>
+   <image width="64" height="64" source="Lightside Top-Right.png"/>
   </tile>
   <tile id="8">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside-center Peice.png"/>
+   <image width="64" height="64" source="Lightside-center Peice.png"/>
   </tile>
   <tile id="9">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Top Left.png"/>
+   <image width="64" height="64" source="Top Left.png"/>
   </tile>
   <tile id="10">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Top Right.png"/>
+   <image width="64" height="64" source="Top Right.png"/>
   </tile>
   <tile id="11">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Bottom Left Peice.png"/>
+   <image width="64" height="64" source="Bottom Left Peice.png"/>
   </tile>
   <tile id="12">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/bottom peice.png"/>
+   <image width="64" height="64" source="bottom peice.png"/>
   </tile>
   <tile id="13">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/BottomRight Peice.png"/>
+   <image width="64" height="64" source="BottomRight Peice.png"/>
   </tile>
   <tile id="14">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Left Peice.png"/>
+   <image width="64" height="64" source="Left Peice.png"/>
   </tile>
   <tile id="15">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Lightside Cover Piece Top.png"/>
+   <image width="64" height="64" source="Lightside Cover Piece Top.png"/>
   </tile>
   <tile id="16">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Right Peice.png"/>
+   <image width="64" height="64" source="Right Peice.png"/>
   </tile>
   <tile id="17">
-   <image width="64" height="64" source="../Desktop/nr fam/Random Screenshots/Top Peice.png"/>
+   <image width="64" height="64" source="Top Peice.png"/>
   </tile>
   <tile id="18">
-   <image width="64" height="64" source="../Downloads/myhomewall.png"/>
-  </tile>
-  <tile id="19">
-   <image width="64" height="64" source="../Downloads/woody.png"/>
+   <image width="64" height="64" source="myhomewall.png"/>
   </tile>
   <tile id="20">
-   <image width="64" height="64" source="../Downloads/fwfwffe.png"/>
+   <image width="64" height="64" source="fwfwffe.png"/>
   </tile>
   <tile id="21">
    <properties>
     <property name="isWall" value=""/>
    </properties>
-   <image width="64" height="64" source="../Downloads/nuumnununu.png"/>
+   <image width="64" height="64" source="nuumnununu.png"/>
   </tile>
   <tile id="22">
    <properties>
     <property name="isWall" value=""/>
    </properties>
-   <image width="64" height="64" source="../Downloads/down.png"/>
+   <image width="64" height="64" source="down.png"/>
   </tile>
   <tile id="23">
    <properties>
     <property name="isWall" value=""/>
    </properties>
-   <image width="64" height="64" source="../Downloads/dance.png"/>
+   <image width="64" height="64" source="dance.png"/>
   </tile>
   <tile id="24">
-   <image width="64" height="64" source="../Downloads/wefwfwf.png"/>
+   <image width="64" height="64" source="wefwfwf.png"/>
   </tile>
   <tile id="25">
-   <image width="64" height="64" source="../Downloads/fefwefwfegb eb.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="fefwefwfegb eb.png"/>
   </tile>
   <tile id="26">
-   <image width="64" height="64" source="../Downloads/qcacac.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="qcacac.png"/>
   </tile>
   <tile id="27">
    <properties>
     <property name="isWall" value=""/>
    </properties>
-   <image width="64" height="64" source="../Downloads/gergegregsg.png"/>
+   <image width="64" height="64" source="gergegregsg.png"/>
   </tile>
   <tile id="28">
    <properties>
     <property name="isWall" value=""/>
    </properties>
-   <image width="64" height="64" source="../Downloads/fafawfw.png"/>
+   <image width="64" height="64" source="fafawfw.png"/>
   </tile>
   <tile id="29">
-   <image width="64" height="64" source="../Downloads/afawfwefawcvwvwv.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="afawfwefawcvwvwv.png"/>
   </tile>
   <tile id="30">
-   <image width="64" height="64" source="../Downloads/ffawefawefwvawe eb ewbe.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="ffawefawefwvawe eb ewbe.png"/>
   </tile>
   <tile id="31">
-   <image width="64" height="64" source="../Downloads/aawfvwvwvwvwvw.png"/>
+   <image width="64" height="64" source="aawfvwvwvwvwvw.png"/>
   </tile>
   <tile id="32">
-   <image width="64" height="64" source="../Downloads/gqQGWG.png"/>
+   <image width="64" height="64" source="gqQGWG.png"/>
   </tile>
   <tile id="33">
-   <image width="64" height="64" source="../Downloads/cantseeme.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="cantseeme.png"/>
   </tile>
   <tile id="34">
-   <image width="64" height="64" source="../Downloads/aawfvwvwvwvwvw.png"/>
+   <image width="64" height="64" source="aawfvwvwvwvwvw.png"/>
   </tile>
   <tile id="35">
-   <image width="64" height="64" source="../Downloads/betterandbetyter.png"/>
+   <image width="64" height="64" source="betterandbetyter.png"/>
   </tile>
   <tile id="36">
-   <image width="64" height="64" source="../Downloads/dqwdqdfw2q1c.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="dqwdqdfw2q1c.png"/>
   </tile>
   <tile id="37">
-   <image width="64" height="64" source="../Downloads/D1D1D1D.png"/>
+   <image width="64" height="64" source="D1D1D1D.png"/>
   </tile>
   <tile id="38">
-   <image width="64" height="64" source="../Downloads/ffwe2f2f2.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="ffwe2f2f2.png"/>
   </tile>
   <tile id="39">
-   <image width="64" height="64" source="../Downloads/fawf2f2f2.png"/>
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="fawf2f2f2.png"/>
+  </tile>
+  <tile id="40">
+   <image width="248" height="132" source="beddy.png"/>
+  </tile>
+  <tile id="42">
+   <image width="64" height="64" source="linoleum.png"/>
   </tile>
  </tileset>
- <layer name="background" width="100" height="100">
+ <layer name="Background" width="100" height="100">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3WSw6CMBiF0S4C41sT42v/K5QmGBBppAjK4JzkDv8J36CEUNuUW2bsMPC2eUfaqtw6Y/uBt8070uI3XWSs3WPIHWl6zEv8pkU1Pf7v2WMR3psUHdNjWs0en1rEnUL9z3TvuNPjO7k92v9Neoyrq0eqRdw59G+gR77me95nl3K7aregx9hye3jPp6XHvOgxL9tQvwd9dkzcxrfkGl7fl9QdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/MIDRrTswUCcAAA=
+   H4sIAAAAAAAAC+3YWQrCMBRA0WxCnBXECbr//dmgohYKCVTyxHPggT+B4g2kTUoAAAAAAAAAAAAAAABtrfqZF86u0TP+k0U/y8LZNnrGX1Ozx4f7PPeYFY4eZWr2+HCf6zE9PWKp+U+H/6se09Mjltoeh/Q6268V6/QoU9vjOPJbj2nU9jj1s3nMpWKdHmWcH7HoEYsesazT6zwomf3I2nyWnNPn+TK2ju/Kd2D53bdL9/dhd7ltPe9cuuQuN4Lco3sbPdrSIxY9YtEjFj1iGX7D+NYAAAAAAAAAAAAAAAAAAAAAAAD4DzfmUJqWQJwAAA==
   </data>
  </layer>
- <objectgroup name="iswalls" visible="0">
-  <object id="2" x="240" y="32" width="720" height="80"/>
-  <object id="3" x="960" y="48" width="32" height="464"/>
-  <object id="4" x="992" y="480" width="224" height="32"/>
-  <object id="5" x="1184" y="32" width="32" height="480"/>
-  <object id="6" x="1216" y="32" width="640" height="80"/>
-  <object id="7" x="1856" y="48" width="32" height="64"/>
-  <object id="8" x="1856" y="112" width="32" height="752"/>
-  <object id="9" x="1856" y="832" height="32"/>
-  <object id="10" x="1472" y="832" width="384" height="80"/>
-  <object id="18" x="1056" y="832" width="352" height="96"/>
-  <object id="19" x="960" y="576" width="256" height="256"/>
-  <object id="20" x="176" y="832" width="1024" height="112"/>
-  <object id="21" x="208" y="32" width="48" height="816"/>
- </objectgroup>
+ <layer name="Foreground" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OoQEAAAjDsN2C4/8HeWEGl+iKJgAAAAAAAAAAAAAAAAAAQGPLbl4vAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAbweVQB5jQJwAAA==
+  </data>
+ </layer>
 </map>
