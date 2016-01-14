@@ -90,10 +90,10 @@ public class CollisionManager {
 		Vector2 teleport1 = new Vector2(25,60);
 		Vector2 teleport2 = new Vector2(26, 37);
 		System.out.println("(" + posX + ", " + posY + ")" );
-		if(posX >= teleport1.x && posY >= teleport1.y)
+		if(((posX >= teleport1.x) && (posX <= 25.5)) && ((( posY >= teleport1.y) && (posY < 60.2))))
 			player.setPosition(27,37);
-		if(((posX >= teleport2.x) && (posX < 26.3)) && (((posY >= teleport2.y && (posY < 37.2)))))
-			player.setPosition(23,60);
+		else if(((posX >= teleport2.x) && (posX < 26.3)) && (((posY >= teleport2.y) && (posY < 37.2))))
+			player.setY(60);
 	}
 
 	public void checkWallCollision(Array<Vector2> collisionPoints) {
