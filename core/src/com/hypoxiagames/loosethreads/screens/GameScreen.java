@@ -55,7 +55,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), testMap, this);
 
 		// Spawns him somewhere in the room.
-		player.setPosition(14, 57);
+		player.getSprite().setPosition(14, 57);
 		Gdx.input.setInputProcessor(player);
 
 		glyphLayout = new GlyphLayout();
@@ -85,7 +85,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		projManager.findBulletSpawn();
 		
 		// Have the camera follow the player around, based on the player's new location.
-		camera.position.set(player.getX(), player.getY(), 0);
+		camera.position.set(player.getSprite().getX(), player.getSprite().getY(), 0);
 		camera.update();
 		
 		// Render the map using the camera
@@ -140,8 +140,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		camera.update();
 	}
 	public void movePlayerToRoom(Vector2 newLocation){
-		player.setX(newLocation.x);
-		player.setY(newLocation.y);
+		player.getSprite().setX(newLocation.x);
+		player.getSprite().setY(newLocation.y);
 	}
 
 	// Get/Setters

@@ -91,9 +91,10 @@ public class CollisionManager {
 		Vector2 teleport2 = new Vector2(26, 37);
 		System.out.println("(" + posX + ", " + posY + ")" );
 		if(((posX >= teleport1.x) && (posX <= 25.5)) && ((( posY >= teleport1.y) && (posY < 60.2))))
-			player.setPosition(27,37);
-		else if(((posX >= teleport2.x) && (posX < 26.3)) && (((posY >= teleport2.y) && (posY < 37.2))))
-			player.setY(60);
+			player.getSprite().setPosition(27,37);
+		else if(((posX >= teleport2.x) && (posX < 26.3)) && (((posY >= teleport2.y) && (posY < 37.2)))){
+			player.getSprite().setPosition(24.5f, 60f);
+		}
 	}
 
 	public void checkWallCollision(Array<Vector2> collisionPoints) {
@@ -110,23 +111,23 @@ public class CollisionManager {
 					switch (i) {
 					case 0:
 						System.out.println("Feet hit wall");
-						player.setY(player.getLocation().y + 0.1f);
+						player.getSprite().setY(player.getLocation().y + 0.1f);
 
 						break;
 					case 1:
 						System.out.println("Head hit wall");
-						player.setY(player.getLocation().y - 0.1f);
+						player.getSprite().setY(player.getLocation().y - 0.1f);
 						break;
 					case 2:
 						System.out.println("Left Side Hit wall");
-						player.setX(player.getLocation().x + 0.1f);
+						player.getSprite().setX(player.getLocation().x + 0.1f);
 						break;
 					case 3:
 						System.out.println("Right Side Hit Wall");
-						player.setX(player.getLocation().x - 0.1f);
+						player.getSprite().setX(player.getLocation().x - 0.1f);
 						break;
 					}
-				if(player.getX() == 24 && player.getY() == 60)
+				if(player.getSprite().getX() == 24 && player.getSprite().getY() == 60)
 				{
 					System.out.println("Should be teleporting");
 					player.moveToPoint(26, 38);

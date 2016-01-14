@@ -3,21 +3,35 @@ package com.hypoxiagames.loosethreads.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.hypoxiagames.loosethreads.CollisionManager;
 import com.hypoxiagames.loosethreads.screens.GameScreen;
 
-public class Player extends Sprite implements InputProcessor {
+public class Player implements InputProcessor {
 	GameScreen screen;
 	// Player movement velocity
 	public Vector2 velocity = new Vector2(0, 0);
 	TiledMap map;
 	public CollisionManager colManager;
 	Array<Vector2> collisionPoints = new Array<Vector2>();
+	
+	Texture animationTexture;
+	TextureRegion animationRegion;
+	private Sprite sprite;
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
 
 	private static float unitScale = GameScreen.UNITSCALE;
 
@@ -40,23 +54,23 @@ public class Player extends Sprite implements InputProcessor {
 	public float oldY;
 
 	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
-		super(sprite);
-		this.setSize(40 * unitScale, 62 * unitScale);
+		this.sprite = sprite;
+		this.sprite.setSize(40 * unitScale, 62 * unitScale);
 		this.map = map;
-		location = new Vector2(getX(), getY());
+		location = new Vector2(sprite.getX(), sprite.getY());
 		posX = (int) location.x;
 		posY = (int) location.y;
 		setxDirection(xDir.none);
 		setyDirection(yDir.none);
 		colManager = new CollisionManager(map, this, this.screen);
 		// Bottom Collision Point
-		collisionPoints.add(new Vector2(location.x + (getWidth() / 2), location.y));
+		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y));
 		// Top Collision Point
-		collisionPoints.add(new Vector2(location.x + (getWidth() / 2), location.y + getHeight()));
+		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight()));
 		// Left Collision Point
-		collisionPoints.add(new Vector2(location.x, location.y + (getHeight() / 2)));
+		collisionPoints.add(new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
 		// Right Collision Point
-		collisionPoints.add(new Vector2(location.x + getWidth(), location.y + (getHeight() / 2)));
+		collisionPoints.add(new Vector2(location.x + sprite.getWidth(), location.y + (sprite.getHeight() / 2)));
 
 	}
 
@@ -78,21 +92,25 @@ public class Player extends Sprite implements InputProcessor {
 		
 	}
 	
-
-	@Override
+	public void updateAnimation(float delta){
+		
+	}
+	
+	
 	public void draw(Batch spriteBatch) {
 		update(Gdx.graphics.getDeltaTime());
-		super.draw(spriteBatch);
+		updateAnimation(Gdx.graphics.getDeltaTime());
+		sprite.draw(spriteBatch);
 	}
 
 	public void update(float delta) {
 		// Save old position
 		oldX = (this.location.x);
 		oldY = (this.location.y);
-		collisionPoints.set(0, new Vector2(location.x + (getWidth() / 2), location.y));
-		collisionPoints.set(1, new Vector2(location.x + (getWidth() / 2), location.y + getHeight()));
-		collisionPoints.set(2, new Vector2(location.x, location.y + (getHeight() / 2)));
-		collisionPoints.set(3, new Vector2(location.x + getWidth(), location.y + (getHeight() / 2)));
+		collisionPoints.set(0, new Vector2(location.x + (sprite.getWidth() / 2), location.y));
+		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight()));
+		collisionPoints.set(2, new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
+		collisionPoints.set(3, new Vector2(location.x + sprite.getWidth(), location.y + (sprite.getHeight() / 2)));
 
 		// Limits the player to only going too fast.
 		if (velocity.y > speed)
@@ -109,17 +127,17 @@ public class Player extends Sprite implements InputProcessor {
 		
 		// Move on X Axis
 		if (canMoveLeft || canMoveRight)
-			setX(getX() + velocity.x * delta);
+			sprite.setX(sprite.getX() + velocity.x * delta);
 		else
-			setX(getX());
+			sprite.setX(sprite.getX());
 
 		// Move on Y Axis
 		if (canMoveDown || canMoveUp)
-			setY(getY() + velocity.y * delta);
+			sprite.setY(sprite.getY() + velocity.y * delta);
 		else
-			setY(getY());
+			sprite.setY(sprite.getY());
 
-		setLocation(new Vector2(getX(), getY()));
+		setLocation(new Vector2(sprite.getX(), sprite.getY()));
 
 		posX = (int) location.x;
 		posY = (int) location.y;
@@ -163,8 +181,8 @@ public class Player extends Sprite implements InputProcessor {
 	}
 	
 	public void moveToPoint(float x, float y){
-		setY(y);
-		setX(x);
+		sprite.setY(y);
+		sprite.setX(x);
 	}
 
 	// Begins code for the player controlled inputs. Such as moving and attack.
