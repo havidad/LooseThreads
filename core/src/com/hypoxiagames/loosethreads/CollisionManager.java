@@ -85,6 +85,16 @@ public class CollisionManager {
 		}
 		return false;
 	}
+	
+	public void checkTeleportingZones(float posX, float posY){
+		Vector2 teleport1 = new Vector2(25,60);
+		Vector2 teleport2 = new Vector2(26, 37);
+		System.out.println("(" + posX + ", " + posY + ")" );
+		if(posX >= teleport1.x && posY >= teleport1.y)
+			player.setPosition(27,37);
+		if(((posX >= teleport2.x) && (posX < 26.3)) && (((posY >= teleport2.y && (posY < 37.2)))))
+			player.setPosition(23,60);
+	}
 
 	public void checkWallCollision(Array<Vector2> collisionPoints) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
@@ -116,12 +126,14 @@ public class CollisionManager {
 						player.setX(player.getLocation().x - 0.1f);
 						break;
 					}
+				if(player.getX() == 24 && player.getY() == 60)
+				{
+					System.out.println("Should be teleporting");
+					player.moveToPoint(26, 38);
+				}
 			} catch (Exception e) {
 				// System.out.println("Not A Wall");
 			}
-			if (player.getLocation().x > 12)
-				screen.moveCamera(13, 0);
-
 			i++;
 		}
 

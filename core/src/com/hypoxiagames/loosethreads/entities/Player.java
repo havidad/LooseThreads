@@ -16,7 +16,7 @@ public class Player extends Sprite implements InputProcessor {
 	// Player movement velocity
 	public Vector2 velocity = new Vector2(0, 0);
 	TiledMap map;
-	CollisionManager colManager;
+	public CollisionManager colManager;
 	Array<Vector2> collisionPoints = new Array<Vector2>();
 
 	private static float unitScale = GameScreen.UNITSCALE;
@@ -41,7 +41,6 @@ public class Player extends Sprite implements InputProcessor {
 
 	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
 		super(sprite);
-		this.screen = screen;
 		this.setSize(40 * unitScale, 58 * unitScale);
 		this.map = map;
 		location = new Vector2(getX(), getY());
@@ -68,7 +67,7 @@ public class Player extends Sprite implements InputProcessor {
 	public enum yDir {
 		up, down, none
 	}
-
+	
 	public void checkWallsAround() {
 		colManager.checkWallCollision(collisionPoints);
 		// Check to see which directions we can't move.
@@ -76,7 +75,9 @@ public class Player extends Sprite implements InputProcessor {
 		canMoveUp = colManager.wallAbove(collisionPoints.get(1));
 		canMoveLeft = colManager.wallLeft(collisionPoints.get(2));
 		canMoveRight = colManager.wallRight(collisionPoints.get(3));
+		
 	}
+	
 
 	@Override
 	public void draw(Batch spriteBatch) {
@@ -93,9 +94,6 @@ public class Player extends Sprite implements InputProcessor {
 		collisionPoints.set(2, new Vector2(location.x, location.y + (getHeight() / 2)));
 		collisionPoints.set(3, new Vector2(location.x + getWidth(), location.y + (getHeight() / 2)));
 
-
-		checkWallsAround();
-
 		// Limits the player to only going too fast.
 		if (velocity.y > speed)
 			velocity.y = speed;
@@ -106,9 +104,9 @@ public class Player extends Sprite implements InputProcessor {
 		else if (velocity.x < -speed)
 			velocity.x = -speed;
 
-		updateMovement();
 		checkWallsAround();
-
+		updateMovement();
+		
 		// Move on X Axis
 		if (canMoveLeft || canMoveRight)
 			setX(getX() + velocity.x * delta);
@@ -127,22 +125,25 @@ public class Player extends Sprite implements InputProcessor {
 		posY = (int) location.y;
 
 		System.out.println(posX + "," + posY);
+		
+		colManager.checkTeleportingZones(location.x, location.y);
 	}
 
 	public void updateMovement() {
 		// Logic to decide which directions the player should move
+		if (sHeld)
+			if (getyDirection() == yDir.down)
+				velocity.y = -speed;
 		if (!canMoveDown)
 			if (velocity.y < 0)
 				velocity.y = 0;
-		if (canMoveDown)
-			if (getyDirection() == yDir.down)
-				velocity.y = -speed;
+		if (wHeld)
+			if (getyDirection() == yDir.up)
+				velocity.y = speed;
 		if (!canMoveUp)
 			if (velocity.y > 0)
 				velocity.y = 0;
-		if (canMoveUp)
-			if (getyDirection() == yDir.up)
-				velocity.y = speed;
+		
 		if (getyDirection() == yDir.none)
 			velocity.y = 0;
 		if (!canMoveLeft)
@@ -160,6 +161,11 @@ public class Player extends Sprite implements InputProcessor {
 		if (getxDirection() == xDir.none)
 			velocity.x = 0;
 	}
+	
+	public void moveToPoint(float x, float y){
+		setY(y);
+		setX(x);
+	}
 
 	// Begins code for the player controlled inputs. Such as moving and attack.
 	// So far only movement code
@@ -169,6 +175,7 @@ public class Player extends Sprite implements InputProcessor {
 		// Switch Statements for the initial deciscion of movement direction.
 		// Sets values so we can keep track of keys kept
 		// pressed down.
+		checkWallsAround();
 		switch (keycode) {
 		case Keys.W:
 			wHeld = true;

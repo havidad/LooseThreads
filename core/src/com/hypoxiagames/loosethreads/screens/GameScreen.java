@@ -80,6 +80,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		// Update the player movement and collision
 		player.update(delta);
 		
+		
 		// Determine where the  bullet should spawn this frame step, if it were to fire this frame.
 		projManager.findBulletSpawn();
 		
@@ -137,6 +138,10 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	public void moveCamera(float x, float y) {
 		camera.position.set(camera.viewportWidth / 2 + x, camera.viewportHeight / 2, 0);
 		camera.update();
+	}
+	public void movePlayerToRoom(Vector2 newLocation){
+		player.setX(newLocation.x);
+		player.setY(newLocation.y);
 	}
 
 	// Get/Setters
