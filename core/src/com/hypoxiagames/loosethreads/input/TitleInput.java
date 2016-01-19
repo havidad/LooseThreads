@@ -27,7 +27,6 @@ public class TitleInput implements com.badlogic.gdx.InputProcessor{
 				game.switchScreens("Game Screen");
 				break;
 			case 1:
-				System.out.println("Settings Pressed");
 				game.switchScreens("Settings");
 				break;
 			case 2:
