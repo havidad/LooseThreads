@@ -49,7 +49,7 @@ public class Player implements InputProcessor{
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
-	private float speed = 120 * unitScale;
+	private float speed = 200 * unitScale;
 
 	private static xDir xDirection;
 	private static yDir yDirection;
@@ -70,7 +70,7 @@ public class Player implements InputProcessor{
 		this.animationTexture = bloopTextureAtlas;
 		animationRegion = animationTexture.createSprite("down1");
 		this.sprite = sprite;
-		this.sprite.setSize(22 * unitScale, 35 * unitScale);
+		this.sprite.setSize(32 * unitScale, 45 * unitScale);
 		this.sprite.setTexture(animationRegion.getTexture());
 		this.map = map;
 		moveDir = new ArrayList<Boolean>();
