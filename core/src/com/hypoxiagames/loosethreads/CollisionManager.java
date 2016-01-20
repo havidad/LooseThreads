@@ -47,7 +47,7 @@ public class CollisionManager {
 	public boolean wallAbove(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x), (int) (points.y + 0.02f)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x), (int) (points.y + 0.03f)).getTile().getProperties()
 					.containsKey("isWall"))
 				return false;
 			else
@@ -71,7 +71,7 @@ public class CollisionManager {
 		}
 		return false;
 	}
-	
+
 	public boolean wallRight(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
@@ -85,14 +85,16 @@ public class CollisionManager {
 		}
 		return false;
 	}
-	
-	public void checkTeleportingZones(float posX, float posY){
-		Vector2 teleport1 = new Vector2(25,60);
+
+	public void checkTeleportingZones(float posX, float posY) {
+		Vector2 teleport1 = new Vector2(25, 60);
 		Vector2 teleport2 = new Vector2(26, 37);
-		System.out.println("(" + posX + ", " + posY + ")" );
-		if(((posX >= teleport1.x) && (posX <= 25.5)) && ((( posY >= teleport1.y) && (posY < 60.2))))
-			player.getSprite().setPosition(27,37);
-		else if(((posX >= teleport2.x) && (posX < 26.3)) && (((posY >= teleport2.y) && (posY < 37.2)))){
+		System.out.println("(" + posX + ", " + posY + ")");
+		if (((posX >= teleport1.x) && (posX <= 25.5)) && (((posY >= teleport1.y) && (posY < 60.2)))) {
+			player.disableMovement();
+			player.getSprite().setPosition(27, 37);
+		} else if (((posX >= teleport2.x) && (posX < 26.3)) && (((posY >= teleport2.y) && (posY < 37.2)))) {
+			player.disableMovement();
 			player.getSprite().setPosition(24.5f, 60f);
 		}
 	}
@@ -127,8 +129,7 @@ public class CollisionManager {
 						player.getSprite().setX(player.getLocation().x - 0.1f);
 						break;
 					}
-				if(player.getSprite().getX() == 24 && player.getSprite().getY() == 60)
-				{
+				if (player.getSprite().getX() == 24 && player.getSprite().getY() == 60) {
 					System.out.println("Should be teleporting");
 					player.moveToPoint(26, 38);
 				}

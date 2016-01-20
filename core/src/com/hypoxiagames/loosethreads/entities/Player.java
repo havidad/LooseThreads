@@ -1,11 +1,15 @@
 package com.hypoxiagames.loosethreads.entities;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +17,7 @@ import com.badlogic.gdx.utils.Array;
 import com.hypoxiagames.loosethreads.CollisionManager;
 import com.hypoxiagames.loosethreads.screens.GameScreen;
 
-public class Player implements InputProcessor {
+public class Player implements InputProcessor{
 	GameScreen screen;
 	// Player movement velocity
 	public Vector2 velocity = new Vector2(0, 0);
@@ -21,8 +25,16 @@ public class Player implements InputProcessor {
 	public CollisionManager colManager;
 	Array<Vector2> collisionPoints = new Array<Vector2>();
 	
-	Texture animationTexture;
-	TextureRegion animationRegion;
+	TextureAtlas animationTexture;
+	private TextureRegion animationRegion;
+	public TextureRegion getAnimationRegion() {
+		return animationRegion;
+	}
+
+	public void setAnimationRegion(TextureRegion animationRegion) {
+		this.animationRegion = animationRegion;
+	}
+
 	private Sprite sprite;
 	
 	public Sprite getSprite() {
@@ -45,6 +57,7 @@ public class Player implements InputProcessor {
 	private Vector2 location;
 
 	public boolean canMoveLeft = true, canMoveRight = true, canMoveUp = true, canMoveDown = true;
+	private ArrayList<Boolean> moveDir;
 	private boolean wHeld, aHeld, sHeld, dHeld;
 
 	boolean isFlipped;
@@ -53,10 +66,18 @@ public class Player implements InputProcessor {
 	public float oldX;
 	public float oldY;
 
-	public Player(Sprite sprite, TiledMap map, GameScreen screen) {
+	public Player(TextureAtlas bloopTextureAtlas, Sprite sprite, TiledMap map, GameScreen screen) {
+		this.animationTexture = bloopTextureAtlas;
+		animationRegion = animationTexture.createSprite("down1");
 		this.sprite = sprite;
-		this.sprite.setSize(40 * unitScale, 62 * unitScale);
+		this.sprite.setSize(22 * unitScale, 35 * unitScale);
+		this.sprite.setTexture(animationRegion.getTexture());
 		this.map = map;
+		moveDir = new ArrayList<Boolean>();
+		moveDir.add(canMoveLeft);
+		moveDir.add(canMoveRight);
+		moveDir.add(canMoveUp);
+		moveDir.add(canMoveDown);
 		location = new Vector2(sprite.getX(), sprite.getY());
 		posX = (int) location.x;
 		posY = (int) location.y;
@@ -95,7 +116,6 @@ public class Player implements InputProcessor {
 	public void updateAnimation(float delta){
 		
 	}
-	
 	
 	public void draw(Batch spriteBatch) {
 		update(Gdx.graphics.getDeltaTime());
@@ -149,40 +169,64 @@ public class Player implements InputProcessor {
 
 	public void updateMovement() {
 		// Logic to decide which directions the player should move
-		if (sHeld)
-			if (getyDirection() == yDir.down)
-				velocity.y = -speed;
-		if (!canMoveDown)
-			if (velocity.y < 0)
-				velocity.y = 0;
-		if (wHeld)
-			if (getyDirection() == yDir.up)
-				velocity.y = speed;
-		if (!canMoveUp)
-			if (velocity.y > 0)
-				velocity.y = 0;
-		
-		if (getyDirection() == yDir.none)
-			velocity.y = 0;
-		if (!canMoveLeft)
-			if (velocity.x < 0)
-				velocity.x = 0;
-		if (canMoveLeft)
-			if (getxDirection() == xDir.left)
-				velocity.x = -speed;
-		if (!canMoveRight)
-			if (velocity.x > 0)
-				velocity.x = 0;
-		if (canMoveRight)
-			if (getxDirection() == xDir.right)
-				velocity.x = speed;
-		if (getxDirection() == xDir.none)
+		if (sHeld || wHeld){
+			switch(getyDirection()){
+			case up:
+				if(canMoveUp && wHeld)
+					velocity.y = speed;
+				else
+					velocity.y = 0;
+				break;
+			case down:
+				if(canMoveDown && sHeld)
+					velocity.y = -speed;
+				else
+					velocity.y = 0;
+				break;
+			default:
+				velocity.y = 0; 
+				break;
+			}
+		}
+		else
+			velocity.y =0;
+		if (aHeld || dHeld){
+			switch(getxDirection()){
+			case right:
+				if(canMoveRight && dHeld)
+					velocity.x = speed;
+				else
+					velocity.x = 0;
+				break;
+			case left:
+				if(canMoveLeft && aHeld)
+					velocity.x = -speed;
+				else
+					velocity.x = 0;
+				break;
+			default:
+				velocity.x = 0; 
+				break;
+			}
+		}
+		else
 			velocity.x = 0;
 	}
 	
 	public void moveToPoint(float x, float y){
 		sprite.setY(y);
 		sprite.setX(x);
+	}
+	
+	public void disableMovement(){
+		for(Boolean bool : moveDir)
+			bool = false;
+		
+	}
+	public void enableMovement(){
+		for(Boolean bool : moveDir)
+			bool = true;
+		
 	}
 
 	// Begins code for the player controlled inputs. Such as moving and attack.

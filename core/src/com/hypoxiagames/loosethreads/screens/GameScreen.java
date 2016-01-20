@@ -18,6 +18,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	Assets assetManager;
 
 	private Player player;
+	private TextureAtlas bloopAnim;
 	public static final float UNITSCALE = 1 / 64f;
 
 	GlyphLayout glyphLayout;
@@ -51,8 +52,9 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		// ratio so it looks similar at most
 		// resolutions.
 		camera.setToOrtho(false, 24, 24);
-
-		player = new Player(new Sprite(new Texture("Sprites/imgo.png")), testMap, this);
+		
+		bloopAnim = new TextureAtlas("Sprites/SpriteSheets/BleepBloop.pack");
+		player = new Player(bloopAnim,new Sprite(), testMap, this);
 
 		// Spawns him somewhere in the room.
 		player.getSprite().setPosition(14, 57);
@@ -94,7 +96,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		
 		// Render the player, bullets, and anything else that moves/lives in this part.
 		renderer.getBatch().begin();
-		player.draw(renderer.getBatch());
+		renderer.getBatch().draw(player.getAnimationRegion(), player.getSprite().getX(), player.getSprite().getY(),player.getSprite().getWidth(), player.getSprite().getHeight());
 		renderer.getBatch().end();
 
 	}

@@ -1,0 +1,68 @@
+
+BleepBloop.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+down1
+  rotate: false
+  xy: 1, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+down2
+  rotate: false
+  xy: 25, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+down3
+  rotate: false
+  xy: 49, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+right1
+  rotate: false
+  xy: 73, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+right2
+  rotate: false
+  xy: 97, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+right3
+  rotate: false
+  xy: 121, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+up1
+  rotate: false
+  xy: 145, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+up2
+  rotate: false
+  xy: 169, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
+up3
+  rotate: false
+  xy: 193, 1
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: -1
