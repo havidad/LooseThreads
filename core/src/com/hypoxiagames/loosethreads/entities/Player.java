@@ -38,7 +38,7 @@ public class Player implements InputProcessor {
 
 	// Change these values to change different parameters for the characters
 	// movement in the world
-	private float speed = 200 * unitScale;
+	private float speed = 255 * unitScale;
 
 	private static xDir xDirection;
 	private static yDir yDirection;
@@ -56,6 +56,7 @@ public class Player implements InputProcessor {
 	public float oldY;
 
 	float stateTime;
+	float animationSpeed;
 
 	public Player(TextureAtlas bloopTextureAtlas, Sprite sprite, TiledMap map, GameScreen screen) {
 		// Setting up the animations used by this sprite, as well as the initial
@@ -68,6 +69,7 @@ public class Player implements InputProcessor {
 		rightAnimation = new TextureRegion[3];
 		upAnimation = new TextureRegion[3];
 		leftAnimation = new TextureRegion[3];
+		animationSpeed = 1 / 12f;
 		initializeSpriteSheet();
 
 		this.sprite = sprite;
@@ -102,23 +104,21 @@ public class Player implements InputProcessor {
 			animRegion[i] = animationTexture.getRegions().get(i);
 		// Simple down Animation population WARNING I HAD TO DO MATH TO DO THESE
 		// SO THEY ARE FINICKY
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++) {
 			downAnimation[i] = animationTexture.findRegion("down", i + 1);
-		for (int i = 0; i < 3; i++)
 			leftAnimation[i] = animationTexture.findRegion("left", i + 1);
-		for (int i = 0; i < 3; i++)
 			rightAnimation[i] = animationTexture.findRegion("right", i + 1);
-		for (int i = 0; i < 3; i++)
 			upAnimation[i] = animationTexture.findRegion("up", i + 1);
+		}
 
-		animation = new Animation(1 / 4f, downAnimation);
+		animation = new Animation(animationSpeed, downAnimation);
 	}
 
 	public void setCollisionPoints() {
 		// Bottom Collision Point
 		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y));
 		// Top Collision Point
-		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight()));
+		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() -10));
 		// Left Collision Point
 		collisionPoints.add(new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
 		// Right Collision Point
@@ -141,15 +141,16 @@ public class Player implements InputProcessor {
 
 	public void updateAnimation(float delta) {
 		stateTime += delta;
-		if (xDirection == xDir.right) 
-			animation = new Animation(1 / 4f, rightAnimation);
-		if (xDirection == xDir.left)
-			animation = new Animation(1 / 4f, leftAnimation);
-		if (yDirection == yDir.up)
-			animation = new Animation(1 / 4f, upAnimation);
+		if (xDirection == xDir.right)
+			animation = new Animation(animationSpeed, rightAnimation);
 		if (yDirection == yDir.down)
-			animation = new Animation(1 / 4f, downAnimation);
-		
+			animation = new Animation(animationSpeed, downAnimation);
+		if (xDirection == xDir.left)
+			animation = new Animation(animationSpeed, leftAnimation);
+		if (yDirection == yDir.up)
+			animation = new Animation(animationSpeed, upAnimation);
+		if(xDirection == xDir.none && yDirection == yDir.none)
+			animation = new Animation(1/4f, downAnimation);
 
 		currentFrame = animation.getKeyFrame(stateTime, true);
 	}
@@ -167,11 +168,14 @@ public class Player implements InputProcessor {
 
 		setLocation(new Vector2(sprite.getX(), sprite.getY()));
 
+		// Sets the collision points on the player to his new location from last movement.
 		collisionPoints.set(0, new Vector2(location.x + (sprite.getWidth() / 2), location.y));
-		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight()));
+		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
 		collisionPoints.set(2, new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
 		collisionPoints.set(3, new Vector2(location.x + sprite.getWidth(), location.y + (sprite.getHeight() / 2)));
 
+		// Checks collision with walls, using collision points. 
+		//Then checks to see where the player should be moving
 		updateMovement();
 
 		// Limits the player to only going too fast.

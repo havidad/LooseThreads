@@ -46,7 +46,7 @@ public class CollisionManager {
 	public void wallAbove(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x), (int) (points.y + 0.1f)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x), (int) (points.y - .1f)).getTile().getProperties()
 					.containsKey("isWall"))
 				player.canMoveUp = false;
 			else

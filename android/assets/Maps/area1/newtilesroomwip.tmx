@@ -83,9 +83,6 @@
    <image width="64" height="64" source="dance.png"/>
   </tile>
   <tile id="24">
-   <properties>
-    <property name="isWall" value=""/>
-   </properties>
    <image width="64" height="64" source="wefwfwf.png"/>
   </tile>
   <tile id="25">
@@ -209,9 +206,6 @@
    <image width="64" height="64" source="fwfwffe - Copy.png"/>
   </tile>
   <tile id="55">
-   <properties>
-    <property name="isWall" value=""/>
-   </properties>
    <image width="64" height="64" source="fwfwffe - Copy - Copy.png"/>
   </tile>
   <tile id="56">
@@ -242,9 +236,6 @@
    <image width="64" height="64" source="transparent.png"/>
   </tile>
   <tile id="63">
-   <properties>
-    <property name="isWall" value=""/>
-   </properties>
    <image width="64" height="64" source="gergegregsg - Copy.png"/>
   </tile>
   <tile id="64">
