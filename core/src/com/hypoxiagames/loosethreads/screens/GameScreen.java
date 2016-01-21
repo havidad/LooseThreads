@@ -96,7 +96,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		
 		// Render the player, bullets, and anything else that moves/lives in this part.
 		renderer.getBatch().begin();
-		renderer.getBatch().draw(player.getAnimationRegion(), player.getSprite().getX(), player.getSprite().getY(),player.getSprite().getWidth(), player.getSprite().getHeight());
+		player.updateAnimation(delta);
+		renderer.getBatch().draw(player.getCurrentFrame(), player.getSprite().getX(), player.getSprite().getY(),player.getSprite().getWidth(), player.getSprite().getHeight());
 		renderer.getBatch().end();
 
 	}

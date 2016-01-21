@@ -3,66 +3,87 @@ BleepBloop.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-down1
+down
   rotate: false
-  xy: 1, 1
+  xy: 0, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-down2
+  index: 1
+down
   rotate: false
-  xy: 25, 1
+  xy: 22, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-down3
+  index: 2
+down
   rotate: false
-  xy: 49, 1
+  xy: 44, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-right1
+  index: 3
+left
   rotate: false
-  xy: 73, 1
+  xy: 66, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-right2
+  index: 1
+left
   rotate: false
-  xy: 97, 1
+  xy: 88, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-right3
+  index: 2
+left
   rotate: false
-  xy: 121, 1
+  xy: 110, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-up1
+  index: 3
+right
   rotate: false
-  xy: 145, 1
+  xy: 132, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-up2
+  index: 1
+right
   rotate: false
-  xy: 169, 1
+  xy: 154, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
-up3
+  index: 2
+right
   rotate: false
-  xy: 193, 1
+  xy: 176, 0
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: -1
+  index: 3
+up
+  rotate: false
+  xy: 198, 0
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: 1
+up
+  rotate: false
+  xy: 220, 0
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: 2
+up
+  rotate: false
+  xy: 242, 0
+  size: 22, 35
+  orig: 22, 35
+  offset: 0, 0
+  index: 3

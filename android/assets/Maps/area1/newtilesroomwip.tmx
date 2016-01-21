@@ -206,9 +206,6 @@
    <image width="64" height="64" source="transparent.png"/>
   </tile>
   <tile id="54">
-   <properties>
-    <property name="isWall" value=""/>
-   </properties>
    <image width="64" height="64" source="fwfwffe - Copy.png"/>
   </tile>
   <tile id="55">
@@ -218,15 +215,9 @@
    <image width="64" height="64" source="fwfwffe - Copy - Copy.png"/>
   </tile>
   <tile id="56">
-   <properties>
-    <property name="isWall" value=""/>
-   </properties>
    <image width="64" height="64" source="putmeunder.png"/>
   </tile>
   <tile id="57">
-   <properties>
-    <property name="isWall" value=""/>
-   </properties>
    <image width="64" height="64" source="cornerme.png"/>
   </tile>
   <tile id="58">

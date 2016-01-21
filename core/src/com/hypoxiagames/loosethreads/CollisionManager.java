@@ -30,70 +30,68 @@ public class CollisionManager {
 		this.screen = screen;
 	}
 
-	public boolean wallBelow(Vector2 points) {
+	public void wallBelow(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x), (int) (points.y - 0.02f)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x), (int) (points.y - 0.2f)).getTile().getProperties()
 					.containsKey("isWall"))
-				return false;
-			else
-				return true;
+				player.canMoveDown = false;
+			else 
+				player.canMoveDown = true;
 		} catch (Exception e) {
 
 		}
-		return false;
 	}
 
-	public boolean wallAbove(Vector2 points) {
+	public void wallAbove(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x), (int) (points.y + 0.03f)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x), (int) (points.y + 0.1f)).getTile().getProperties()
 					.containsKey("isWall"))
-				return false;
+				player.canMoveUp = false;
 			else
-				return true;
+				player.canMoveUp = true;
 		} catch (Exception e) {
 
 		}
-		return false;
 	}
 
-	public boolean wallLeft(Vector2 points) {
+	public void wallLeft(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x - 0.02f), (int) (points.y)).getTile().getProperties()
+			if(player.aHeld)
+				player.canMoveLeft = true;
+			if (collisionLayer.getCell((int) (points.x), (int) (points.y)).getTile().getProperties()
 					.containsKey("isWall"))
-				return false;
+				player.canMoveLeft = false;
 			else
-				return true;
+				player.canMoveLeft = true;
 		} catch (Exception e) {
 
 		}
-		return false;
 	}
 
-	public boolean wallRight(Vector2 points) {
+	public void wallRight(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if (collisionLayer.getCell((int) (points.x + 0.02f), (int) (points.y)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x + 0.05f), (int) (points.y)).getTile().getProperties()
 					.containsKey("isWall"))
-				return false;
+				player.canMoveRight = false;
 			else
-				return true;
+				player.canMoveRight = true;
 		} catch (Exception e) {
 
 		}
-		return false;
 	}
 
 	public void checkTeleportingZones(float posX, float posY) {
 		Vector2 teleport1 = new Vector2(25, 60);
 		Vector2 teleport2 = new Vector2(26, 37);
 		System.out.println("(" + posX + ", " + posY + ")");
-		if (((posX >= teleport1.x) && (posX <= 25.5)) && (((posY >= teleport1.y) && (posY < 60.5)))) {
+		if (((posX >= teleport1.x) && (posX <= 25.5)) && (((posY >= teleport1.y - 0.3f) && (posY < 61)))) {
 			player.disableMovement();
 			player.getSprite().setPosition(27, 37);
-		} else if (((posX >= teleport2.x) && (posX <= 26.5)) && (((posY >= teleport2.y) && (posY < 37.5)))) {
+		} else if (((posX >= teleport2.x) && (posX <= 26.5)) && (((posY >= teleport2.y - 0.5f) && (posY < 38)))) {
 			player.disableMovement();
 			player.getSprite().setPosition(24.5f, 60f);
 		}

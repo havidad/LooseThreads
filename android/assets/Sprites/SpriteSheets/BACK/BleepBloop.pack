@@ -1,68 +1,68 @@
 
-Blop.png
+BleepBloop.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-down
+down1
   rotate: false
-  xy: 0, 0
+  xy: 1, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 1
-down
+  index: -1
+down2
   rotate: false
-  xy: 22, 0
+  xy: 25, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 2
-down
+  index: -1
+down3
   rotate: false
-  xy: 44, 0
+  xy: 49, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 3
-right
+  index: -1
+right1
   rotate: false
-  xy: 66, 0
+  xy: 73, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 1
-right
+  index: -1
+right2
   rotate: false
-  xy: 88, 0
+  xy: 97, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 2
-right
+  index: -1
+right3
   rotate: false
-  xy: 110, 0
+  xy: 121, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 3
-up
+  index: -1
+up1
   rotate: false
-  xy: 132, 0
+  xy: 145, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 1
-up
+  index: -1
+up2
   rotate: false
-  xy: 154, 0
+  xy: 169, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 2
-up
+  index: -1
+up3
   rotate: false
-  xy: 176, 0
+  xy: 193, 1
   size: 22, 35
   orig: 22, 35
   offset: 0, 0
-  index: 3
+  index: -1
