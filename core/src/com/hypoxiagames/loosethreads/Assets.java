@@ -21,6 +21,7 @@ public class Assets {
 		getManager().load("Screens/mainMenuBackground.png", Texture.class);
 		System.out.println("Loaded Main Menu Background");
 		getManager().load("Screens/Background.png", Texture.class);
+		getManager().load("Screens/MainMenuBackground.png", Texture.class);
 		LoadFonts();
 	}
 
@@ -28,6 +29,7 @@ public class Assets {
 		getManager().unload(finn);
 		getManager().unload(human);
 		getManager().unload("Screens/mainMenuBackground.png");
+		getManager().unload("Screens.MainMenuBackground");
 		getManager().unload("Screens/Background.png");
 		getManager().unload("Fonts/AVidaNova.fnt");
 		getManager().unload("Fonts/DroidSans.fnt");

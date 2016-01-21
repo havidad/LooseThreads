@@ -85,16 +85,16 @@ public class CollisionManager {
 	}
 
 	public void checkTeleportingZones(float posX, float posY) {
-		Vector2 teleport1 = new Vector2(25, 60);
-		Vector2 teleport2 = new Vector2(26, 37);
+		Vector2 teleport1 = new Vector2(25, 59.45f);
+		Vector2 teleport2 = new Vector2(26, 36.45f);
 		System.out.println("(" + posX + ", " + posY + ")");
 		if (((posX >= teleport1.x) && (posX <= 25.5)) && (((posY >= teleport1.y - 0.3f) && (posY < 61)))) {
 			player.disableMovement();
-			player.setInBedroom(false);
+			//player.setInBedroom(false);
 			player.getSprite().setPosition(27, 37);
 		} else if (((posX >= teleport2.x) && (posX <= 26.5)) && (((posY >= teleport2.y - 0.5f) && (posY < 38)))) {
 			player.disableMovement();
-			player.setInBedroom(true);
+			//player.setInBedroom(true);
 			player.getSprite().setPosition(24.5f, 60f);
 		}
 		

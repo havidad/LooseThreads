@@ -304,13 +304,13 @@ public class Player implements InputProcessor {
 	}
 
 	public void disableMovement() {
-		for (Boolean bool : moveDir)
-			bool = false;
+		for (@SuppressWarnings("unused") Boolean bool : moveDir)
+			bool = true;
 
 	}
 
 	public void enableMovement() {
-		for (Boolean bool : moveDir)
+		for (@SuppressWarnings("unused") Boolean bool : moveDir)
 			bool = true;
 
 	}

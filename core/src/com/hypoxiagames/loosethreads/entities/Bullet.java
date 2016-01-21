@@ -25,11 +25,27 @@ public class Bullet extends Sprite{
 	
 	public Bullet(Sprite sprite,Vector2 Location, Direction dir){
 		super(sprite);
-		direction = dir;
+		setDirection(dir);
 		
 	}
 	
 	public void destroy(){
 		this.destroy();
+	}
+
+	public Vector2 getLocation() {
+		return location;
+	}
+
+	public void setLocation(Vector2 location) {
+		this.location = location;
+	}
+
+	public Direction getDirection() {
+		return direction;
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
 	}
 }

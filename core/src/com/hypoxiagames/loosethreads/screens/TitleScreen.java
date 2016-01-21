@@ -39,7 +39,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 	private static boolean isKeyPressed;
 	
 	// Strings to be displayed on the screen
-		public static final String TITLE = "Project: Mafia";
+		public static final String TITLE = "Loose Threads";
 		public static final String menuItem[] = { "Play Now", "Settings",
 				"Credits", "Exit" };
 	
@@ -80,10 +80,9 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		
 		// Checks 20 times in a second and goes through an array that mirrors the options on the screen.
 		//this is how we are doing Menu's until some UI controls get implemented into the game
-		if(frame % 5 == 0){
+		if(frame % 6 == 0){
 			if (TitleInput.upButtonPressed == true){
 				setItemSelected(getItemSelected() - 1);
-				System.out.println("Up is pressed down");
 				if(getItemSelected() < 0)
 					setItemSelected(3);
 			}
@@ -112,7 +111,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		batch.setProjectionMatrix(camera.combined);
 		backgroundSprite.draw(batch);
 		glyphLayout.setText(titleFont, TITLE);
-		titleFont.draw(batch, TITLE, 0, 0);
+		titleFont.draw(batch, TITLE, GAME_WORLD_WIDTH * ASPECT_RATIO / 2 - 125 , 350);
 		drawMenuItems();
 		batch.end();
 		
@@ -175,7 +174,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		for(int i = 0; i < 4; i++)
 		{ 
 			if(i == itemSelected){
-				menuItemFont.setColor(Color.RED);
+				menuItemFont.setColor(Color.GREEN);
 				menuItemFont.getData().setScale(0.7f);
 			}
 			else{
@@ -198,8 +197,8 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 					System.out.println(Assets.getManager().getProgress() * 100 + "%");
 			}
 			System.out.println(Assets.getManager().getProgress() * 100 + "% All Files Loaded");
-			if (Assets.getManager().isLoaded("Screens/Background.png")) {
-				backgroundSprite = new Sprite(new Texture(Gdx.files.internal("Screens/Background.png")));
+			if (Assets.getManager().isLoaded("Screens/MainMenuBackground.png")) {
+				backgroundSprite = new Sprite(new Texture(Gdx.files.internal("Screens/MainMenuBackground.png")));
 				titleFont = Assets.getManager().get("Fonts/AVidaNova.fnt");
 				menuItemFont = Assets.getManager().get("Fonts/DroidSans.fnt");
 
