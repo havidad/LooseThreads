@@ -90,11 +90,20 @@ public class CollisionManager {
 		System.out.println("(" + posX + ", " + posY + ")");
 		if (((posX >= teleport1.x) && (posX <= 25.5)) && (((posY >= teleport1.y - 0.3f) && (posY < 61)))) {
 			player.disableMovement();
+			player.setInBedroom(false);
 			player.getSprite().setPosition(27, 37);
 		} else if (((posX >= teleport2.x) && (posX <= 26.5)) && (((posY >= teleport2.y - 0.5f) && (posY < 38)))) {
 			player.disableMovement();
+			player.setInBedroom(true);
 			player.getSprite().setPosition(24.5f, 60f);
 		}
+		
+		// With the way the walls are drawn with the walls not the same with the two rooms before it, we need
+		//this check to make sure that the collision is correct based on which wall there is.
+		if(player.getSprite().getY() < 32)
+			player.setInBedroom(false);
+		else
+			player.setInBedroom(true);
 	}
 
 	public void checkWallCollision(Array<Vector2> collisionPoints) {

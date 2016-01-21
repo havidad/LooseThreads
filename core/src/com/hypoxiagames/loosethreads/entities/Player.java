@@ -57,6 +57,17 @@ public class Player implements InputProcessor {
 
 	float stateTime;
 	float animationSpeed;
+	
+	// To decide which collision point should be on based on which room they are in.
+	private boolean inBedroom;
+
+	public boolean isInBedroom() {
+		return inBedroom;
+	}
+
+	public void setInBedroom(boolean inBedroom) {
+		this.inBedroom = inBedroom;
+	}
 
 	public Player(TextureAtlas bloopTextureAtlas, Sprite sprite, TiledMap map, GameScreen screen) {
 		// Setting up the animations used by this sprite, as well as the initial
@@ -83,6 +94,7 @@ public class Player implements InputProcessor {
 		posY = (int) location.y;
 		setxDirection(xDir.none);
 		setyDirection(yDir.none);
+		inBedroom = true;
 
 		// set up the collision manager, and the points that the collision
 		// manager will use.
@@ -141,13 +153,13 @@ public class Player implements InputProcessor {
 
 	public void updateAnimation(float delta) {
 		stateTime += delta;
-		if (xDirection == xDir.right)
+		if (xDirection == xDir.right || dHeld)
 			animation = new Animation(animationSpeed, rightAnimation);
-		if (yDirection == yDir.down)
+		if (yDirection == yDir.down || sHeld)
 			animation = new Animation(animationSpeed, downAnimation);
-		if (xDirection == xDir.left)
+		if (xDirection == xDir.left || aHeld)
 			animation = new Animation(animationSpeed, leftAnimation);
-		if (yDirection == yDir.up)
+		if (yDirection == yDir.up || wHeld)
 			animation = new Animation(animationSpeed, upAnimation);
 		if(xDirection == xDir.none && yDirection == yDir.none)
 			animation = new Animation(1/4f, downAnimation);
@@ -171,7 +183,10 @@ public class Player implements InputProcessor {
 		// Sets the collision points on the player to his new location from last movement.
 		collisionPoints.set(0, new Vector2(location.x + (sprite.getWidth() / 2), location.y));
 		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
-		collisionPoints.set(2, new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
+		if(inBedroom)
+			collisionPoints.set(2, new Vector2(location.x - 0.4f, location.y + (sprite.getHeight() / 2)));
+		else
+			collisionPoints.set(2, new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
 		collisionPoints.set(3, new Vector2(location.x + sprite.getWidth(), location.y + (sprite.getHeight() / 2)));
 
 		// Checks collision with walls, using collision points. 
