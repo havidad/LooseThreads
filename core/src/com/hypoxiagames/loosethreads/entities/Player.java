@@ -153,14 +153,14 @@ public class Player implements InputProcessor {
 
 	public void updateAnimation(float delta) {
 		stateTime += delta;
-		if (xDirection == xDir.right || dHeld)
-			animation = new Animation(animationSpeed, rightAnimation);
 		if (yDirection == yDir.down || sHeld)
 			animation = new Animation(animationSpeed, downAnimation);
-		if (xDirection == xDir.left || aHeld)
-			animation = new Animation(animationSpeed, leftAnimation);
 		if (yDirection == yDir.up || wHeld)
 			animation = new Animation(animationSpeed, upAnimation);
+		if (xDirection == xDir.right || dHeld)
+			animation = new Animation(animationSpeed, rightAnimation);
+		if (xDirection == xDir.left)
+			animation = new Animation(animationSpeed, leftAnimation);
 		if(xDirection == xDir.none && yDirection == yDir.none)
 			animation = new Animation(1/4f, downAnimation);
 
