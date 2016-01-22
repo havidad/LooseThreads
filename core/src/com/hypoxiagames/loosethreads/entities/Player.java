@@ -57,8 +57,9 @@ public class Player implements InputProcessor {
 
 	float stateTime;
 	float animationSpeed;
-	
-	// To decide which collision point should be on based on which room they are in.
+
+	// To decide which collision point should be on based on which room they are
+	// in.
 	private boolean inBedroom;
 
 	public boolean isInBedroom() {
@@ -130,7 +131,7 @@ public class Player implements InputProcessor {
 		// Bottom Collision Point
 		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y));
 		// Top Collision Point
-		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() -10));
+		collisionPoints.add(new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() - 10));
 		// Left Collision Point
 		collisionPoints.add(new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
 		// Right Collision Point
@@ -161,8 +162,8 @@ public class Player implements InputProcessor {
 			animation = new Animation(animationSpeed, rightAnimation);
 		if (xDirection == xDir.left)
 			animation = new Animation(animationSpeed, leftAnimation);
-		if(xDirection == xDir.none && yDirection == yDir.none)
-			animation = new Animation(1/4f, downAnimation);
+		if (xDirection == xDir.none && yDirection == yDir.none)
+			animation = new Animation(1 / 4f, downAnimation);
 
 		currentFrame = animation.getKeyFrame(stateTime, true);
 	}
@@ -180,17 +181,19 @@ public class Player implements InputProcessor {
 
 		setLocation(new Vector2(sprite.getX(), sprite.getY()));
 
-		// Sets the collision points on the player to his new location from last movement.
+		// Sets the collision points on the player to his new location from last
+		// movement.
 		collisionPoints.set(0, new Vector2(location.x + (sprite.getWidth() / 2), location.y));
-		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
-		if(inBedroom)
+		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2),
+				location.y + sprite.getHeight() + 0.5f));
+		if (inBedroom)
 			collisionPoints.set(2, new Vector2(location.x - 0.4f, location.y + (sprite.getHeight() / 2)));
 		else
 			collisionPoints.set(2, new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
 		collisionPoints.set(3, new Vector2(location.x + sprite.getWidth(), location.y + (sprite.getHeight() / 2)));
 
-		// Checks collision with walls, using collision points. 
-		//Then checks to see where the player should be moving
+		// Checks collision with walls, using collision points.
+		// Then checks to see where the player should be moving
 		updateMovement();
 
 		// Limits the player to only going too fast.
@@ -304,13 +307,15 @@ public class Player implements InputProcessor {
 	}
 
 	public void disableMovement() {
-		for (@SuppressWarnings("unused") Boolean bool : moveDir)
+		for (@SuppressWarnings("unused")
+		Boolean bool : moveDir)
 			bool = true;
 
 	}
 
 	public void enableMovement() {
-		for (@SuppressWarnings("unused") Boolean bool : moveDir)
+		for (@SuppressWarnings("unused")
+		Boolean bool : moveDir)
 			bool = true;
 
 	}
@@ -352,6 +357,11 @@ public class Player implements InputProcessor {
 			else
 				setxDirection(xDir.none);
 			break;
+		// This is a speed boost, it basically makes it so pressing shift
+		// makes you super man.
+		case Keys.SHIFT_LEFT:
+		case Keys.SHIFT_RIGHT:
+			speed = 420 * unitScale;
 		}
 		updateMovement();
 		return true;
@@ -393,6 +403,9 @@ public class Player implements InputProcessor {
 			break;
 		case Keys.ESCAPE:
 			Gdx.app.exit();
+		case Keys.SHIFT_LEFT:
+		case Keys.SHIFT_RIGHT:
+			speed = 255 * unitScale;
 		}
 		return true;
 	}
