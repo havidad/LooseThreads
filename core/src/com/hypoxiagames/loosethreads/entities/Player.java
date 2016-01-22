@@ -361,7 +361,7 @@ public class Player implements InputProcessor {
 		// makes you super man.
 		case Keys.SHIFT_LEFT:
 		case Keys.SHIFT_RIGHT:
-			speed = 420 * unitScale;
+			speed = 375 * unitScale;
 		}
 		updateMovement();
 		return true;

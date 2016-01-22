@@ -34,13 +34,18 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	public final static float GAME_WORLD_WIDTH = 100;
 	public final static float GAME_WORLD_HEIGHT = 75;
 	public final float ASPECT_RATIO;
+	
+	BitmapFont fpsFont;
+	float fps;
 
 	public GameScreen(final MainGame gam) {
 		game = gam;
 		glyphLayout = new GlyphLayout();
-
 		ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
 
+		// Flips the Y axis on the map to match LibGdx's, then defines the map and makes a layer off of that.
+		//That layer will eventually become collision, and moved from here, as it gets refactored into a map 
+		//loader system.
 		Parameters params = new Parameters();
 		params.flipY = true;
 		testMap = new TmxMapLoader().load("Maps/area1/newtilesroomwip.tmx", params);
@@ -78,6 +83,10 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		// Clear the screen from the last frame
 		Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		fps = Gdx.graphics.getFramesPerSecond();
+		System.out.println("FPS: " + fps);
+		String fpsStr = String.valueOf((int)fps);
+		
 		
 		// Update the player movement and collision
 		player.update(delta);
@@ -97,7 +106,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		// Render the player, bullets, and anything else that moves/lives in this part.
 		renderer.getBatch().begin();
 		player.updateAnimation(delta);
-		renderer.getBatch().draw(player.getCurrentFrame(), player.getSprite().getX(), player.getSprite().getY(),player.getSprite().getWidth(), player.getSprite().getHeight());
+		renderer.getBatch().draw(player.getCurrentFrame(), player.getSprite().getX(), 
+				player.getSprite().getY(),player.getSprite().getWidth(), player.getSprite().getHeight());
 		renderer.getBatch().end();
 
 	}
