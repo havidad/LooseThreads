@@ -1,6 +1,7 @@
 package com.hypoxiagames.loosethreads.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.MapObjects;
@@ -14,7 +15,7 @@ import com.hypoxiagames.loosethreads.*;
 import com.hypoxiagames.loosethreads.entities.Player;
 
 public class GameScreen implements com.badlogic.gdx.Screen {
-	private final MainGame game;
+	final MainGame game;
 	Assets assetManager;
 
 	private Player player;
@@ -29,6 +30,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	private OrthographicCamera camera;
 
 	private ProjectileManager projManager;
+	
+	private Music music;
 
 	// Used to keep things drawn at the same size regardless of the screen size.
 	public final static float GAME_WORLD_WIDTH = 100;
@@ -42,6 +45,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		game = gam;
 		glyphLayout = new GlyphLayout();
 		ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
+		
+		music = Assets.getManager().get("Sounds/Home.mp3");
 
 		// Flips the Y axis on the map to match LibGdx's, then defines the map and makes a layer off of that.
 		//That layer will eventually become collision, and moved from here, as it gets refactored into a map 
@@ -71,6 +76,9 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		 * initialization of this system.
 		 */
 		projManager = new ProjectileManager(player.getLocation(), this);
+		music.setVolume(0.33f);
+		music.setLooping(true);
+		music.play();
 
 	}
 
@@ -81,11 +89,10 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	@Override
 	public void render(float delta) {
 		// Clear the screen from the last frame
-		Gdx.gl.glClearColor(0.5f,0.5f,0.5f,1);
+		Gdx.gl.glClearColor(0,0,0,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		fps = Gdx.graphics.getFramesPerSecond();
 		System.out.println("FPS: " + fps);
-		String fpsStr = String.valueOf((int)fps);
 		
 		
 		// Update the player movement and collision
@@ -147,6 +154,9 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		renderer.dispose();
 
 	}
+	public void switchScreen(String screen){
+			game.switchScreens(screen);
+	}
 
 	public void moveCamera(float x, float y) {
 		camera.position.set(camera.viewportWidth / 2 + x, camera.viewportHeight / 2, 0);
@@ -188,6 +198,14 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	public void setCamera(OrthographicCamera camera) {
 		this.camera = camera;
+	}
+
+	public Music getMusic() {
+		return music;
+	}
+
+	public void setMusic(Music music) {
+		this.music = music;
 	}
 
 }

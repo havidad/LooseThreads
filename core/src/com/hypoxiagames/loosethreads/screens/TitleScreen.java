@@ -1,6 +1,7 @@
 package com.hypoxiagames.loosethreads.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,7 +19,7 @@ import com.hypoxiagames.loosethreads.input.TitleInput;
 
 public class TitleScreen implements com.badlogic.gdx.Screen {
 	final MainGame game;
-	final TitleInput input;
+	TitleInput input;
 	Sprite backgroundSprite;
 	SpriteBatch batch;
 	Viewport viewport;
@@ -26,6 +27,8 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 	BitmapFont titleFont, menuItemFont;
 	GlyphLayout glyphLayout;
 	Stage stage;
+	Music titleMusic;
+
 	final float GAME_WORLD_WIDTH = 480, GAME_WORLD_HEIGHT = 360;
 	final float ASPECT_RATIO;
 	
@@ -42,6 +45,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		public static final String TITLE = "Loose Threads";
 		public static final String menuItem[] = { "Play Now", "Settings",
 				"Credits", "Exit" };
+		public static final String musicLoc = "Sounds/Title/cringe.mp3";
 	
 	public TitleScreen(final MainGame gam){
 		game = gam;
@@ -49,7 +53,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		
 		ASPECT_RATIO = (float)Gdx.graphics.getHeight()/(float)Gdx.graphics.getWidth();
 		
-		input = new TitleInput(game);
+		input = new TitleInput(game,this);
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		viewport = new StretchViewport(GAME_WORLD_WIDTH * ASPECT_RATIO, GAME_WORLD_HEIGHT, camera);
@@ -69,11 +73,13 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		
 		frame = 0;
 		
+		titleMusic.setLooping(true);
+		titleMusic.setVolume(0.25f);
+		titleMusic.play();
 	}
 	@Override
 	public void show() {
-		
-		
+		input = new TitleInput(game,this);
 	}
 	
 	private void processControl(float delta){
@@ -115,6 +121,8 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		drawMenuItems();
 		batch.end();
 		
+		
+		
 		// Calls method that processes the control of the main screen
 		processControl(delta);
 		
@@ -140,6 +148,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void hide() {
+		titleMusic.stop();
 		dispose();
 		
 	}
@@ -148,7 +157,9 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 	public void dispose() {
 		batch.dispose();
 	}
-	
+	public Music getTitleMusic() {
+		return titleMusic;
+	}
 	public static int getItemSelected() {
 		return itemSelected;
 	}
@@ -201,6 +212,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 				backgroundSprite = new Sprite(new Texture(Gdx.files.internal("Screens/MainMenuBackground.png")));
 				titleFont = Assets.getManager().get("Fonts/AVidaNova.fnt");
 				menuItemFont = Assets.getManager().get("Fonts/DroidSans.fnt");
+				titleMusic = Assets.getManager().get(musicLoc);
 
 			} else {
 				loadAssets();

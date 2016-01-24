@@ -2,6 +2,7 @@ package com.hypoxiagames.loosethreads;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.hypoxiagames.loosethreads.screens.*;
 
 public class MainGame extends Game {
@@ -12,11 +13,13 @@ public class MainGame extends Game {
 	SettingsScreen settingsScreen;
 	SaveSelectionScreen saveScreen;
 	GameScreen gameScreen;
+
 	
 	public int screenX, screenY;
 
 	public void exit(){
 		System.out.println("Exiting game now!");
+		Assets.getManager().dispose();
 		Gdx.app.exit();
 	}
 	
@@ -50,6 +53,7 @@ public class MainGame extends Game {
 		screenY = Gdx.graphics.getHeight();
 		switchScreens("Main Menu");
 		
+		
 	}
 
 	public void render() {
@@ -59,5 +63,14 @@ public class MainGame extends Game {
 	public void dispose() {
 		
 	}
+	public Music getMusic() {
+		return music;
+	}
+
+	public void setMusic(Music music) {
+		this.music = music;
+	}
+
+	Music music;
 
 }

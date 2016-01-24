@@ -2,6 +2,7 @@ package com.hypoxiagames.loosethreads.entities;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -297,8 +298,12 @@ public class Player implements InputProcessor {
 				velocity.x = 0;
 				break;
 			}
-		} else
+		}else
 			velocity.x = 0;
+		if(aHeld && dHeld){
+			xDirection = xDir.none;
+		}
+		
 	}
 
 	public void moveToPoint(float x, float y) {
@@ -325,6 +330,7 @@ public class Player implements InputProcessor {
 	// has been done
 	@Override
 	public boolean keyDown(int keycode) {
+		int i = 1;
 		// Switch Statements for the initial deciscion of movement direction.
 		// Sets values so we can keep track of keys kept
 		// pressed down.
@@ -362,6 +368,7 @@ public class Player implements InputProcessor {
 		case Keys.SHIFT_LEFT:
 		case Keys.SHIFT_RIGHT:
 			speed = 375 * unitScale;
+			break;
 		}
 		updateMovement();
 		return true;
@@ -402,10 +409,14 @@ public class Player implements InputProcessor {
 				setxDirection(xDir.none);
 			break;
 		case Keys.ESCAPE:
+			//screen.getMainGame().switchScreens("Main Menu");
+			//screen.switchScreen("Main Menu");
 			Gdx.app.exit();
+			break;
 		case Keys.SHIFT_LEFT:
 		case Keys.SHIFT_RIGHT:
 			speed = 255 * unitScale;
+			break;
 		}
 		return true;
 	}

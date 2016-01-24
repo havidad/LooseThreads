@@ -17,6 +17,9 @@ public class SettingInput implements InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) isLeftPressed = true;
+		if(keycode == Keys.ESCAPE){
+			game.switchScreens("Main Menu");
+		}
 		return false;
 	}
 

@@ -1,6 +1,7 @@
 package com.hypoxiagames.loosethreads;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
@@ -21,6 +22,8 @@ public class Assets {
 		System.out.println("Loaded Main Menu Background");
 		getManager().load("Screens/Background.png", Texture.class);
 		getManager().load("Screens/MainMenuBackground.png", Texture.class);
+		getManager().load("Sounds/Title/cringe.mp3",Music.class);
+		getManager().load("Sounds/Home.mp3", Music.class);
 		LoadFonts();
 	}
 
@@ -31,6 +34,8 @@ public class Assets {
 		getManager().unload("Screens/Background.png");
 		getManager().unload("Fonts/AVidaNova.fnt");
 		getManager().unload("Fonts/DroidSans.fnt");
+		getManager().unload("Sounds/Title/cring.wav");
+		getManager().unload("Sounds/Home.mp3");
 	}
 
 	private static void LoadFonts() {

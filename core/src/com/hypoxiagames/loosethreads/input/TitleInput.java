@@ -6,10 +6,12 @@ import com.hypoxiagames.loosethreads.screens.*;
 
 public class TitleInput implements com.badlogic.gdx.InputProcessor{
 	final MainGame game;
+	final TitleScreen screen;
 	public static boolean upButtonPressed, downButtonPressed, leftButtonPressed, rightButtonPressed;
 
-	public TitleInput(final MainGame gam) {
+	public TitleInput(final MainGame gam, TitleScreen screen) {
 		game = gam;
+		this.screen = screen;
 		upButtonPressed = false;
 		downButtonPressed = false;
 		leftButtonPressed = false;
@@ -24,6 +26,7 @@ public class TitleInput implements com.badlogic.gdx.InputProcessor{
 		case Keys.ENTER:
 			switch (TitleScreen.getItemSelected()) {
 			case 0:
+				//screen.getTitleMusic().stop();
 				game.switchScreens("Game Screen");
 				break;
 			case 1:
@@ -97,6 +100,7 @@ public class TitleInput implements com.badlogic.gdx.InputProcessor{
 			if (TitleScreen.getItemSelected() == 3)
 				game.exit();
 		}*/
+		 game.switchScreens("Game Screen");
 
 		return false;
 	}
