@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Array;
 import com.hypoxiagames.loosethreads.CollisionManager;
 import com.hypoxiagames.loosethreads.screens.GameScreen;
 
-public class Player implements InputProcessor {
+public class Player extends Entity implements InputProcessor {
 	GameScreen screen;
 	// Player movement velocity
 	public Vector2 velocity = new Vector2(0, 0);
@@ -27,19 +27,15 @@ public class Player implements InputProcessor {
 
 	TextureAtlas animationTexture;
 	private TextureRegion[] animRegion;
-	private TextureRegion currentFrame;
 	private TextureRegion[] upAnimation;
 	private TextureRegion[] downAnimation;
 	private TextureRegion[] rightAnimation;
 	private TextureRegion[] leftAnimation;
+
+	private TextureRegion currentFrame;
+
 	private Sprite sprite;
 	private Animation animation;
-
-	private static float unitScale = GameScreen.UNITSCALE;
-
-	// Change these values to change different parameters for the characters
-	// movement in the world
-	private float speed = 255 * unitScale;
 
 	private static xDir xDirection;
 	private static yDir yDirection;
@@ -50,14 +46,15 @@ public class Player implements InputProcessor {
 	private ArrayList<Boolean> moveDir;
 	public boolean wHeld, aHeld, sHeld, dHeld;
 
+	public void setdHeld(boolean dHeld) {
+		this.dHeld = dHeld;
+	}
+
 	boolean isFlipped;
 
 	public int posX, posY;
 	public float oldX;
 	public float oldY;
-
-	float stateTime;
-	float animationSpeed;
 
 	// To decide which collision point should be on based on which room they are
 	// in.
@@ -72,6 +69,7 @@ public class Player implements InputProcessor {
 	}
 
 	public Player(TextureAtlas bloopTextureAtlas, Sprite sprite, TiledMap map, GameScreen screen) {
+		super("Player");
 		// Setting up the animations used by this sprite, as well as the initial
 		// image for the sprite
 		this.animationTexture = bloopTextureAtlas;
@@ -82,7 +80,7 @@ public class Player implements InputProcessor {
 		rightAnimation = new TextureRegion[3];
 		upAnimation = new TextureRegion[3];
 		leftAnimation = new TextureRegion[3];
-		animationSpeed = 1 / 12f;
+
 		initializeSpriteSheet();
 
 		this.sprite = sprite;
@@ -103,14 +101,6 @@ public class Player implements InputProcessor {
 		colManager = new CollisionManager(map, this, this.screen);
 		setCollisionPoints();
 
-	}
-
-	public enum xDir {
-		left, right, none
-	}
-
-	public enum yDir {
-		up, down, none
 	}
 
 	public void initializeSpriteSheet() {
@@ -153,25 +143,9 @@ public class Player implements InputProcessor {
 		colManager.checkWallCollision(collisionPoints);
 	}
 
-	public void updateAnimation(float delta) {
-		stateTime += delta;
-		if (yDirection == yDir.down || sHeld)
-			animation = new Animation(animationSpeed, downAnimation);
-		if (yDirection == yDir.up || wHeld)
-			animation = new Animation(animationSpeed, upAnimation);
-		if (xDirection == xDir.right || dHeld)
-			animation = new Animation(animationSpeed, rightAnimation);
-		if (xDirection == xDir.left)
-			animation = new Animation(animationSpeed, leftAnimation);
-		if (xDirection == xDir.none && yDirection == yDir.none)
-			animation = new Animation(1 / 4f, downAnimation);
-
-		currentFrame = animation.getKeyFrame(stateTime, true);
-	}
-
 	public void draw(Batch spriteBatch) {
 		update(Gdx.graphics.getDeltaTime());
-		updateAnimation(Gdx.graphics.getDeltaTime());
+		updateAnimation(this, Gdx.graphics.getDeltaTime());
 		sprite.draw(spriteBatch);
 	}
 
@@ -185,8 +159,8 @@ public class Player implements InputProcessor {
 		// Sets the collision points on the player to his new location from last
 		// movement.
 		collisionPoints.set(0, new Vector2(location.x + (sprite.getWidth() / 2), location.y));
-		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2),
-				location.y + sprite.getHeight() + 0.5f));
+		collisionPoints.set(1,
+				new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
 		if (inBedroom)
 			collisionPoints.set(2, new Vector2(location.x - 0.4f, location.y + (sprite.getHeight() / 2)));
 		else
@@ -298,12 +272,12 @@ public class Player implements InputProcessor {
 				velocity.x = 0;
 				break;
 			}
-		}else
+		} else
 			velocity.x = 0;
-		if(aHeld && dHeld){
+		if (aHeld && dHeld) {
 			xDirection = xDir.none;
 		}
-		
+
 	}
 
 	public void moveToPoint(float x, float y) {
@@ -330,7 +304,6 @@ public class Player implements InputProcessor {
 	// has been done
 	@Override
 	public boolean keyDown(int keycode) {
-		int i = 1;
 		// Switch Statements for the initial deciscion of movement direction.
 		// Sets values so we can keep track of keys kept
 		// pressed down.
@@ -409,8 +382,8 @@ public class Player implements InputProcessor {
 				setxDirection(xDir.none);
 			break;
 		case Keys.ESCAPE:
-			//screen.getMainGame().switchScreens("Main Menu");
-			//screen.switchScreen("Main Menu");
+			// screen.getMainGame().switchScreens("Main Menu");
+			// screen.switchScreen("Main Menu");
 			Gdx.app.exit();
 			break;
 		case Keys.SHIFT_LEFT:
@@ -484,7 +457,7 @@ public class Player implements InputProcessor {
 		Player.xDirection = xDirection;
 	}
 
-	public static yDir getyDirection() {
+	public yDir getyDirection() {
 		return yDirection;
 	}
 
@@ -503,5 +476,59 @@ public class Player implements InputProcessor {
 
 	public TextureRegion getCurrentFrame() {
 		return currentFrame;
+	}
+
+	public void setCurrentFrame(TextureRegion currentFrame) {
+		this.currentFrame = currentFrame;
+	}
+
+	public Animation getAnimation() {
+		return animation;
+	}
+
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
+	}
+
+	public TextureRegion[] getRegion(String direction) {
+		switch (direction) {
+		case "Down":
+			return downAnimation;
+		case "Up":
+			return upAnimation;
+		case "Left":
+			return leftAnimation;
+		case "Right":
+			return rightAnimation;
+		}
+		return null;
+	}
+
+	public boolean iswHeld() {
+		return wHeld;
+	}
+
+	public void setwHeld(boolean wHeld) {
+		this.wHeld = wHeld;
+	}
+
+	public boolean isaHeld() {
+		return aHeld;
+	}
+
+	public void setaHeld(boolean aHeld) {
+		this.aHeld = aHeld;
+	}
+
+	public boolean issHeld() {
+		return sHeld;
+	}
+
+	public void setsHeld(boolean sHeld) {
+		this.sHeld = sHeld;
+	}
+
+	public boolean isdHeld() {
+		return dHeld;
 	}
 }
