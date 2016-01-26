@@ -12,10 +12,10 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = '1.0'
+    version = '0.0.3'
     ext {
         appName = "LooseThreads"
-        gdxVersion = '1.8.1'
+        gdxVersion = '1.9.0'
         roboVMVersion = '1.12.0'
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.6.0'

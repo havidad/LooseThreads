@@ -60,12 +60,12 @@ public class SettingsScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void show() {
+		Assets.load();
 		Gdx.input.setInputProcessor(inputProcessor);
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(game.screenX, game.screenY);
 		camera.setToOrtho(false, game.screenX, game.screenY);
 		fontLoc = new Vector2(500,500);
-		Assets.load();
 		while (!Assets.getManager().update()) {
 			System.out.println(Assets.getManager().getProgress() * 100 + "%");
 		}

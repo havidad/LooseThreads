@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="64" nextobjectid="37">
- <tileset firstgid="1" name="NewTiles" tilewidth="124" tileheight="66">
+ <tileset firstgid="1" name="NewTiles" tilewidth="124" tileheight="66" tilecount="68" columns="0">
   <tile id="0">
    <image width="64" height="64" source="CenterPeice.png"/>
   </tile>
@@ -261,13 +261,13 @@
   </tile>
  </tileset>
  <layer name="Background" width="100" height="100">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3buUoEQRQF0PoJcQnFDTozcdBkUP//m6yXDRN1BUVd7HPg5g8uPd1TS2sAAAAAAAAAAAAAAAAAx/HQczuQnzVjHsZdz2fP/c58rxnzMKqPU8/7zuhjrurjo+dmZ/Qxlz6yjPbxtGbMw/B8ZNFHFn1k0UeWr57fgZyXTAkAAABcqzWWvf/nra/MN7Lnro/5Rvbc9THfyJqwPubTRxZ9ZNFHlremjyR15sf+bo7X5vlI4v2RRR9Z9JHl8oxQvUteep6b80Gr1d2q+vbdeh6bu1Or1e9WreFuzVpugupju4g+1tJHFn1k0UcWfWS5vqtwXjoNAAAAAAAAAAAA/8UfHEmmY0CcAAA=
+  <data encoding="base64" compression="zlib">
+   eJzt27lKBEEUBdD6CXEJxQ06M3HQZFD//5uslw0TdQVFXexz4OYPLj3dU0trAAAAAAAAAAAAAAAAAMfx0HM7kJ81Yx7GXc9nz/3OfK8Z8zCqj1PP+87oY67q46PnZmf0MZc+soz28bRmzMPwfGTRRxZ9ZNFHlq+e34Gcl0wJAAAAXKs1lr3/562vzDey566P+Ub23PUx38iasD7m00cWfWTRR5a3po8kdebH/m6O1+b5SOL9kUUfWfSR5fKMUL1LXnqem/NBq9Xdqvr23Xoem7tTq9XvVq3hbs1aboLqY7uIPtbSRxZ9ZNFHFn1kub6rcF46DQAAAAAAAAAAAP/FH2JDMC0=
   </data>
  </layer>
  <layer name="Foreground" width="100" height="100">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OMQEAAAgDoNWxf0Er7NIHEpAAAAAAAAAAAAAAAAAAAACN+Q4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnFrFQh9ZAnAAA
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6DVsX9BK+zSBxKQAAAAAAAAAAAAAAAAAAAAjfkOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJxYXdAAq
   </data>
  </layer>
 </map>

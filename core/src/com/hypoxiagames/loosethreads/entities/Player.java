@@ -2,7 +2,6 @@ package com.hypoxiagames.loosethreads.entities;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -100,6 +99,7 @@ public class Player extends Entity implements InputProcessor {
 		// manager will use.
 		colManager = new CollisionManager(map, this, this.screen);
 		setCollisionPoints();
+		this.screen = screen;
 
 	}
 
@@ -342,6 +342,8 @@ public class Player extends Entity implements InputProcessor {
 		case Keys.SHIFT_RIGHT:
 			speed = 375 * unitScale;
 			break;
+		case Keys.ESCAPE:
+			screen.getMainGame().setMainScreen(false);
 		}
 		updateMovement();
 		return true;
@@ -381,11 +383,11 @@ public class Player extends Entity implements InputProcessor {
 			else
 				setxDirection(xDir.none);
 			break;
-		case Keys.ESCAPE:
+	//	case Keys.ESCAPE:
 			// screen.getMainGame().switchScreens("Main Menu");
 			// screen.switchScreen("Main Menu");
-			Gdx.app.exit();
-			break;
+		//	Gdx.app.exit();
+			//break;
 		case Keys.SHIFT_LEFT:
 		case Keys.SHIFT_RIGHT:
 			speed = 255 * unitScale;

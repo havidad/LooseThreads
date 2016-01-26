@@ -39,7 +39,7 @@ public class SettingInput implements InputProcessor {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		System.out.println(screenX + " " + screenY);
 		if(hovered)
-			game.switchScreens("Main Menu");
+			game.setMainScreen(false);
 		return false;
 	}
 

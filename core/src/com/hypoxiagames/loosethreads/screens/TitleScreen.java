@@ -80,6 +80,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 	@Override
 	public void show() {
 		input = new TitleInput(game,this);
+		Gdx.input.setInputProcessor(input);
 	}
 	
 	private void processControl(float delta){

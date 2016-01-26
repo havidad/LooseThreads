@@ -27,28 +27,39 @@ public class MainGame extends Game {
 		switch(ScreenName){
 		case "Main Menu":
 			mainMenuScreen = new TitleScreen(this);
-			setScreen(mainMenuScreen);
+			this.setScreen(mainMenuScreen);
 			break;
 		
 		case "Settings":
 			settingsScreen = new SettingsScreen(this);
-			setScreen(settingsScreen);
+			this.setScreen(settingsScreen);
 			break;
 		case "Save Selection":
 			saveScreen = new SaveSelectionScreen(this);
-			setScreen(saveScreen);
+			this.setScreen(saveScreen);
 			break;
 		case "Game Screen":
 			gameScreen = new GameScreen(this);
-			setScreen(gameScreen);
+			this.setScreen(gameScreen);
 			break;
 			
 		}
 	}
 	
+	public void setMainScreen(boolean isNewGame){
+		this.getScreen().dispose();
+		Assets.loadTitleScreenAssets();
+		this.setScreen(new TitleScreen(this));
+	}
+	public void setGameScreen(boolean isNewGame){
+		this.getScreen().dispose();
+		this.setScreen(new GameScreen(this));
+	}
+	
 	
 	
 	public void create() {
+		Assets.load();
 		screenX = Gdx.graphics.getWidth();
 		screenY = Gdx.graphics.getHeight();
 		switchScreens("Main Menu");

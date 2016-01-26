@@ -25,7 +25,10 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	GlyphLayout glyphLayout;
 
+	// List of all maps in the game;
 	private TiledMap testMap;
+	private TiledMap overWorld; // The Main Outside world of the game.
+	
 	private TiledMapTileLayer layer;
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
@@ -46,6 +49,47 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		game = gam;
 		glyphLayout = new GlyphLayout();
 		ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
+		
+		music = Assets.getManager().get("Sounds/Home.mp3");
+
+		// Flips the Y axis on the map to match LibGdx's, then defines the map and makes a layer off of that.
+		//That layer will eventually become collision, and moved from here, as it gets refactored into a map 
+		//loader system.
+		Parameters params = new Parameters();
+		params.flipY = true;
+		testMap = new TmxMapLoader().load("Maps/area1/newtilesroomwip.tmx", params);
+		overWorld = new TmxMapLoader().load("Maps/overworld/overworld.tmx",params);
+		layer = (TiledMapTileLayer) testMap.getLayers().get(1);
+		renderer = new OrthogonalTiledMapRenderer(testMap, UNITSCALE);
+		camera = new OrthographicCamera(GAME_WORLD_WIDTH * UNITSCALE, GAME_WORLD_HEIGHT * UNITSCALE);
+
+		// Sets the camera to show the maximum game world size, times an aspect
+		// ratio so it looks similar at most
+		// resolutions.
+		camera.setToOrtho(false, 24, 24);
+		
+		bloopAnim = new TextureAtlas("Sprites/SpriteSheets/BleepBloop.pack");
+		player = new Player(bloopAnim,new Sprite(), testMap, this);
+
+		// Spawns him somewhere in the room.
+		player.getSprite().setPosition(18, 57);
+		Gdx.input.setInputProcessor(player);
+
+		glyphLayout = new GlyphLayout();
+		/*
+		 * Handle Projectiles being shot from the player. This is just an
+		 * initialization of this system.
+		 */
+		projManager = new ProjectileManager(player.getLocation(), this);
+		music.setVolume(0.33f);
+		music.setLooping(true);
+		music.play();
+
+	}
+
+	@Override
+	public void show() {
+		glyphLayout = new GlyphLayout();
 		
 		music = Assets.getManager().get("Sounds/Home.mp3");
 
@@ -80,11 +124,6 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		music.setVolume(0.33f);
 		music.setLooping(true);
 		music.play();
-
-	}
-
-	@Override
-	public void show() {
 	}
 
 	@Override
@@ -142,6 +181,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void hide() {
+		music.stop();
 		dispose();
 
 	}
@@ -151,13 +191,12 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	// extend or
 	@Override
 	public void dispose() {
-		Assets.dispose();
 		testMap.dispose();
-		renderer.dispose();
 
 	}
 	public void switchScreen(String screen){
-			game.switchScreens(screen);
+		music.stop();	
+		game.switchScreens(screen);
 	}
 
 	public void moveCamera(float x, float y) {

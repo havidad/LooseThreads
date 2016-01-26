@@ -10,14 +10,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Assets {
 	private final static AssetManager manager = new AssetManager();
-	private static final String human = "Sprites/race2.png";
-	private static final String finn = "Sprites/Finn.png";
+	
 
 	public static void load() {
 		Texture.setAssetManager(getManager());
-
-		getManager().load(human, Texture.class);
-		getManager().load(finn, Texture.class);
 		System.out.println("Loaded Human File");
 		System.out.println("Loaded Main Menu Background");
 		getManager().load("Screens/Background.png", Texture.class);
@@ -28,14 +24,16 @@ public class Assets {
 	}
 
 	public static void dispose() {
-		getManager().unload(finn);
-		getManager().unload(human);
 		getManager().unload("Screens.MainMenuBackground");
 		getManager().unload("Screens/Background.png");
 		getManager().unload("Fonts/AVidaNova.fnt");
 		getManager().unload("Fonts/DroidSans.fnt");
 		getManager().unload("Sounds/Title/cring.wav");
 		getManager().unload("Sounds/Home.mp3");
+	}
+	
+	public static void loadTitleScreenAssets(){
+		getManager().load("Screens/MainMenuBackground.png", Texture.class);
 	}
 
 	private static void LoadFonts() {
