@@ -34,9 +34,10 @@ public class CollisionManager {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
 			if (collisionLayer.getCell((int) (points.x), (int) (points.y - 0.2f)).getTile().getProperties()
-					.containsKey("isWall"))
+					.containsKey("isWall")) {
 				player.canMoveDown = false;
-			else 
+				System.out.println(" Can't move down");
+			} else
 				player.canMoveDown = true;
 		} catch (Exception e) {
 
@@ -47,9 +48,10 @@ public class CollisionManager {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
 			if (collisionLayer.getCell((int) (points.x), (int) (points.y - .1f)).getTile().getProperties()
-					.containsKey("isWall"))
+					.containsKey("isWall")) {
 				player.canMoveUp = false;
-			else
+				System.out.println("Can't move up");
+			} else
 				player.canMoveUp = true;
 		} catch (Exception e) {
 
@@ -59,12 +61,13 @@ public class CollisionManager {
 	public void wallLeft(Vector2 points) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
-			if(player.aHeld)
+			if (player.aHeld)
 				player.canMoveLeft = true;
 			if (collisionLayer.getCell((int) (points.x), (int) (points.y)).getTile().getProperties()
-					.containsKey("isWall"))
+					.containsKey("isWall")) {
 				player.canMoveLeft = false;
-			else
+				System.out.println(" Can't move left");
+			} else
 				player.canMoveLeft = true;
 		} catch (Exception e) {
 
@@ -75,10 +78,13 @@ public class CollisionManager {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		try {
 			if (collisionLayer.getCell((int) (points.x + 0.05f), (int) (points.y)).getTile().getProperties()
-					.containsKey("isWall"))
+					.containsKey("isWall")) {
 				player.canMoveRight = false;
-			else
+				System.out.println(" Can't move right");
+			} else {
 				player.canMoveRight = true;
+
+			}
 		} catch (Exception e) {
 
 		}
@@ -90,17 +96,19 @@ public class CollisionManager {
 		System.out.println("(" + posX + ", " + posY + ")");
 		if (((posX >= teleport1.x) && (posX <= 25.5)) && (((posY >= teleport1.y - 0.3f) && (posY < 61)))) {
 			player.disableMovement();
-			//player.setInBedroom(false);
+			// player.setInBedroom(false);
 			player.getSprite().setPosition(27, 37);
 		} else if (((posX >= teleport2.x) && (posX <= 26.5)) && (((posY >= teleport2.y - 0.5f) && (posY < 38)))) {
 			player.disableMovement();
-			//player.setInBedroom(true);
+			// player.setInBedroom(true);
 			player.getSprite().setPosition(24.5f, 60f);
 		}
-		
-		// With the way the walls are drawn with the walls not the same with the two rooms before it, we need
-		//this check to make sure that the collision is correct based on which wall there is.
-		if(player.getSprite().getY() < 32)
+
+		// With the way the walls are drawn with the walls not the same with the
+		// two rooms before it, we need
+		// this check to make sure that the collision is correct based on which
+		// wall there is.
+		if (player.getSprite().getY() < 32)
 			player.setInBedroom(false);
 		else
 			player.setInBedroom(true);

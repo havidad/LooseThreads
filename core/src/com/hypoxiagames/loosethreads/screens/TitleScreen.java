@@ -53,6 +53,10 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		
 		ASPECT_RATIO = (float)Gdx.graphics.getHeight()/(float)Gdx.graphics.getWidth();
 		
+		
+	}
+	@Override
+	public void show() {
 		input = new TitleInput(game,this);
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
@@ -76,11 +80,6 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		titleMusic.setLooping(true);
 		titleMusic.setVolume(0.25f);
 		titleMusic.play();
-	}
-	@Override
-	public void show() {
-		input = new TitleInput(game,this);
-		Gdx.input.setInputProcessor(input);
 	}
 	
 	private void processControl(float delta){
@@ -122,8 +121,6 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 		drawMenuItems();
 		batch.end();
 		
-		
-		
 		// Calls method that processes the control of the main screen
 		processControl(delta);
 		
@@ -157,6 +154,11 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 	@Override
 	public void dispose() {
 		batch.dispose();
+		titleFont.dispose();
+		menuItemFont.dispose();
+		//stage.dispose();
+		backgroundSprite.getTexture().dispose();
+		titleMusic.dispose();
 	}
 	public Music getTitleMusic() {
 		return titleMusic;
@@ -210,7 +212,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen {
 			}
 			System.out.println(Assets.getManager().getProgress() * 100 + "% All Files Loaded");
 			if (Assets.getManager().isLoaded("Screens/MainMenuBackground.png")) {
-				backgroundSprite = new Sprite(new Texture(Gdx.files.internal("Screens/MainMenuBackground.png")));
+				backgroundSprite = new Sprite(new Texture(Assets.mainMenuBackground));
 				titleFont = Assets.getManager().get("Fonts/AVidaNova.fnt");
 				menuItemFont = Assets.getManager().get("Fonts/DroidSans.fnt");
 				titleMusic = Assets.getManager().get(musicLoc);

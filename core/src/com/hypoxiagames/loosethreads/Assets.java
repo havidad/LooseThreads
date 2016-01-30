@@ -10,25 +10,26 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Assets {
 	private final static AssetManager manager = new AssetManager();
+	public final static String mainMenuBackground = "Screens/MainMenuBackground.png";
+	public final static String titleMusic = "Sounds/Title/cringe.mp3";
+	public static final String homeMusic = "Sounds/Home.mp3";
 	
 
 	public static void load() {
 		Texture.setAssetManager(getManager());
 		System.out.println("Loaded Human File");
 		System.out.println("Loaded Main Menu Background");
-		getManager().load("Screens/Background.png", Texture.class);
-		getManager().load("Screens/MainMenuBackground.png", Texture.class);
-		getManager().load("Sounds/Title/cringe.mp3",Music.class);
-		getManager().load("Sounds/Home.mp3", Music.class);
+		getManager().load(mainMenuBackground, Texture.class);
+		getManager().load(titleMusic,Music.class);
+		getManager().load(homeMusic, Music.class);
 		LoadFonts();
 	}
 
 	public static void dispose() {
-		getManager().unload("Screens.MainMenuBackground");
-		getManager().unload("Screens/Background.png");
+		getManager().unload("Screens/MainMenuBackground.png");
 		getManager().unload("Fonts/AVidaNova.fnt");
 		getManager().unload("Fonts/DroidSans.fnt");
-		getManager().unload("Sounds/Title/cring.wav");
+		getManager().unload("Sounds/Title/cring.mp3");
 		getManager().unload("Sounds/Home.mp3");
 	}
 	

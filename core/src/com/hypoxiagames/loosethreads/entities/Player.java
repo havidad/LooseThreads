@@ -24,7 +24,6 @@ public class Player extends Entity implements InputProcessor {
 	public CollisionManager colManager;
 	Array<Vector2> collisionPoints = new Array<Vector2>();
 
-	TextureAtlas animationTexture;
 	private TextureRegion[] animRegion;
 	private TextureRegion[] upAnimation;
 	private TextureRegion[] downAnimation;
@@ -38,8 +37,6 @@ public class Player extends Entity implements InputProcessor {
 
 	private static xDir xDirection;
 	private static yDir yDirection;
-
-	private Vector2 location;
 
 	public boolean canMoveLeft = true, canMoveRight = true, canMoveUp = true, canMoveDown = true;
 	private ArrayList<Boolean> moveDir;
@@ -71,7 +68,7 @@ public class Player extends Entity implements InputProcessor {
 		super("Player");
 		// Setting up the animations used by this sprite, as well as the initial
 		// image for the sprite
-		this.animationTexture = bloopTextureAtlas;
+		animationTexture = bloopTextureAtlas;
 
 		// Texture Regions for each different animation
 		animRegion = new TextureRegion[9];
@@ -97,7 +94,7 @@ public class Player extends Entity implements InputProcessor {
 
 		// set up the collision manager, and the points that the collision
 		// manager will use.
-		colManager = new CollisionManager(map, this, this.screen);
+		colManager = new CollisionManager(screen.getMap(-1), this, this.screen);
 		setCollisionPoints();
 		this.screen = screen;
 
@@ -383,11 +380,11 @@ public class Player extends Entity implements InputProcessor {
 			else
 				setxDirection(xDir.none);
 			break;
-	//	case Keys.ESCAPE:
-			// screen.getMainGame().switchScreens("Main Menu");
-			// screen.switchScreen("Main Menu");
-		//	Gdx.app.exit();
-			//break;
+		// case Keys.ESCAPE:
+		// screen.getMainGame().switchScreens("Main Menu");
+		// screen.switchScreen("Main Menu");
+		// Gdx.app.exit();
+		// break;
 		case Keys.SHIFT_LEFT:
 		case Keys.SHIFT_RIGHT:
 			speed = 255 * unitScale;
@@ -441,14 +438,6 @@ public class Player extends Entity implements InputProcessor {
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
-	}
-
-	public Vector2 getLocation() {
-		return location;
-	}
-
-	public void setLocation(Vector2 location) {
-		this.location = location;
 	}
 
 	public static xDir getxDirection() {
@@ -510,24 +499,12 @@ public class Player extends Entity implements InputProcessor {
 		return wHeld;
 	}
 
-	public void setwHeld(boolean wHeld) {
-		this.wHeld = wHeld;
-	}
-
 	public boolean isaHeld() {
 		return aHeld;
 	}
 
-	public void setaHeld(boolean aHeld) {
-		this.aHeld = aHeld;
-	}
-
 	public boolean issHeld() {
 		return sHeld;
-	}
-
-	public void setsHeld(boolean sHeld) {
-		this.sHeld = sHeld;
 	}
 
 	public boolean isdHeld() {

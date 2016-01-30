@@ -28,88 +28,56 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	// List of all maps in the game;
 	private TiledMap testMap;
 	private TiledMap overWorld; // The Main Outside world of the game.
-	
+	private TiledMap currentMap;
+
 	private TiledMapTileLayer layer;
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
 
 	private ProjectileManager projManager;
-	
+
 	private Music music;
 
 	// Used to keep things drawn at the same size regardless of the screen size.
 	public final static float GAME_WORLD_WIDTH = 100;
 	public final static float GAME_WORLD_HEIGHT = 75;
-	public final float ASPECT_RATIO;
-	
-	BitmapFont fpsFont;
+	public final float ASPECT_RATIO = GAME_WORLD_HEIGHT *GAME_WORLD_WIDTH;
+
+	// BitmapFont fpsFont;
 	float fps;
 
 	public GameScreen(final MainGame gam) {
 		game = gam;
-		glyphLayout = new GlyphLayout();
-		ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
-		
-		music = Assets.getManager().get("Sounds/Home.mp3");
-
-		// Flips the Y axis on the map to match LibGdx's, then defines the map and makes a layer off of that.
-		//That layer will eventually become collision, and moved from here, as it gets refactored into a map 
-		//loader system.
-		Parameters params = new Parameters();
-		params.flipY = true;
-		testMap = new TmxMapLoader().load("Maps/area1/newtilesroomwip.tmx", params);
-		overWorld = new TmxMapLoader().load("Maps/overworld/overworld.tmx",params);
-		layer = (TiledMapTileLayer) testMap.getLayers().get(1);
-		renderer = new OrthogonalTiledMapRenderer(testMap, UNITSCALE);
-		camera = new OrthographicCamera(GAME_WORLD_WIDTH * UNITSCALE, GAME_WORLD_HEIGHT * UNITSCALE);
-
-		// Sets the camera to show the maximum game world size, times an aspect
-		// ratio so it looks similar at most
-		// resolutions.
-		camera.setToOrtho(false, 24, 24);
-		
-		bloopAnim = new TextureAtlas("Sprites/SpriteSheets/BleepBloop.pack");
-		player = new Player(bloopAnim,new Sprite(), testMap, this);
-
-		// Spawns him somewhere in the room.
-		player.getSprite().setPosition(18, 57);
-		Gdx.input.setInputProcessor(player);
-
-		glyphLayout = new GlyphLayout();
-		/*
-		 * Handle Projectiles being shot from the player. This is just an
-		 * initialization of this system.
-		 */
-		projManager = new ProjectileManager(player.getLocation(), this);
-		music.setVolume(0.33f);
-		music.setLooping(true);
-		music.play();
 
 	}
 
 	@Override
 	public void show() {
 		glyphLayout = new GlyphLayout();
-		
+
 		music = Assets.getManager().get("Sounds/Home.mp3");
 
-		// Flips the Y axis on the map to match LibGdx's, then defines the map and makes a layer off of that.
-		//That layer will eventually become collision, and moved from here, as it gets refactored into a map 
-		//loader system.
+		// Flips the Y axis on the map to match LibGdx's, then defines the map
+		// and makes a layer off of that.
+		// That layer will eventually become collision, and moved from here, as
+		// it gets refactored into a map
+		// loader system.
 		Parameters params = new Parameters();
 		params.flipY = true;
 		testMap = new TmxMapLoader().load("Maps/area1/newtilesroomwip.tmx", params);
-		layer = (TiledMapTileLayer) testMap.getLayers().get(1);
-		renderer = new OrthogonalTiledMapRenderer(testMap, UNITSCALE);
+		overWorld = new TmxMapLoader().load("Maps/overworld/overworld.tmx", params);
+		currentMap = testMap;
+		layer = (TiledMapTileLayer) currentMap.getLayers().get(1);
+		renderer = new OrthogonalTiledMapRenderer(currentMap, UNITSCALE);
 		camera = new OrthographicCamera(GAME_WORLD_WIDTH * UNITSCALE, GAME_WORLD_HEIGHT * UNITSCALE);
 
 		// Sets the camera to show the maximum game world size, times an aspect
 		// ratio so it looks similar at most
 		// resolutions.
 		camera.setToOrtho(false, 24, 24);
-		
+
 		bloopAnim = new TextureAtlas("Sprites/SpriteSheets/BleepBloop.pack");
-		player = new Player(bloopAnim,new Sprite(), testMap, this);
+		player = new Player(bloopAnim, new Sprite(), testMap, this);
 
 		// Spawns him somewhere in the room.
 		player.getSprite().setPosition(18, 57);
@@ -129,32 +97,33 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	@Override
 	public void render(float delta) {
 		// Clear the screen from the last frame
-		Gdx.gl.glClearColor(0,0,0,1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		fps = Gdx.graphics.getFramesPerSecond();
 		System.out.println("FPS: " + fps);
-		
-		
+
 		// Update the player movement and collision
 		player.update(delta);
-		
-		
-		// Determine where the  bullet should spawn this frame step, if it were to fire this frame.
+
+		// Determine where the bullet should spawn this frame step, if it were
+		// to fire this frame.
 		projManager.findBulletSpawn();
-		
-		// Have the camera follow the player around, based on the player's new location.
+
+		// Have the camera follow the player around, based on the player's new
+		// location.
 		camera.position.set(player.getSprite().getX(), player.getSprite().getY(), 0);
 		camera.update();
-		
+
 		// Render the map using the camera
 		renderer.setView(camera);
 		renderer.render();
-		
-		// Render the player, bullets, and anything else that moves/lives in this part.
+
+		// Render the player, bullets, and anything else that moves/lives in
+		// this part.
 		renderer.getBatch().begin();
-		player.updateAnimation(player,delta);
-		renderer.getBatch().draw(player.getCurrentFrame(), player.getSprite().getX(), 
-				player.getSprite().getY(),player.getSprite().getWidth(), player.getSprite().getHeight());
+		player.updateAnimation(player, delta);
+		renderer.getBatch().draw(player.getCurrentFrame(), player.getSprite().getX(), player.getSprite().getY(),
+				player.getSprite().getWidth(), player.getSprite().getHeight());
 		renderer.getBatch().end();
 
 	}
@@ -192,10 +161,15 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	@Override
 	public void dispose() {
 		testMap.dispose();
+		bloopAnim.dispose();
+		music.dispose();
+		player.getAnimationTexture().dispose();
+		// fpsFont.dispose();
 
 	}
-	public void switchScreen(String screen){
-		music.stop();	
+
+	public void switchScreen(String screen) {
+		music.stop();
 		game.switchScreens(screen);
 	}
 
@@ -203,13 +177,34 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		camera.position.set(camera.viewportWidth / 2 + x, camera.viewportHeight / 2, 0);
 		camera.update();
 	}
-	public void movePlayerToRoom(Vector2 newLocation){
+
+	public void movePlayerToRoom(Vector2 newLocation) {
 		player.getSprite().setX(newLocation.x);
 		player.getSprite().setY(newLocation.y);
 	}
 
+	public void switchMaps(int index) {
+		switch (index) {
+		case 0:
+			currentMap = testMap;
+			break;
+		case 1:
+			currentMap = overWorld;
+			break;
+
+		}
+	}
+
 	// Get/Setters
-	public TiledMap getTestMap() {
+	public TiledMap getMap(int index) {
+		switch(index){
+		case -1:
+			return currentMap;
+		case 0: 
+			return testMap;
+		case 1:
+			return overWorld;
+		}
 		return testMap;
 	}
 

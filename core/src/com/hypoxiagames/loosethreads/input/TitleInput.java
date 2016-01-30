@@ -97,9 +97,7 @@ public class TitleInput implements com.badlogic.gdx.InputProcessor{
 			if (TitleScreen.getItemSelected() == 3)
 				game.exit();
 		}*/
-		 game.switchScreens("Game Screen");
-
-		return false;
+		return true;
 	}
 
 	@Override

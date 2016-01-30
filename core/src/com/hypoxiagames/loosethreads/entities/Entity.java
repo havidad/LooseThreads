@@ -1,26 +1,36 @@
 package com.hypoxiagames.loosethreads.entities;
 
-
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.hypoxiagames.loosethreads.screens.GameScreen;
 
 public class Entity {
 	float unitScale = GameScreen.UNITSCALE;
 	float speed = 255 * unitScale;
-	
+
 	float stateTime;
 	float animationSpeed;
-	
+	TextureAtlas animationTexture;
+
 	// Defines a default amount of health for the average Entity
-	//This value will change based on what level the character/Monster is.
+	// This value will change based on what level the character/Monster is.
 	float health = 50;
-	
-	// Default attack value for hands. Getting punched will deal 2 damage, depending on other stats this will go up.
+
+	// Default attack value for hands. Getting punched will deal 2 damage,
+	// depending on other stats this will go up.
 	float attack = 2;
-	public Entity(String type){
+
+	// Holds location information for Entity
+	protected Vector2 location;
+
+	private static xDir xDirection;
+	private static yDir yDirection;
+
+	public Entity(String type) {
 		animationSpeed = 1 / 12f;
 	}
-	
+
 	public enum xDir {
 		left, right, none
 	}
@@ -28,9 +38,10 @@ public class Entity {
 	public enum yDir {
 		up, down, none
 	}
-	
-	public void updateAnimation(Player player,float delta){
+
+	public void updateAnimation(Player player, float delta) {
 		stateTime += delta;
+		player.setAnimation(new Animation(1 / 4f, player.getRegion("Down")));
 		if (player.getyDirection() == yDir.down || player.issHeld())
 			player.setAnimation(new Animation(animationSpeed, player.getRegion("Down")));
 		if (xDirection == xDir.right || player.isdHeld())
@@ -39,14 +50,27 @@ public class Entity {
 			player.setAnimation(new Animation(animationSpeed, player.getRegion("Left")));
 		if (yDirection == yDir.up || player.iswHeld())
 			player.setAnimation(new Animation(animationSpeed, player.getRegion("Up")));
-		if (xDirection == xDir.none && yDirection == yDir.none)
-			player.setAnimation(new Animation(1 / 4f, player.getRegion("Down")));
+
 		player.setCurrentFrame(player.getAnimation().getKeyFrame(stateTime, true));
 	}
-	public void updateAnimation(Monster monster, float delta){
-		
+
+	public void updateAnimation(Monster monster, float delta) {
+
 	}
-	
-	private static xDir xDirection;
-	private static yDir yDirection;
+
+	public TextureAtlas getAnimationTexture() {
+		return animationTexture;
+	}
+
+	public void setAnimationTexture(TextureAtlas animationTexture) {
+		this.animationTexture = animationTexture;
+	}
+
+	public Vector2 getLocation() {
+		return location;
+	}
+
+	public void setLocation(Vector2 location) {
+		this.location = location;
+	}
 }
