@@ -191,8 +191,10 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		case 1:
 			currentMap = overWorld;
 			break;
-
 		}
+		layer = (TiledMapTileLayer)currentMap.getLayers().get(1);
+		renderer.setMap(currentMap);
+		player.colManager.switchMap(currentMap);
 	}
 
 	// Get/Setters

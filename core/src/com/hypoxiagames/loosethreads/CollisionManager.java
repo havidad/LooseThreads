@@ -12,6 +12,8 @@ public class CollisionManager {
 	Player player;
 	Array<Monster> monsters;
 	GameScreen screen;
+	private static final Vector2 HomeTP1 = new Vector2(25, 59.45f);
+	private static final Vector2 HomeTP2 = new Vector2(26, 36.45f);
 
 	// Handle the width and height of the tile.
 	float tileHeight, tileWidth;
@@ -91,17 +93,19 @@ public class CollisionManager {
 	}
 
 	public void checkTeleportingZones(float posX, float posY) {
-		Vector2 teleport1 = new Vector2(25, 59.45f);
-		Vector2 teleport2 = new Vector2(26, 36.45f);
-		System.out.println("(" + posX + ", " + posY + ")");
-		if (((posX >= teleport1.x) && (posX <= 25.5)) && (((posY >= teleport1.y - 0.3f) && (posY < 61)))) {
+		System.out.println("Position: "+"(" + posX + ", " + posY + ")");
+		if (((posX >= HomeTP1.x) && (posX <= HomeTP1.x + 0.5f)) && (((posY >= HomeTP1.y - 0.3f) && (posY < 61)))) {
 			player.disableMovement();
 			// player.setInBedroom(false);
 			player.getSprite().setPosition(27, 37);
-		} else if (((posX >= teleport2.x) && (posX <= 26.5)) && (((posY >= teleport2.y - 0.5f) && (posY < 38)))) {
+		} else if (((posX >= HomeTP2.x) && (posX <= HomeTP2.x + 0.5f)) && (((posY >= HomeTP2.y - 0.5f) && (posY < 38)))) {
 			player.disableMovement();
 			// player.setInBedroom(true);
 			player.getSprite().setPosition(24.5f, 60f);
+		}
+		if((int)posX >= 37 && (int)posY >= 37){
+			screen.switchMaps(1);
+			player.getSprite().setPosition(21, 29.5f);
 		}
 
 		// With the way the walls are drawn with the walls not the same with the
@@ -149,5 +153,9 @@ public class CollisionManager {
 			}
 			i++;
 		}
+	}
+
+	public void switchMap(TiledMap map) {
+		this.map = map;
 	}
 }

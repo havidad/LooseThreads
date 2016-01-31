@@ -92,11 +92,12 @@ public class Player extends Entity implements InputProcessor {
 		setyDirection(yDir.none);
 		inBedroom = true;
 
+		this.screen = screen;
+		
 		// set up the collision manager, and the points that the collision
 		// manager will use.
 		colManager = new CollisionManager(screen.getMap(-1), this, this.screen);
 		setCollisionPoints();
-		this.screen = screen;
 
 	}
 
