@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="64" nextobjectid="37">
- <tileset firstgid="1" name="NewTiles" tilewidth="124" tileheight="66" tilecount="86" columns="0">
+ <tileset firstgid="1" name="NewTiles" tilewidth="124" tileheight="66" tilecount="92" columns="0">
   <tile id="0">
    <image width="64" height="64" source="CenterPeice.png"/>
   </tile>
@@ -337,15 +337,33 @@
   <tile id="99">
    <image width="64" height="64" source="bookshelf_2.png"/>
   </tile>
+  <tile id="100">
+   <image width="64" height="64" source="drawer.png"/>
+  </tile>
+  <tile id="101">
+   <image width="64" height="64" source="corneredbb.png"/>
+  </tile>
+  <tile id="102">
+   <image width="64" height="64" source="downfromhere.png"/>
+  </tile>
+  <tile id="103">
+   <image width="64" height="64" source="drawer_right.png"/>
+  </tile>
+  <tile id="104">
+   <image width="64" height="64" source="mirror.png"/>
+  </tile>
+  <tile id="105">
+   <image width="64" height="64" source="ivibrate.png"/>
+  </tile>
  </tileset>
- <layer name="Background" width="100" height="100" opacity="0.9">
+ <layer name="Background" width="100" height="100" opacity="0.87">
   <data encoding="base64" compression="zlib">
-   eJzt2zlqBDEUBFBdwngJjTfozIkHOxls3/9M1s+GiVqBUOF+Dyr/UPSmlloDAAAAAAAAAAAAAAAAOI6HntuB/KwZ8zDuej577nfme82Yh1F9nHred0Yfc1UfHz03O6OPufSRZbSPpzVjHobrI4s+sugjiz6yfPX8DuS8ZEoAAADgWq2x7P2et74y38g/d33MN/LPXR/zjawJ62M+fWTRRxZ9ZHlr+khSe37sD8rx2lwfSTw/sugjiz6yXO4RqmfJS89zsz9otTpbVe++W89jc3Zqtbpv1Rru1qzlJqg+tovoYy19ZNFHFn1k0UeW67MK56XTAAAAAAAAAAAA8F/8AX3yMA8=
+   eJzt20tKBDEUBdBsQvwMRUSomRPFnjTqWnT/OzBv1vSoMgi5WOfAnT+41C+VtAYAAAAAAAAAAAAAAABwHA89twP5WjPmYdz1fPTc78znmjEPo/p473ndGX3MVX289dzsjD7m0keW0T6e1ox5GK6PLPrIoo8s+shy6vkeyHnJlAAAAMC1WmPZ+z1vfWW+kX/u+phv5J+7PuYbWRPWx3z6yKKPLPrI8tL0kaT2/NgflOOnuT6SeH5k0UcWfWS53CNUz5Lnnt9mf9Bqdbaq3n23nsfm7NRqdd+qNdytWctNUH1sF9HHWvrIoo8s+siijyzXZxXOS6cBAAAAAAAAAADgv/gDX+4wzw==
   </data>
  </layer>
  <layer name="Foreground" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt27EJACEMBVDXcZ6rBDtv/xl0AcFGkuPeg5AmxW/SJaUAAAAAAAAAAAAAAAAAQKy+6eT0rhrRISBIPZh5rqeA77IfAAAAAAAAAEBm7WDG/QN/ZT8AAO7wTwUAAAAAAAAAAAAAALlN/+MEuw==
+   eJzt2zEKgDAMBdBex/M4CW4qiPc/gC4OilIXSUvfg9KhGf6SKWlKAAAAAAAAAAAAAAAAABBrfLkp03ycKTpEQ9boAFx0H2r631Nw0h/10R9ACZYP77kaAAAAACjJ04zd3D2e2ToA1GlI+Z0U+w+0Sn8AtVluN0Cp/KeCvC06AAAAAAAAAAAAAADQtB3n9Ao9
   </data>
  </layer>
 </map>
