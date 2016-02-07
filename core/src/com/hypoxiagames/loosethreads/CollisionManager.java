@@ -93,19 +93,20 @@ public class CollisionManager {
 	}
 
 	public void checkTeleportingZones(float posX, float posY) {
-		System.out.println("Position: "+"(" + posX + ", " + posY + ")");
+		System.out.println("Position: " + "(" + posX + ", " + posY + ")");
 		if (((posX >= HomeTP1.x) && (posX <= HomeTP1.x + 0.5f)) && (((posY >= HomeTP1.y - 0.3f) && (posY < 61)))) {
 			player.disableMovement();
-			// player.setInBedroom(false);
 			player.getSprite().setPosition(27, 37);
-		} else if (((posX >= HomeTP2.x) && (posX <= HomeTP2.x + 0.5f)) && (((posY >= HomeTP2.y - 0.5f) && (posY < 38)))) {
+		} else if (((posX >= HomeTP2.x) && (posX <= HomeTP2.x + 0.5f))
+				&& (((posY >= HomeTP2.y - 0.5f) && (posY < 38)))) {
 			player.disableMovement();
-			// player.setInBedroom(true);
 			player.getSprite().setPosition(24.5f, 60f);
 		}
-		if((int)posX >= 37 && (int)posY >= 37){
-			screen.switchMaps(1);
-			player.getSprite().setPosition(21, 29.5f);
+		if (screen.getLevel() == 0) {
+			if ((int) posX >= 37 && (int) posY >= 37) {
+				screen.switchMaps(1);
+				player.getSprite().setPosition(21, 29.5f);
+			}
 		}
 
 		// With the way the walls are drawn with the walls not the same with the
@@ -116,6 +117,7 @@ public class CollisionManager {
 			player.setInBedroom(false);
 		else
 			player.setInBedroom(true);
+
 	}
 
 	public void checkWallCollision(Array<Vector2> collisionPoints) {

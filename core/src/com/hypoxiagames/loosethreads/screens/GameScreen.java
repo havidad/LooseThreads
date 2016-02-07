@@ -24,6 +24,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	public static final float UNITSCALE = 1 / 64f;
 
 	GlyphLayout glyphLayout;
+	
+	private int level = 0;
 
 	// List of all maps in the game;
 	private TiledMap testMap;
@@ -187,14 +189,20 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		switch (index) {
 		case 0:
 			currentMap = testMap;
+			level = index;
 			break;
 		case 1:
 			currentMap = overWorld;
+			level = index;
 			break;
 		}
 		layer = (TiledMapTileLayer)currentMap.getLayers().get(1);
 		renderer.setMap(currentMap);
 		player.colManager.switchMap(currentMap);
+	}
+
+	public int getLevel() {
+		return level;
 	}
 
 	// Get/Setters
