@@ -1,0 +1,15 @@
+Everytime that the button is pressed the number will increase by one
+these are modifiers to the basic system 
+
+
+ !setProperty
+ !getProperty 
+ !getProperty.if(<event tots was set as value> /* except parameters of || or && */) 
+	<do this and that>
+ /*OPTIONAL*/
+ 
+  elseCheck(<k, was that set to event>)
+  else(do something else)
+ :repeat:<repeat WHATEVER IS IN HERE>/*if referencing another number stay on that number indefinitely */
+ ^<number> /*This tells the program what text to display for that Time pressed
+ 

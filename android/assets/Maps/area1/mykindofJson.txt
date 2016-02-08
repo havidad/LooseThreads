@@ -1,0 +1,125 @@
+Everytime that the button is pressed the number will increase by one
+and that line will be read by the program
+
+	object <bed, for example >{
+	/* lists the rules that 
+	}
+/* This  vv denotes basic properties that will come with tiles or objects or ANYTHING denoted with isEventful:True;
+/* gives super powers to bed */
+   function isEventful(<bed, for example >){
+	var <bed, for example >.triggered = false /* <- Default */
+	}
+	function triggeredON{
+	<bed, for example >.triggered == true;
+	}
+	function triggeredOFF{
+	
+	<bed, for example >.triggered == false;
+	}
+ flags will be set in the json in front of all the text
+ 
+ :Choices: <BLA BLA BLA(<flagName>> :: <BlA  BLA bloo(<flagName>) /*or more */
+ :%%:  /* this makes this the final quote that then closes the whole dialogue shit.*/
+ :: /* times to use this is to seperate the different events if there are them*/
+ :: <THING> :: /* Only continue reading dialogue if <THING> is fulfilled */
+ setProperty(<property>.triggeredON)
+ getProperty 
+ ifhit(<number of times that this dialogue should be read until triggered event... YOUUUULLLL SEEE!!!!>)
+ getProperty.if(<event tots was set as value> /* accept parameters of || or && */) <do this and that>
+  elseCheck(<k, was that event set> /* accept parameters of || or && */)
+  else(<do something else>) 
+ :event: <an event>					 /* Do what? sAY WHAT?*/
+ :repeat:<repeat WHATEVER IS IN HERE>/*if referencing another number stay on that number indefinitely */
+ ^<number> /*This tells the program what text to display for that Time pressed
+
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////
+ Example Workflow Time ;3
+ 
+ In Tiled:
+ 
+ Properties v
+ 
+ isDialogue	  True
+ isEventful   True
+ _Drawer
+ 
+ 
+ In pretty Java dialogue system tyler will setup
+ 
+ Property(isDialogue) has been detected
+ Open and scan dialogue.json for "_Drawer"
+ found "_Drawer"
+ Make _Drawer into an object!
+ give it all the basic properties that every good dialogue should have
+ teach it to read line by line
+ teach it all the  advanced functions.
+ by that I mean
+ just attach them automatically
+ like let "_Drawer" join the Club and wear a dialogueClub badge
+ make a function also that is called openDrawer() this will be a gif of opening the drawer
+also close drawer() that plays the drawer closing gif.
+ 
+ OKAY
+ in dialogue.json
+ 
+ _Drawer
+ Variables::
+drawerOpen
+
+ 1:"What a nice drawer, would you like to open it?"
+ 2:Choices: hell nah(drawerOpen.setProperty(false) :: Yea sure (drawerOpen.setProperty(true))
+ 3:if(getProperty(drawerOpen)== true):^5
+ 4:else(if(getProperty(drawerOpen) == false):^6
+ 5:event: openDrawer() : ^7
+ 6:event: closeDrawer() : ^10
+ 7: "Not much stuff in this drawer..." ::(ifhit(5)):%%:  "This is kindof turning me on... I'm gonna stop."
+ 8: "Should I keep this drawer open?"^9
+ 9:Choices: No way dude. (drawerOpen.setProperty(false)) && ^6::  sure ^7
+ 10:%%: "K. I'll leave " 
+ 
+
+ PLAYER VIEW
+ 
+Goes to drawer
+presses dialogue button... IDK E or something
+
+What a nice drawer would you like to open it?
+	[]Hell Nah.					 []Yea Sure
+>Yea Sure. /* decided by cursor
+ Plays drawer opening animation 
+ Not much stuff in this drawer...
+ Should I keep this drawer Open?
+	[]No way dude.				[]sure
+>sure
+Not much stuff in this drawer...
+ Should I keep this drawer Open?
+	[]No way dude.				[]sure
+>sure
+Not much stuff in this drawer...
+ Should I keep this drawer Open?
+	[]No way dude.				[]sure
+>sure
+Not much stuff in this drawer...
+ Should I keep this drawer Open?
+	[]No way dude.				[]sure
+>sure
+This is kindof turning me on... I'm gonna stop.
+
+stops dialogue
+
+Press e again
+
+What a nice drawer would you like to open it?
+	[]Hell Nah.					 []Yea Sure
+>Hell Nah /* decided by cursor
+k.
+
+
+THIS IS HOW IT WILL WORK ISH!
+ 
+ 
+ 
+ 
+ 
+ 
+ 
