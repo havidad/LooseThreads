@@ -12,11 +12,9 @@ public class CollisionManager {
 	Player player;
 	Array<Monster> monsters;
 	GameScreen screen;
-	private static final Vector2 HomeTP1 = new Vector2(25, 59.45f); // Upstairs
-																	// point
-	private static final Vector2 HomeTP2 = new Vector2(26, 36.45f); // Downstairs
-																	// point
-	private static final Vector2 HomeFrontDoor = new Vector2(36.8f, 36.8f);
+	private static final Vector2 INHOMETP1 = new Vector2(25, 59.45f); // Upstairs															// point
+	private static final Vector2 INHOMETP2 = new Vector2(26, 36.45f); // Downstairs
+	private static final Vector2 INHOMEDOOR = new Vector2(36.8f, 36.8f); // Indoor Home Front Door
 
 	// Handle the width and height of the tile.
 	float tileHeight, tileWidth;
@@ -33,37 +31,6 @@ public class CollisionManager {
 		this.map = map;
 		this.monsters = monsters;
 		this.screen = screen;
-	}
-
-	public void checkTeleportingZones(float posX, float posY) {
-		System.out.println("Position: " + "(" + posX + ", " + posY + ")");
-		if (screen.getMap(-1) == screen.getMap(0)) {
-			if (((posX >= HomeTP1.x) && (posX <= HomeTP1.x + 0.5f)) && (((posY >= HomeTP1.y - 0.3f) && (posY < 61)))) {
-				player.disableMovement();
-				// player.setInBedroom(false);
-				player.getSprite().setPosition(27, 37);
-			} else if (((posX >= HomeTP2.x) && (posX <= HomeTP2.x + 0.5f))
-					&& (((posY >= HomeTP2.y - 0.5f) && (posY < 38)))) {
-				player.disableMovement();
-				// player.setInBedroom(true);
-				player.getSprite().setPosition(24.5f, 60f);
-			}
-if ((int) posX >= HomeFrontDoor.x && (int) posY >= HomeFrontDoor.y) {	
-				screen.switchMaps(1);
-				player.getSprite().setPosition(21, 29.5f);
-			}
-
-			// With the way the walls are drawn with the walls not the same with
-			// the
-			// two rooms before it, we need
-			// this check to make sure that the collision is correct based on
-			// which
-			// wall there is.
-			if (player.getSprite().getY() < 32)
-				player.setInBedroom(false);
-			else
-				player.setInBedroom(true);
-		}
 	}
 
 	public void wallBelow(Vector2 points) {
@@ -99,7 +66,7 @@ if ((int) posX >= HomeFrontDoor.x && (int) posY >= HomeFrontDoor.y) {
 		try {
 			if (player.aHeld)
 				player.canMoveLeft = true;
-			if (collisionLayer.getCell((int) (points.x), (int) (points.y)).getTile().getProperties()
+			if (collisionLayer.getCell((int) (points.x + 0.4f), (int) (points.y)).getTile().getProperties()
 					.containsKey("isWall")) {
 				player.canMoveLeft = false;
 				System.out.println(" Can't move left");
@@ -126,37 +93,35 @@ if ((int) posX >= HomeFrontDoor.x && (int) posY >= HomeFrontDoor.y) {
 		}
 	}
 
-<<<<<<< Updated upstream
 	public void checkTeleportingZones(float posX, float posY) {
-		System.out.println("Position: " + "(" + posX + ", " + posY + ")");
-		if (((posX >= HomeTP1.x) && (posX <= HomeTP1.x + 0.5f)) && (((posY >= HomeTP1.y - 0.3f) && (posY < 61)))) {
-			player.disableMovement();
-			player.getSprite().setPosition(27, 37);
-		} else if (((posX >= HomeTP2.x) && (posX <= HomeTP2.x + 0.5f))
-				&& (((posY >= HomeTP2.y - 0.5f) && (posY < 38)))) {
-			player.disableMovement();
-			player.getSprite().setPosition(24.5f, 60f);
-		}
+		System.out.println(
+				"Position: " + "(" + posX + ", " + posY + ")" + ", Level Loaded: " + String.valueOf(screen.getLevel()));
 		if (screen.getLevel() == 0) {
-			if ((int) posX >= 37 && (int) posY >= 37) {
+			if (((posX >= INHOMETP1.x) && (posX <= INHOMETP1.x + 0.5f)) && (((posY >= INHOMETP1.y - 0.3f) && (posY < 61)))) {
+				player.disableMovement();
+				player.getSprite().setPosition(27, 37);
+			} else if (((posX >= INHOMETP2.x) && (posX <= INHOMETP2.x + 0.5f))
+					&& (((posY >= INHOMETP2.y - 0.5f) && (posY < 38)))) {
+				player.disableMovement();
+				player.getSprite().setPosition(24.5f, 60f);
+			}
+			if ((int) posX >= INHOMEDOOR.x && (int) posY >= INHOMEDOOR.y) {
 				screen.switchMaps(1);
 				player.getSprite().setPosition(21, 29.5f);
 			}
-		}
+			// With the way the walls are drawn with the walls not the same with the
+			// two rooms before it, we need
+			// this check to make sure that the collision is correct based on which
+			// wall there is.
+			if (player.getSprite().getY() < 32)
+				player.setInBedroom(false);
+			else
+				player.setInBedroom(true);
 
-		// With the way the walls are drawn with the walls not the same with the
-		// two rooms before it, we need
-		// this check to make sure that the collision is correct based on which
-		// wall there is.
-		if (player.getSprite().getY() < 32)
-			player.setInBedroom(false);
-		else
-			player.setInBedroom(true);
+		}
 
 	}
 
-=======
->>>>>>> Stashed changes
 	public void checkWallCollision(Array<Vector2> collisionPoints) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
 		int i = 0;

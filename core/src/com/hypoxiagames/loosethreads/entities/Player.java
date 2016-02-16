@@ -157,12 +157,11 @@ public class Player extends Entity implements InputProcessor {
 		// Sets the collision points on the player to his new location from last
 		// movement.
 		collisionPoints.set(0, new Vector2(location.x + (sprite.getWidth() / 2), location.y));
-		collisionPoints.set(1,
-				new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
+		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
 		if (inBedroom)
 			collisionPoints.set(2, new Vector2(location.x - 0.4f, location.y + (sprite.getHeight() / 2)));
 		else
-			collisionPoints.set(2, new Vector2(location.x, location.y + (sprite.getHeight() / 2)));
+			collisionPoints.set(2, new Vector2(location.x - 0.3f, location.y + (sprite.getHeight() / 2)));
 		collisionPoints.set(3, new Vector2(location.x + sprite.getWidth(), location.y + (sprite.getHeight() / 2)));
 
 		// Checks collision with walls, using collision points.

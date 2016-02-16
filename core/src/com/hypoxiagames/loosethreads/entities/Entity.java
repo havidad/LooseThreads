@@ -15,7 +15,8 @@ public class Entity {
 
 	// Defines a default amount of health for the average Entity
 	// This value will change based on what level the character/Monster is.
-	float health = 50;
+	float currentHealth = 50;
+	float maxHealth = 50;
 
 	// Default attack value for hands. Getting punched will deal 2 damage,
 	// depending on other stats this will go up.
@@ -39,6 +40,7 @@ public class Entity {
 		up, down, none
 	}
 
+	// Player animation updates are done here.
 	public void updateAnimation(Player player, float delta) {
 		stateTime += delta;
 		player.setAnimation(new Animation(1 / 4f, player.getRegion("Down")));
@@ -72,5 +74,17 @@ public class Entity {
 
 	public void setLocation(Vector2 location) {
 		this.location = location;
+	}
+
+	public float getCurrentHealth() {
+		return currentHealth;
+	}
+
+	public void setCurrentHealth(float currentHealth) {
+		this.currentHealth = currentHealth;
+	}
+
+	public float getMaxHealth() {
+		return maxHealth;
 	}
 }
