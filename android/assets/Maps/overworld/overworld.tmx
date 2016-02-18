@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="125" tilewidth="64" tileheight="64" nextobjectid="1">
- <tileset firstgid="1" name="OverWorld" tilewidth="64" tileheight="64" tilecount="10" columns="0">
+ <tileset firstgid="1" name="OverWorld" tilewidth="64" tileheight="64" tilecount="20" columns="0">
   <tile id="0">
    <image width="64" height="64" source="bricktilesnewreallive2016.png"/>
   </tile>
@@ -31,15 +31,45 @@
   <tile id="9">
    <image width="64" height="64" source="house_top_3.png"/>
   </tile>
+  <tile id="11">
+   <image width="64" height="64" source="nuumnununu.png"/>
+  </tile>
+  <tile id="12">
+   <image width="64" height="64" source="putmeoverrtr.png"/>
+  </tile>
+  <tile id="14">
+   <image width="64" height="64" source="fullimageofbluewood.png"/>
+  </tile>
+  <tile id="16">
+   <image width="64" height="64" source="edgeme.png"/>
+  </tile>
+  <tile id="17">
+   <image width="64" height="64" source="edgeme_door.png"/>
+  </tile>
+  <tile id="18">
+   <image width="64" height="64" source="thisisawhitefence.png"/>
+  </tile>
+  <tile id="19">
+   <image width="64" height="64" source="thisisawhitefenceturning.png"/>
+  </tile>
+  <tile id="20">
+   <image width="64" height="64" source="thisisawhitefenceturningbackwards.png"/>
+  </tile>
+  <tile id="21">
+   <image width="64" height="64" source="whitefencerotated.png"/>
+  </tile>
+  <tile id="22">
+   <image width="64" height="64" source="whitefencestandingweird.png"/>
+  </tile>
  </tileset>
  <layer name="Tile Layer 1" width="500" height="125">
   <data encoding="base64" compression="zlib">
-   eJzt3dtqwzAQQEHH+P+/ufShtDVaWaqsyEsnMJCLHEJeDqs4yb5t2w4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWvH1a/FgDg26ugtu58HQBoM6udpS5HrY7W6ToAtIn6+temtszipfWr3wcAyKi2F361/x2tjdbXHtNyABjXuv8d3W7peW1m13MAGHdnz6Nu15qt5wAwpmVmvpq3S3v2PY3WcwCYY+R8uP3iGJ+fA0AOtbnf+e0AkEdtP760tvV+8z0AxMzJAJCblgNAbloOAM91NKzRcgB4rmOLe37+bvnq1woA/L583VebzfUcANa4+v3z82PHFs/oGg4Aa8zuuc/RAWC+GT0f/U1XAKDP3T3XcAB4v56eH1u953vwPADAXCM9b/keOgAwpvZf4r0+n0/PAeD99BwA8tNzAPgfes5J13MAeCY9B4D8Rnuu6QCwnp4DQH56DgD53dFzTQeAtcznAJCfngNAfq09t9cOAM9lPgeA/PQcAPLr6fl5fc9xAMA8eg4A+ek5AOSn5wCQ313/jQ4ArKPnAJCfngMAAAAAAAAAALDCB7sD588=
+   eJzt3c1unDAUBtCb0SzbRfv+D1tlgeo62NgEbFOdTzrCQ8iNlc0nmPy8IuIFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAINtmb0PAOC8LbP3AQCcE9kRAHieyI4AwPNEdgQAniUKawDgOaKwBgCeIQprAOA5orAGAJ4jCmsA4DmisAYAniEOXgMA64uD1wDA+qJwBACeIwpHAOAZYmcdF80GAMaInXVcNBsAGCN21nHRbABgjMjWkZ0DANYX2TqycwDA+iJbR3YOAFjblnQd2XkAYG1b0vVeZu9zJR+J2XsBgE9b0nUps/d6p48dtevyNQDM1JPZe72rO/d6udTVpev0OgCztWb2Pkv9erZTW+7F966f/X0AgNyWdF3KrD3WnoUfPf8uXVu6vvYxXQ7Aqnoye6+tz79Lr1v6vHbPrs8BWFVPZu/1yj4v9Xats/U5AKvqycx9ttwzH91v7z2z7+lofQ7Aqnoye697vvPzcK+Dz/H+OQBP0ZPZe71D7b7fz7cD8BQ9mb3Xu9Sex+9d23re/T0Ao/Rk9l437pMB4F89mb3XT7ocAL7qyey96nIA2NeTu/bwbrhGlwNAWU/u+PrvKPd5/rvls79XALCqnlz5tbZztXtzfQ4AbXrSMu/o75/nH3tH+R5dhwNAm560zLu7z72PDgBfpflR8atx3h19/t2/6QoA/7s0K/a5DgeAY2lG9/k76n3+KswBAP6VZnaft/weOgDwVZqjPq/9L/Fen19bnwPANdLU+vx36HMAWFUa9+cA8Exp7n7/PKfPAeAaaX4eaJmnzwFgvFrOzPtun+t0AOhXy5l5+hwAxqvlzDx9DgDj1XJm3hV9rtMBoE8tZ+a5PweA8Wo5M0+fA8B4tZyZ19rnnrUDwHVqOTPP/TkAjFfK2Xn6HADGK+XsvJ4+z6/v+TwA4K9azszT5wAw3lF65+lzABivJy3z9DkAjNeTlnlX/W90AKBdT1rm6XMAGK8nLfP0OQCM15PZewUA9kVyPMrsvQIA+yI7ls4BAOuK7AgAPM8fFnfnVg==
   </data>
  </layer>
  <layer name="Foreground" width="500" height="125">
   <data encoding="base64" compression="zlib">
-   eJztyUEKgDAQBMEFjVH//+DMF5ZcRKqgT10FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAjpnu9KS38QCA7zjSmUa6Gg8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPiPBSR4AGk=
+   eJzt3DsKwzAQRVFB/mnz2/9OozKosGQCsV44B6Yw4/5iZLsUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvnGqc65zqXNdsQMA5rGrs69zqHNcsQMA5nBrrp+DOwBgHnoOAPn0HADy6TkAzO81MEv3f9JzAMin5wCQT88BIJ+eA8A27p19+87bo4ydswMAv9P2urf3DA4A89FzAMin5wCQT88BIJ+eA8B/WPo3nJ4DQD49B4B8eg4A+fQcAPLpOQDk03MAyNf7ng0AmJ+eAwAAAAAAAAAAAAAAAAAAAABs5w13EAbj
   </data>
  </layer>
 </map>

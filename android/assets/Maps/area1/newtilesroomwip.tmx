@@ -442,7 +442,7 @@
    <image width="64" height="64" source="topcornerpeice.png"/>
   </tile>
  </tileset>
- <layer name="Background" width="100" height="100" opacity="0.99">
+ <layer name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
    eJzt2zFqw0AURdHZhAluTQgBdVmBC6/FWUSKKBvImj0qAsLdFMN/ROfA6wcucjGSWwMAAAAAAAAAAAAAAAA4jrXvZWC/Jac8jq++88B+ao55GFuPj4HpMdfW4zQwPeba/17pUW/0+XitOeZh+L3KokcWPbLokeW77zawa8kpAQAAgGdr8749ycg7d/dd8428c9djvpE7YT3m0yOLHln0yKJHlu2bH98H5fB8ZNEjix5Z9Miy/0bo3vfW99l8H1Rt7XvvW/ouzV1utb973qW5y02w9Vh206OWHln0yKJHFj2yPP9X4Vp6GgAAAAAAAAAAAP6LBwcWP2A=
   </data>
