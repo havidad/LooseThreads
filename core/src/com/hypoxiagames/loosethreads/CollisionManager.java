@@ -12,9 +12,14 @@ public class CollisionManager {
 	Player player;
 	Array<Monster> monsters;
 	GameScreen screen;
-	private static final Vector2 INHOMETP1 = new Vector2(25, 59.45f); // Upstairs															// point
+	private static final Vector2 INHOMETP1 = new Vector2(25, 59.45f); // Upstairs
+																		// //
+																		// point
 	private static final Vector2 INHOMETP2 = new Vector2(26, 36.45f); // Downstairs
-	private static final Vector2 INHOMEDOOR = new Vector2(36.8f, 36.8f); // Indoor Home Front Door
+	private static final Vector2 INHOMEDOOR = new Vector2(36.8f, 36.8f); // Indoor
+																			// Home
+																			// Front
+																			// Door
 
 	// Handle the width and height of the tile.
 	float tileHeight, tileWidth;
@@ -97,7 +102,8 @@ public class CollisionManager {
 		System.out.println(
 				"Position: " + "(" + posX + ", " + posY + ")" + ", Level Loaded: " + String.valueOf(screen.getLevel()));
 		if (screen.getLevel() == 0) {
-			if (((posX >= INHOMETP1.x) && (posX <= INHOMETP1.x + 0.5f)) && (((posY >= INHOMETP1.y - 0.3f) && (posY < 61)))) {
+			if (((posX >= INHOMETP1.x) && (posX <= INHOMETP1.x + 0.5f))
+					&& (((posY >= INHOMETP1.y - 0.3f) && (posY < 61)))) {
 				player.disableMovement();
 				player.getSprite().setPosition(27, 37);
 			} else if (((posX >= INHOMETP2.x) && (posX <= INHOMETP2.x + 0.5f))
@@ -109,15 +115,16 @@ public class CollisionManager {
 				screen.switchMaps(1);
 				player.getSprite().setPosition(21, 29.5f);
 			}
-			// With the way the walls are drawn with the walls not the same with the
+			// With the way the walls are drawn with the walls not the same with
+			// the
 			// two rooms before it, we need
-			// this check to make sure that the collision is correct based on which
+			// this check to make sure that the collision is correct based on
+			// which
 			// wall there is.
 			if (player.getSprite().getY() < 32)
 				player.setInBedroom(false);
 			else
 				player.setInBedroom(true);
-
 		}
 
 	}
