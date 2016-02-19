@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="64" nextobjectid="37">
- <tileset firstgid="1" name="NewTiles" tilewidth="124" tileheight="66" tilecount="106" columns="0">
+ <tileset firstgid="1" name="NewTiles" tilewidth="256" tileheight="128" tilecount="107" columns="0">
   <tile id="0">
    <image width="64" height="64" source="CenterPeice.png"/>
   </tile>
@@ -441,6 +441,9 @@
    </properties>
    <image width="64" height="64" source="topcornerpeice.png"/>
   </tile>
+  <tile id="143">
+   <image width="256" height="128" source="rug_just_right.png"/>
+  </tile>
  </tileset>
  <layer name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
@@ -449,7 +452,7 @@
  </layer>
  <layer name="Foreground" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2ksKgzAQANBcp+fp1p11owfpxkO3XRQkRA2U2Gl9D4QBZzGbkM9MSgAAAAAAAAAAAAAAAAAQR7cS0969Mu/2/PqWhUBQl8q8a9MqIKa5Ms/64Gxqz1cca1jEUyEeshwAAAAAiK7UW+82/tFG/iast/4b9K84Iz0s+Jz9A9ZZH8ewn8O+1yzQewYonwWaEkAs3nOhbHnuHb9WBcTkXhiTuwYAAAAAAAAAAAD8rwf+Dg6S
+   eJzt2r0KwjAQAOC8js/j2k272Adxcegjq4NQQqKBknra74PChd6QJeTnLiUAAAAAAAAAAAAAAAAAiGOoxPR3bcw7P75Tz4lAUIfGvGPXWUBMt2w8V/KsD/am9XzFtsZFPBXiMcsBAAAAgOhKtfXhzT/6yN+E1dZ/g/oVe6SGBevZP6DO+tiG/Rw+e/YCvXqA8l6gKQHE4j0Xypbn3svXZgExuRfG5K4BAAAAAAAAAAAA/+sOlKkPIg==
   </data>
  </layer>
 </map>
