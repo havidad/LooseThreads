@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="64" nextobjectid="37">
- <tileset firstgid="1" name="NewTiles" tilewidth="124" tileheight="66">
+ <tileset firstgid="1" name="NewTiles" tilewidth="256" tileheight="128" tilecount="107" columns="0">
   <tile id="0">
    <image width="64" height="64" source="CenterPeice.png"/>
   </tile>
@@ -161,6 +161,9 @@
    <image width="64" height="64" source="fawf2f2f2.png"/>
   </tile>
   <tile id="40">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
    <image width="124" height="66" source="beddy.png"/>
   </tile>
   <tile id="41">
@@ -241,12 +244,6 @@
   <tile id="64">
    <image width="64" height="64" source="transparent.png"/>
   </tile>
-  <tile id="65">
-   <properties>
-    <property name="isWall" value=""/>
-   </properties>
-   <image width="64" height="64" source="edgy.png"/>
-  </tile>
   <tile id="66">
    <properties>
     <property name="isWall" value=""/>
@@ -259,15 +256,203 @@
    </properties>
    <image width="64" height="64" source="gurglemouthwash.png"/>
   </tile>
+  <tile id="81">
+   <image width="64" height="64" source="sprite_1.png"/>
+  </tile>
+  <tile id="82">
+   <image width="64" height="64" source="sprite_2.png"/>
+   <animation>
+    <frame tileid="81" duration="100"/>
+    <frame tileid="82" duration="100"/>
+    <frame tileid="83" duration="100"/>
+    <frame tileid="84" duration="100"/>
+    <frame tileid="85" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="83">
+   <image width="64" height="64" source="sprite_3.png"/>
+  </tile>
+  <tile id="84">
+   <image width="64" height="64" source="sprite_4.png"/>
+  </tile>
+  <tile id="85">
+   <image width="64" height="64" source="sprite_5.png"/>
+  </tile>
+  <tile id="91">
+   <image width="64" height="64" source="fire_on_the_wall1.png"/>
+   <animation>
+    <frame tileid="91" duration="100"/>
+    <frame tileid="92" duration="100"/>
+    <frame tileid="93" duration="100"/>
+    <frame tileid="94" duration="100"/>
+    <frame tileid="95" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="92">
+   <image width="64" height="64" source="fire_on_the_wall2.png"/>
+  </tile>
+  <tile id="93">
+   <image width="64" height="64" source="fire_on_the_wall3.png"/>
+  </tile>
+  <tile id="94">
+   <image width="64" height="64" source="fire_on_the_wall4.png"/>
+  </tile>
+  <tile id="95">
+   <image width="64" height="64" source="fire_on_the_wall5.png"/>
+  </tile>
+  <tile id="98">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="bookshelf_1.png"/>
+  </tile>
+  <tile id="99">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="bookshelf_2.png"/>
+  </tile>
+  <tile id="100">
+   <image width="64" height="64" source="drawer.png"/>
+  </tile>
+  <tile id="101">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="corneredbb.png"/>
+  </tile>
+  <tile id="102">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="downfromhere.png"/>
+  </tile>
+  <tile id="104">
+   <image width="64" height="64" source="mirror.png"/>
+  </tile>
+  <tile id="105">
+   <image width="64" height="64" source="ivibrate.png"/>
+  </tile>
+  <tile id="106">
+   <image width="64" height="64" source="facingwall1.png"/>
+   <animation>
+    <frame tileid="106" duration="100"/>
+    <frame tileid="107" duration="100"/>
+    <frame tileid="108" duration="100"/>
+    <frame tileid="109" duration="100"/>
+    <frame tileid="110" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="107">
+   <image width="64" height="64" source="facingwall2.png"/>
+  </tile>
+  <tile id="108">
+   <image width="64" height="64" source="facingwall3.png"/>
+  </tile>
+  <tile id="109">
+   <image width="64" height="64" source="facingwall4.png"/>
+  </tile>
+  <tile id="110">
+   <image width="64" height="64" source="facingwall5.png"/>
+  </tile>
+  <tile id="116">
+   <image width="64" height="64" source="fireontherealleft1.png"/>
+   <animation>
+    <frame tileid="116" duration="100"/>
+    <frame tileid="117" duration="100"/>
+    <frame tileid="118" duration="100"/>
+    <frame tileid="119" duration="100"/>
+    <frame tileid="120" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="117">
+   <image width="64" height="64" source="fireontherealleft2.png"/>
+  </tile>
+  <tile id="118">
+   <image width="64" height="64" source="fireontherealleft3.png"/>
+  </tile>
+  <tile id="119">
+   <image width="64" height="64" source="fireontherealleft4.png"/>
+  </tile>
+  <tile id="120">
+   <image width="64" height="64" source="fireontherealleft5.png"/>
+  </tile>
+  <tile id="122">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="edgeme.png"/>
+  </tile>
+  <tile id="123">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="whywhat.png"/>
+  </tile>
+  <tile id="126">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="cornerstone.png"/>
+  </tile>
+  <tile id="127">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="topcornerstone.png"/>
+  </tile>
+  <tile id="128">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="edgy.png"/>
+  </tile>
+  <tile id="134">
+   <image width="64" height="64" source="fireleft1.png"/>
+   <animation>
+    <frame tileid="134" duration="100"/>
+    <frame tileid="135" duration="100"/>
+    <frame tileid="136" duration="100"/>
+    <frame tileid="137" duration="100"/>
+    <frame tileid="138" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="135">
+   <image width="64" height="64" source="fireleft2.png"/>
+  </tile>
+  <tile id="136">
+   <image width="64" height="64" source="fireleft3.png"/>
+  </tile>
+  <tile id="137">
+   <image width="64" height="64" source="fireleft4.png"/>
+  </tile>
+  <tile id="138">
+   <image width="64" height="64" source="fireleft5.png"/>
+  </tile>
+  <tile id="139">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="drawer_right.png"/>
+  </tile>
+  <tile id="141">
+   <properties>
+    <property name="isWall" value=""/>
+   </properties>
+   <image width="64" height="64" source="topcornerpeice.png"/>
+  </tile>
+  <tile id="143">
+   <image width="256" height="128" source="rug_just_right.png"/>
+  </tile>
  </tileset>
  <layer name="Background" width="100" height="100">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3buUoEQRQF0PoJcQnFDTozcdBkUP//m6yXDRN1BUVd7HPg5g8uPd1TS2sAAAAAAAAAAAAAAAAAx/HQczuQnzVjHsZdz2fP/c58rxnzMKqPU8/7zuhjrurjo+dmZ/Qxlz6yjPbxtGbMw/B8ZNFHFn1k0UeWr57fgZyXTAkAAABcqzWWvf/nra/MN7Lnro/5Rvbc9THfyJqwPubTRxZ9ZNFHlremjyR15sf+bo7X5vlI4v2RRR9Z9JHl8oxQvUteep6b80Gr1d2q+vbdeh6bu1Or1e9WreFuzVpugupju4g+1tJHFn1k0UcWfWS5vqtwXjoNAAAAAAAAAAAA/8UfHEmmY0CcAAA=
+  <data encoding="base64" compression="zlib">
+   eJzt2zFqw0AURdHZhAluTQgBdVmBC6/FWUSKKBvImj0qAsLdFMN/ROfA6wcucjGSWwMAAAAAAAAAAAAAAAA4jrXvZWC/Jac8jq++88B+ao55GFuPj4HpMdfW4zQwPeba/17pUW/0+XitOeZh+L3KokcWPbLokeW77zawa8kpAQAAgGdr8749ycg7d/dd8428c9djvpE7YT3m0yOLHln0yKJHlu2bH98H5fB8ZNEjix5Z9Miy/0bo3vfW99l8H1Rt7XvvW/ouzV1utb973qW5y02w9Vh206OWHln0yKJHFj2yPP9X4Vp6GgAAAAAAAAAAAP6LBwcWP2A=
   </data>
  </layer>
  <layer name="Foreground" width="100" height="100">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OMQEAAAgDoNWxf0Er7NIHEpAAAAAAAAAAAAAAAAAAAACN+Q4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnFrFQh9ZAnAAA
+  <data encoding="base64" compression="zlib">
+   eJzt2r0KwjAQAOC8js/j2k272Adxcegjq4NQQqKBknra74PChd6QJeTnLiUAAAAAAAAAAAAAAAAAiGOoxPR3bcw7P75Tz4lAUIfGvGPXWUBMt2w8V/KsD/am9XzFtsZFPBXiMcsBAAAAgOhKtfXhzT/6yN+E1dZ/g/oVe6SGBevZP6DO+tiG/Rw+e/YCvXqA8l6gKQHE4j0Xypbn3svXZgExuRfG5K4BAAAAAAAAAAAA/+sOlKkPIg==
   </data>
  </layer>
 </map>

@@ -17,6 +17,9 @@ public class SettingInput implements InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) isLeftPressed = true;
+		if(keycode == Keys.ESCAPE){
+			game.switchScreens("Main Menu");
+		}
 		return false;
 	}
 
@@ -36,7 +39,7 @@ public class SettingInput implements InputProcessor {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		System.out.println(screenX + " " + screenY);
 		if(hovered)
-			game.switchScreens("Main Menu");
+			game.setMainScreen(false);
 		return false;
 	}
 

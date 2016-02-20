@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="125" tilewidth="64" tileheight="64" nextobjectid="1">
+ <tileset firstgid="1" name="OverWorld" tilewidth="64" tileheight="64" tilecount="24" columns="0">
+  <tile id="0">
+   <image width="64" height="64" source="bricktilesnewreallive2016.png"/>
+  </tile>
+  <tile id="1">
+   <image width="64" height="64" source="grasstilesreallive2016.png"/>
+  </tile>
+  <tile id="2">
+   <image width="64" height="64" source="house_bottom_0.png"/>
+  </tile>
+  <tile id="3">
+   <image width="64" height="64" source="house_bottom_1.png"/>
+  </tile>
+  <tile id="4">
+   <image width="64" height="64" source="house_bottom_2.png"/>
+  </tile>
+  <tile id="5">
+   <image width="64" height="64" source="house_bottom_3.png"/>
+  </tile>
+  <tile id="6">
+   <image width="64" height="64" source="house_top_0.png"/>
+  </tile>
+  <tile id="7">
+   <image width="64" height="64" source="house_top_1.png"/>
+  </tile>
+  <tile id="8">
+   <image width="64" height="64" source="house_top_2.png"/>
+  </tile>
+  <tile id="9">
+   <image width="64" height="64" source="house_top_3.png"/>
+  </tile>
+  <tile id="11">
+   <image width="64" height="64" source="nuumnununu.png"/>
+  </tile>
+  <tile id="12">
+   <image width="64" height="64" source="putmeoverrtr.png"/>
+  </tile>
+  <tile id="14">
+   <image width="64" height="64" source="fullimageofbluewood.png"/>
+  </tile>
+  <tile id="16">
+   <image width="64" height="64" source="edgeme.png"/>
+  </tile>
+  <tile id="17">
+   <image width="64" height="64" source="edgeme_door.png"/>
+  </tile>
+  <tile id="18">
+   <image width="64" height="64" source="thisisawhitefence.png"/>
+  </tile>
+  <tile id="19">
+   <image width="64" height="64" source="thisisawhitefenceturning.png"/>
+  </tile>
+  <tile id="20">
+   <image width="64" height="64" source="thisisawhitefenceturningbackwards.png"/>
+  </tile>
+  <tile id="21">
+   <image width="64" height="64" source="whitefencerotated.png"/>
+  </tile>
+  <tile id="22">
+   <image width="64" height="64" source="whitefencestandingweird.png"/>
+  </tile>
+  <tile id="27">
+   <image width="64" height="64" source="bloom1.png"/>
+   <animation>
+    <frame tileid="27" duration="200"/>
+    <frame tileid="28" duration="200"/>
+    <frame tileid="29" duration="200"/>
+    <frame tileid="30" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="28">
+   <image width="64" height="64" source="bloom2.png"/>
+  </tile>
+  <tile id="29">
+   <image width="64" height="64" source="bloom3.png"/>
+  </tile>
+  <tile id="30">
+   <image width="64" height="64" source="bloom4.png"/>
+  </tile>
+ </tileset>
+ <layer name="Background" width="500" height="125">
+  <data encoding="base64" compression="zlib">
+   eJzt3c1unDAUBtCb0SzbRfv+D1tlgeo62NgEbFOdTzrCQ8iNlc0nmPy8IuIFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAINtmb0PAOC8LbP3AQCcE9kRAHieyI4AwPNEdgQAniUKawDgOaKwBgCeIQprAOA5orAGAJ4jCmsA4DmisAYAniEOXgMA64uD1wDA+qJwBACeIwpHAOAZYmcdF80GAMaInXVcNBsAGCN21nHRbABgjMjWkZ0DANYX2TqycwDA+iJbR3YOAFjblnQd2XkAYG1b0vVeZu9zJR+J2XsBgE9b0nUps/d6p48dtevyNQDM1JPZe72rO/d6udTVpev0OgCztWb2Pkv9erZTW+7F966f/X0AgNyWdF3KrD3WnoUfPf8uXVu6vvYxXQ7Aqnoye6+tz79Lr1v6vHbPrs8BWFVPZu/1yj4v9Xats/U5AKvqycx9ttwzH91v7z2z7+lofQ7Aqnoye697vvPzcK+Dz/H+OQBP0ZPZe71D7b7fz7cD8BQ9mb3Xu9Sex+9d23re/T0Ao/Rk9l437pMB4F89mb3XT7ocAL7qyey96nIA2NeTu/bwbrhGlwNAWU/u+PrvKPd5/rvls79XALCqnlz5tbZztXtzfQ4AbXrSMu/o75/nH3tH+R5dhwNAm560zLu7z72PDgBfpflR8atx3h19/t2/6QoA/7s0K/a5DgeAY2lG9/k76n3+KswBAP6VZnaft/weOgDwVZqjPq/9L/Fen19bnwPANdLU+vx36HMAWFUa9+cA8Exp7n7/PKfPAeAaaX4eaJmnzwFgvFrOzPtun+t0AOhXy5l5+hwAxqvlzDx9DgDj1XJm3hV9rtMBoE8tZ+a5PweA8Wo5M0+fA8B4tZyZ19rnnrUDwHVqOTPP/TkAjFfK2Xn6HADGK+XsvJ4+z6/v+TwA4K9azszT5wAw3lF65+lzABivJy3z9DkAjNeTlnlX/W90AKBdT1rm6XMAGK8nLfP0OQCM15PZewUA9kVyPMrsvQIA+yI7ls4BAOuK7AgAPM8fFnfnVg==
+  </data>
+ </layer>
+ <layer name="Foreground" width="500" height="125">
+  <data encoding="base64" compression="zlib">
+   eJzt3DkOgzAQQFGk7GmzNbn/OeMGCVnJmDSGQe9JU42pfwFmGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIi8f8zoVOZc5lLmWj0b7QCAflo935XZlzmUOVbPRjsAoJ+o57fq7HOy/7YDAJah5wCQn54DwLbpOQCs32vGROen9BwA8tNzAMhPzwEgPz0HgGXcG/v6m7fHMO89OwDQz9jrf+6rRecBgP70HADy03MAyK/udWuv5wCwPnoOANsQ/RtOzwEgP/9oB4D89BwA8tNzAMhPzwEgPz0HgPxa99kAgPXTcwAAAAAAAAAAAAAAAAAAAACA5XwAdpQP9w==
+  </data>
+ </layer>
+</map>
