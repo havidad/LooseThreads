@@ -47,6 +47,8 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	// BitmapFont fpsFont;
 	float fps;
+	
+	boolean isIndoors;
 
 	public GameScreen(final MainGame gam) {
 		game = gam;
@@ -98,8 +100,16 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void render(float delta) {
+		if(level == 0)
+			isIndoors = true;
+		if(level ==1)
+			isIndoors = false;
 		// Clear the screen from the last frame
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		if(!isIndoors)
+			Gdx.gl.glClearColor(0, 0, 205, 1);
+		else
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		fps = Gdx.graphics.getFramesPerSecond();
 		System.out.println("FPS: " + fps);

@@ -12,14 +12,13 @@ public class CollisionManager {
 	Player player;
 	Array<Monster> monsters;
 	GameScreen screen;
-	private static final Vector2 INHOMETP1 = new Vector2(25, 59.45f); // Upstairs
-																		// //
-																		// point
+	/*BEGIN TELEPORTING POINTS*/
+	//Bleeps House
+	private static final Vector2 INHOMETP1 = new Vector2(25, 59.45f); // Upstairs						
 	private static final Vector2 INHOMETP2 = new Vector2(26, 36.45f); // Downstairs
-	private static final Vector2 INHOMEDOOR = new Vector2(36.8f, 36.8f); // Indoor
-																			// Home
-																			// Front
-																			// Door
+	private static final Vector2 INHOMEDOOR = new Vector2(36.8f, 36.8f); // To Overworld
+	//OverWorld
+	/*END TELEPORTING POINTS*/
 
 	// Handle the width and height of the tile.
 	float tileHeight, tileWidth;
