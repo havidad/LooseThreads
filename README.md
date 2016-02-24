@@ -23,4 +23,4 @@ This Repository is to help you set up your development Enviroment so you can pul
 ### Who do I talk to? ###
 
 * Contact the Admin of this Repository at havidadgaibey@gmail.com
-* You may also want to contact either Lucas Steele, or (Enter other team info here)...
+* You may also want to contact either Lucas Steele at like my email which is sketchwithcomedy@gmail.com  ... if your working on this project you can also like totally email me and such.
