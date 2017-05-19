@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader.Parameters;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -24,7 +23,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	public static final float UNITSCALE = 1 / 64f;
 
 	GlyphLayout glyphLayout;
-	
+
 	private int level = 0;
 
 	// List of all maps in the game;
@@ -43,11 +42,11 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 	// Used to keep things drawn at the same size regardless of the screen size.
 	public final static float GAME_WORLD_WIDTH = 100;
 	public final static float GAME_WORLD_HEIGHT = 75;
-	public final float ASPECT_RATIO = GAME_WORLD_HEIGHT *GAME_WORLD_WIDTH;
+	public final float ASPECT_RATIO = GAME_WORLD_HEIGHT * GAME_WORLD_WIDTH;
 
 	// BitmapFont fpsFont;
 	float fps;
-	
+
 	boolean isIndoors;
 
 	public GameScreen(final MainGame gam) {
@@ -100,16 +99,16 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void render(float delta) {
-		if(level == 0)
+		if (level == 0)
 			isIndoors = true;
-		if(level ==1)
+		if (level == 1)
 			isIndoors = false;
 		// Clear the screen from the last frame
-		if(!isIndoors)
+		if (!isIndoors)
 			Gdx.gl.glClearColor(0, 0, 205, 1);
 		else
 			Gdx.gl.glClearColor(0, 0, 0, 1);
-		
+
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		fps = Gdx.graphics.getFramesPerSecond();
 		System.out.println("FPS: " + fps);
@@ -133,7 +132,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 		// Render the player, bullets, and anything else that moves/lives in
 		// this part.
 		renderer.getBatch().begin();
-		player.updateAnimation(player, delta);
+		player.updateAnimation(delta);
 		renderer.getBatch().draw(player.getCurrentFrame(), player.getSprite().getX(), player.getSprite().getY(),
 				player.getSprite().getWidth(), player.getSprite().getHeight());
 		renderer.getBatch().end();
@@ -206,7 +205,7 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 			level = index;
 			break;
 		}
-		layer = (TiledMapTileLayer)currentMap.getLayers().get(1);
+		layer = (TiledMapTileLayer) currentMap.getLayers().get(1);
 		renderer.setMap(currentMap);
 		player.colManager.switchMap(currentMap);
 	}
@@ -217,10 +216,10 @@ public class GameScreen implements com.badlogic.gdx.Screen {
 
 	// Get/Setters
 	public TiledMap getMap(int index) {
-		switch(index){
+		switch (index) {
 		case -1:
 			return currentMap;
-		case 0: 
+		case 0:
 			return testMap;
 		case 1:
 			return overWorld;

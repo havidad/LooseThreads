@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.hypoxiagames.loosethreads.CollisionManager;
+import com.hypoxiagames.loosethreads.entities.Entity.xDir;
+import com.hypoxiagames.loosethreads.entities.Entity.yDir;
 import com.hypoxiagames.loosethreads.screens.GameScreen;
 
 public class Player extends Entity implements InputProcessor {
@@ -33,7 +35,7 @@ public class Player extends Entity implements InputProcessor {
 	private TextureRegion currentFrame;
 
 	private Sprite sprite;
-	private Animation animation;
+	private Animation<TextureRegion> animation;
 
 	private static xDir xDirection;
 	private static yDir yDirection;
@@ -93,7 +95,7 @@ public class Player extends Entity implements InputProcessor {
 		inBedroom = true;
 
 		this.screen = screen;
-		
+
 		// set up the collision manager, and the points that the collision
 		// manager will use.
 		colManager = new CollisionManager(screen.getMap(-1), this, this.screen);
@@ -113,7 +115,7 @@ public class Player extends Entity implements InputProcessor {
 			upAnimation[i] = animationTexture.findRegion("up", i + 1);
 		}
 
-		animation = new Animation(animationSpeed, downAnimation);
+		animation = new Animation<TextureRegion>(animationSpeed, downAnimation);
 	}
 
 	public void setCollisionPoints() {
@@ -143,7 +145,7 @@ public class Player extends Entity implements InputProcessor {
 
 	public void draw(Batch spriteBatch) {
 		update(Gdx.graphics.getDeltaTime());
-		updateAnimation(this, Gdx.graphics.getDeltaTime());
+		updateAnimation(Gdx.graphics.getDeltaTime());
 		sprite.draw(spriteBatch);
 	}
 
@@ -157,7 +159,8 @@ public class Player extends Entity implements InputProcessor {
 		// Sets the collision points on the player to his new location from last
 		// movement.
 		collisionPoints.set(0, new Vector2(location.x + (sprite.getWidth() / 2), location.y));
-		collisionPoints.set(1, new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
+		collisionPoints.set(1,
+				new Vector2(location.x + (sprite.getWidth() / 2), location.y + sprite.getHeight() + 0.5f));
 		if (inBedroom)
 			collisionPoints.set(2, new Vector2(location.x - 0.4f, location.y + (sprite.getHeight() / 2)));
 		else
@@ -275,6 +278,21 @@ public class Player extends Entity implements InputProcessor {
 			xDirection = xDir.none;
 		}
 
+	}
+
+	public void updateAnimation(float delta) {
+		stateTime += delta;
+		setAnimation(new Animation<TextureRegion>(1 / 4f, getRegion("Down")));
+		if (getyDirection() == yDir.down || issHeld())
+			setAnimation(new Animation<TextureRegion>(animationSpeed, getRegion("Down")));
+		if (xDirection == xDir.right || isdHeld())
+			setAnimation(new Animation<TextureRegion>(animationSpeed, getRegion("Right")));
+		if (xDirection == xDir.left || isaHeld())
+			setAnimation(new Animation<TextureRegion>(animationSpeed, getRegion("Left")));
+		if (yDirection == yDir.up || iswHeld())
+			setAnimation(new Animation<TextureRegion>(animationSpeed, getRegion("Up")));
+
+		setCurrentFrame((TextureRegion) getAnimation().getKeyFrame(stateTime, true));
 	}
 
 	public void moveToPoint(float x, float y) {
@@ -473,11 +491,11 @@ public class Player extends Entity implements InputProcessor {
 		this.currentFrame = currentFrame;
 	}
 
-	public Animation getAnimation() {
+	public Animation<TextureRegion> getAnimation() {
 		return animation;
 	}
 
-	public void setAnimation(Animation animation) {
+	public void setAnimation(Animation<TextureRegion> animation) {
 		this.animation = animation;
 	}
 
